@@ -11,7 +11,9 @@ class World {
     shark;
     enemies = [];
     jellyEnemies = [];
+    collectables = [];
     backgrounds = [];
+    collectedItems = [];
     canvas;
     keyboard;
     ctx;
@@ -51,21 +53,47 @@ class World {
         '../images/2.Enemy/2 Jelly fish/Regular damage/Yellow 4.png',
     ];
 
-    constructor(canvas, ctx, numEnemies = 12, keyboard) {
+    COIN_IMAGES = [
+        '../images/4.Marks/1. Coins/1.png',
+        '../images/4.Marks/1. Coins/3.png',
+        '../images/4.Marks/1. Coins/4.png',
+        '../images/4.Marks/1. Coins/2.png',
+    ];
+
+    LIFE_IMAGES = [
+        '../images/4.Marks/Hearts/green_heart_0.png',
+        '../images/4.Marks/Hearts/green_heart_2.png',
+        '../images/4.Marks/Hearts/green_heart_1.png',
+        '../images/4.Marks/Hearts/green_heart_3.png',
+    ];
+
+    POISON_IMAGES = [
+        '../images/4.Marks/Posión/Animada/1.png',
+        '../images/4.Marks/Posión/Animada/2.png',
+        '../images/4.Marks/Posión/Animada/6.png',
+        '../images/4.Marks/Posión/Animada/3.png',
+        '../images/4.Marks/Posión/Animada/4.png',
+        '../images/4.Marks/Posión/Animada/7.png',
+        '../images/4.Marks/Posión/Animada/5.png',
+        '../images/4.Marks/Posión/Animada/8.png',
+    ]
+
+    numEnemies = 10;
+    constructor(canvas, ctx, numEnemies, keyboard) {
         this.canvas = canvas;
         this.ctx = ctx;
         this.keyboard = keyboard;
+        this.numEnemies = numEnemies;
         this.shark = new Shark(0, 300, 300, 300, '../images/1.Sharkie/Stay/1.png');
         const enemyWidth = 70;
         const enemyHeight = 70;
-
-        const cols = Math.floor((800 - 200) / enemyWidth);
+        const cols = Math.floor((1200 - 200) / enemyWidth);
         const rows = Math.floor(600 / enemyHeight);        
         const maxEnemies = rows * cols;
-
-        if (numEnemies > maxEnemies) {
-            console.warn(`Too many enemies! Reducing from ${numEnemies} to ${maxEnemies}`);
-            numEnemies = maxEnemies;
+        
+        if (this.numEnemies > maxEnemies) {
+            console.warn(`Too many enemies! Reducing from ${this.numEnemies} to ${maxEnemies}`);
+            this.numEnemies = maxEnemies;
         }
 
         let fishPositions = [];
@@ -94,6 +122,20 @@ class World {
             this.JELLY_FISH_IMAGES_REGULAR_YELLOW,
         ];
 
+        const collectables = [
+            { type: "coin",    images: this.COIN_IMAGES },
+            { type: "life",    images: this.LIFE_IMAGES },
+            { type: "poison",  images: this.POISON_IMAGES },
+        ];
+
+        for (let k = 0; k < 10; k++) {
+            let x = 200 + Math.random() * (800 - 200 - enemyWidth);
+            let y = Math.random() * (600 - enemyHeight);
+            let item = collectables[k % collectables.length];
+            this.collectables.push(new Collectable(x, y, 40, 40, item.images, item.type));
+        }
+
+
         for (let i = 0; i < numEnemies && i < fishPositions.length; i++) {
             let pos = fishPositions[i];
             let images = enemyFishes[i % enemyFishes.length];
@@ -103,8 +145,14 @@ class World {
         for (let j = 0; j < numEnemies && j < jellyPositions.length; j++) {
             let pos = jellyPositions[j];
             let images = enemyJelly[j % enemyJelly.length];
-            this.jellyEnemies.push(new Jelly(pos.x, pos.y, enemyWidth, enemyHeight, images, 2)); // speed 2
+            this.jellyEnemies.push(new Jelly(pos.x, pos.y = 550, enemyWidth, enemyHeight, images, 2)); // speed 2
         }
+
+        this.collectedItems = [
+            new Mark(100,-10, 150, 50, '../images/4.Marks/Purple/100_ .png'),
+            new Mark(300,-10, 150, 50, '../images/4.Marks/Purple/0_ _1.png'),
+            new Mark(500,-10, 150, 50, '../images/4.Marks/Purple/0_.png'),
+        ]
 
 
         this.backgrounds = [
@@ -135,8 +183,9 @@ class World {
         this.addObjectsToCanvas(this.backgrounds);
         this.addObjectsToCanvas(this.enemies);
         this.addObjectsToCanvas(this.jellyEnemies);
+        this.addObjectsToCanvas(this.collectables);
+        this.addObjectsToCanvas(this.collectedItems);
         this.shark.draw(ctx);
-        
     }
 
     animatedObjects() {

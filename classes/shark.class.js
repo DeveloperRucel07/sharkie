@@ -26,32 +26,20 @@ class Shark extends MovableObject {
     animate(){
         
         setInterval(() => {
+            let i = this.currentImage % this.IMAGES_SWIM.length;
+            let path = this.IMAGES_SWIM[i];
+            this.img = this.imageCache[path];
+            this.currentImage++;
             if ( this.world.keyboard.RIGHT && this.x < 700) {
                 this.otherDirection = false;
-                let i = this.currentImage % this.IMAGES_SWIM.length;
-                let path = this.IMAGES_SWIM[i];
-                this.img = this.imageCache[path];
-                this.currentImage++;
                 this.moveRIGHT();
             }else if ( this.world.keyboard.LEFT && this.x > -75) {
                 this.otherDirection = true;
-                let i = this.currentImage % this.IMAGES_SWIM.length;
-                let path = this.IMAGES_SWIM[i];
-                this.img = this.imageCache[path];
-                this.currentImage++;
                 this.moveLEFT();
             }else if ( this.world.keyboard.UP && this.y > -120) {
-                let i = this.currentImage % this.IMAGES_SWIM.length;
-                let path = this.IMAGES_SWIM[i];
-                this.img = this.imageCache[path];
-                this.currentImage++;
                 this.moveUP();
             }
             else if ( this.world.keyboard.DOWN && this.y < this.world.canvas.height - this.height + 100) {
-                let i = this.currentImage % this.IMAGES_SWIM.length;
-                let path = this.IMAGES_SWIM[i];
-                this.img = this.imageCache[path];
-                this.currentImage++;
                 this.moveDOWN();
             }
 
