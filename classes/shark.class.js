@@ -8,13 +8,17 @@ class Shark extends MovableObject {
             '../images/1.Sharkie/Swim/6.png',
         ];
     world;
-    constructor( x, y, width, height, imagePath) {
-        super(x, y, width, height);
+    x= 0;
+    y = 400;
+    width = 250;
+    height = 250;
+    constructor(imagePath) {
+        super().loadImage(imagePath);
         this.imageCache = {};
-        this.loadImage(imagePath);
         this.loadImages(this.IMAGES_SWIM);
         this.jumHeight = 600;
         this.animate();
+        this.y = 600 - this.height;
         this.moveUP();
         this.moveDOWN();
         this.moveLEFT();
@@ -26,20 +30,20 @@ class Shark extends MovableObject {
     animate(){
         
         setInterval(() => {
-            let i = this.currentImage % this.IMAGES_SWIM.length;
-            let path = this.IMAGES_SWIM[i];
-            this.img = this.imageCache[path];
-            this.currentImage++;
             if ( this.world.keyboard.RIGHT && this.x < 700) {
                 this.otherDirection = false;
+                this.playAnimation(this.IMAGES_SWIM);
                 this.moveRIGHT();
             }else if ( this.world.keyboard.LEFT && this.x > -75) {
                 this.otherDirection = true;
+                this.playAnimation(this.IMAGES_SWIM);
                 this.moveLEFT();
             }else if ( this.world.keyboard.UP && this.y > -120) {
+                this.playAnimation(this.IMAGES_SWIM);
                 this.moveUP();
             }
             else if ( this.world.keyboard.DOWN && this.y < this.world.canvas.height - this.height + 100) {
+                this.playAnimation(this.IMAGES_SWIM);
                 this.moveDOWN();
             }
 

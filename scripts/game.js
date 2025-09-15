@@ -3,7 +3,7 @@ let ctx;
 canvas = document.getElementById('gameCanvas');
 ctx = canvas.getContext('2d');
 let keyboard = new Keyboard();
-let world = new World(canvas, ctx,8, keyboard);
+let world = new World(canvas, ctx, keyboard);
 
 function resizeCanvas() {
     if (window.innerWidth >= 999) {

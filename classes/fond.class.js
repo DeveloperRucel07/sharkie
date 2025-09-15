@@ -1,8 +1,11 @@
 class Fond extends MovableObject {
     speed;
     constructor( x, y, width, height, imagePath, speed) {
-        super(x, y, width, height);
-        this.loadImage(imagePath);
+        super().loadImage(imagePath);
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
         this.speed = speed;
         this.animate();
     }
