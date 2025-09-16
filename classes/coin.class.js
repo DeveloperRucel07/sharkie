@@ -6,19 +6,20 @@ class Coin extends MovableObject{
         '../images/4.Marks/1. Coins/2.png',
     ];
     imagePath = '../images/4.Marks/1. Coins/1.png';
-    constructor(x, y, width, height, COIN_IMAGES ){
-        super(x, y, width, height);
-        this.type = type; 
+    width = 50;
+    height = 50;
+    constructor(x, y ){
+        super().loadImage(this.imagePath);
         this.imageCache = {};
-        this.COIN_IMAGES = COIN_IMAGES;
-        this.loadImage(this.imagePath);
         this.loadImages(this.COIN_IMAGES);
         this.animateCoin();
+        this.x = x;
+        this.y = y;
     }
 
     animateCoin(){
         setInterval(()=>{
             this.playAnimation(this.COIN_IMAGES)
-        }, 1000);
+        }, 100);
     }
 }

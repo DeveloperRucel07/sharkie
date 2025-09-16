@@ -10,20 +10,20 @@ class Poison extends MovableObject{
         '../images/4.Marks/Posión/Animada/8.png',
     ]
     imagePath = '../images/4.Marks/Posión/Animada/1.png';
-    constructor(x, y, width, height, POISON_IMAGES ){
-        super(x, y, width, height);
-        this.type = type; 
+    width = 50;
+    height = 50;
+    constructor(x){
+        super().loadImage(this.imagePath);
         this.imageCache = {};
-        this.POISON_IMAGES = POISON_IMAGES;
-        this.loadImage(this.imagePath);
         this.loadImages(this.POISON_IMAGES);
         this.animatePoison();
+        this.x = x;
         this.y = 550;
     }
 
     animatePoison(){
         setInterval(()=>{
             this.playAnimation(this.POISON_IMAGES)
-        }, 1000);
+        }, 100);
     }
 }

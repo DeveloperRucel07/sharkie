@@ -1,47 +1,21 @@
 class World {
     shark;
-    pufferEnemies = [
-        new PufferFishGreen(600, 100),
-        new PufferFishOrange(500, 10),
-        new PufferFishPink(800, 200),
-        new PufferFishOrange(900, 300),
-        new PufferFishPink(700, 400),
-        new PufferFishGreen(800, 500),
-    ];
-
-    jellyEnemies = [
-        new JellyFishLila(150),
-        new JellyFishGreen(250),
-        new JellyFishYellow(550),
-        new JellyFishPink(850),
-        new JellyFishGreen(1150),
-    ];
-
-    backgrounds = [
-        new Fond(0, 0, 900, 600, '../images/3.Background/Layers/5. Water/D.png',0),
-        new Fond(0, 0, 900, 600, 'images/3.Background/Layers/1. Light/1.png',0.75),
-        new Fond(900, 0, 900, 600, 'images/3.Background/Layers/1. Light/2.png',0.75),
-        new Fond(10, 220, 1000, 300, '../images/3.Background/Layers/4.Fondo 2/D.png ',0.5),
-        new Fond(1000, 220, 1010, 300, '../images/3.Background/Layers/4.Fondo 2/D.png ',0.5),
-        new Fond(10, 260, 1000, 300, '../images/3.Background/Layers/3.Fondo 1/L.png',0.25),
-        new Fond(1000, 260, 1010, 300, '../images/3.Background/Layers/3.Fondo 1/L.png',0.25),
-        // new Fond(0, 200, 900, 400, '../images/3.Background/Layers/2. Floor/D.png',0.15),
-        new Fond(10, 200, 900, 400, '../images/3.Background/Layers/2. Floor/L.png',0.15),
-        new Fond(900, 200, 910, 400, '../images/3.Background/Layers/2. Floor/L.png',0.15),
-    ];
-
-    collectables = [];
-    collectedItems = [];
+    level = level1;
     canvas;
     keyboard;
+    life_mark = new LifeMark();
+    coin_mark = new CoinMark();
+    poison_mark = new PoisonMark();
     ctx;
+    camera_x = 0;
+    worldWidth;
     constructor(canvas, ctx, keyboard) {
         this.canvas = canvas;
         this.ctx = ctx;
         this.keyboard = keyboard;
+        this.worldWidth = this.level.level_end_x;
         this.shark = new Shark('../images/1.Sharkie/Stay/1.png');
         this.setWorldToShark();
-        
     }
 
     setWorldToShark() {
@@ -53,18 +27,26 @@ class World {
     }
 
     draw(ctx) {
-        this.addObjectsToCanvas(this.backgrounds);
-        this.addObjectsToCanvas(this.pufferEnemies);
-        this.addObjectsToCanvas(this.jellyEnemies);
-        this.addObjectsToCanvas(this.collectedItems);
+        ctx.save();
+        ctx.translate(this.camera_x, 0);
+        this.addObjectsToCanvas(this.level.backgrounds);
+        this.addObjectsToCanvas(this.level.pufferEnemies);
+        this.addObjectsToCanvas(this.level.jellyEnemies);
+        this.addObjectsToCanvas(this.level.coins);
+        this.addObjectsToCanvas(this.level.lifes);
+        this.addObjectsToCanvas(this.level.poisons);
+        ctx.restore();
         this.shark.draw(ctx);
+        this.life_mark.draw(ctx);
+        this.coin_mark.draw(ctx);
+        this.poison_mark.draw(ctx);
     }
 
     animatedObjects() {
-        this.backgrounds.forEach(layer => layer.animate());
+        this.level.backgrounds.forEach(layer => layer.animate());
         this.shark.animate();
-        this.pufferEnemies.forEach(enemy => enemy.animateFish());
-        this.jellyEnemies.forEach(jelly => jelly.animate());
+        this.level.pufferEnemies.forEach(enemy => enemy.animateFish());
+        this.level.jellyEnemies.forEach(jelly => jelly.animate());
     }
 
     gameLoop() {

@@ -1,10 +1,13 @@
 class LifeMark extends DrawableObject{
     LIFE_MARK_IMAGES = [];
-    imagePath = '../images/4.Marks/Purple/100_ .png'; 
-    constructor(x,y, width, height, imagePath, LIFE_MARK_IMAGES ){
-        super(x,y, width, height, imagePath);
-        this.loadImage(imagePath);
-        this.LIFE_MARK_IMAGES = LIFE_MARK_IMAGES
+    imagePath = '../images/4.Marks/Purple/100_ .png';
+    width = 200;
+    height = 40;
+    x = 10;
+    y = 0;
+
+    constructor(){
+        super().loadImage(this.imagePath);
         this.loadImages(this.LIFE_MARK_IMAGES);
     }
 }

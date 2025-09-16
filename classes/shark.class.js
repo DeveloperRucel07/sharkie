@@ -12,6 +12,7 @@ class Shark extends MovableObject {
     y = 400;
     width = 250;
     height = 250;
+
     constructor(imagePath) {
         super().loadImage(imagePath);
         this.imageCache = {};
@@ -19,67 +20,63 @@ class Shark extends MovableObject {
         this.jumHeight = 600;
         this.animate();
         this.y = 600 - this.height;
-        this.moveUP();
-        this.moveDOWN();
-        this.moveLEFT();
-        this.moveRIGHT();
-        this.speed = 0.15 + Math.random() * 0.3;
+        this.speed = 0.15;
+        this.worldWidth = this.worldWidth;
     }
 
 
-    animate(){
-        
+    animate() {
         setInterval(() => {
-            if ( this.world.keyboard.RIGHT && this.x < 700) {
-                this.otherDirection = false;
-                this.playAnimation(this.IMAGES_SWIM);
-                this.moveRIGHT();
-            }else if ( this.world.keyboard.LEFT && this.x > -75) {
-                this.otherDirection = true;
-                this.playAnimation(this.IMAGES_SWIM);
-                this.moveLEFT();
-            }else if ( this.world.keyboard.UP && this.y > -120) {
-                this.playAnimation(this.IMAGES_SWIM);
-                this.moveUP();
-            }
-            else if ( this.world.keyboard.DOWN && this.y < this.world.canvas.height - this.height + 100) {
-                this.playAnimation(this.IMAGES_SWIM);
-                this.moveDOWN();
-            }
-
-        }, 1000 / 60);
+            this.moveLeftOrRight();
+            this.moveUpDown();
+        }, 100);
     }
 
-    moveUP(){ 
-        setInterval(() => {
-            if (this.world.keyboard.UP && this.y > -120) {
-                this.y -= 0.01;
-            }
-        }, 1000 / 60);  
+    moveLeftOrRight() {
+        if (this.world.keyboard.RIGHT) {
+            this.playAnimation(this.IMAGES_SWIM);
+            this.moveRight();
+        } else if (this.world.keyboard.LEFT) {
+            this.playAnimation(this.IMAGES_SWIM);
+            this.moveLeft();
+        }
     }
 
-    moveDOWN(){ 
-        setInterval(() => {
-            if (this.world.keyboard.DOWN && this.y < this.world.canvas.height - this.height + 100) {
-                this.y += 0.01;
-            }
-        }, 1000 / 60);  
+    moveUpDown() {
+        if (this.world.keyboard.UP && this.y > 0) {
+            this.y -= this.speed;
+        }
+        if (this.world.keyboard.DOWN && this.y < this.world.canvas.height - this.height) {
+            this.y += this.speed;
+        }
     }
 
-    moveLEFT(){
-        setInterval(() => {
-            if (this.world.keyboard.LEFT && this.x > -75) {
-                this.x -= 0.01;
-            }
-        }, 1000 / 60);
+    moveRight() {
+        this.otherDirection = false;
+        this.worldWidth = this.world.worldWidth;
+        if (this.x < (this.world.canvas.width - this.width*2) ) {
+            this.x += this.speed;
+        } else {
+            const maxCameraX = this.worldWidth - this.world.canvas.width;
+            this.world.camera_x = Math.max(
+                Math.min(this.world.camera_x - this.speed, 0),
+                -maxCameraX                                   
+            );
+        }
     }
 
-    moveRIGHT(){
-        setInterval(() => {
-            if (this.world.keyboard.RIGHT && this.x < this.world.canvas.width - this.width + 100) {
-                this.x += 0.01;
-            }
-        }, 1000 / 60);
+    moveLeft() {
+        this.otherDirection = true;
+        if (this.x > 0 && this.world.camera_x === 0){
+            this.x -= this.speed;
+        }
+        else if (this.x > this.world.canvas.width / 4) {
+            this.x -= this.speed;
+        } else {
+            this.world.camera_x = Math.min(this.world.camera_x + this.speed, 0);
+        }
+        this.x = Math.max(this.x, 0);
     }
+
 }
 
