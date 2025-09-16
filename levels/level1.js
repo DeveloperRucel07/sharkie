@@ -7,7 +7,8 @@ const level1  = new Level(
         new PufferFishPink(1200, 10),
         new PufferFishOrange(1900, 300),
         new PufferFishPink(2700, 400),
-        new PufferFishGreen(3800, 500),
+        new PufferFishGreen(3000, 500),
+        new Endboss(3800, 200),
     ],
 
     [
@@ -156,7 +157,6 @@ const level1  = new Level(
     ],
 
     [
-        new Poison(450),
         new Poison(350),
         new Poison(2250),
         new Poison(3450),
@@ -165,9 +165,7 @@ const level1  = new Level(
         new Poison(1200),
         new Poison(1500),
         new Poison(1800),
-        new Poison(3700),
-        new Poison(4100),
-        new Poison(4500),
+
     ],
 
     [

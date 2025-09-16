@@ -5,7 +5,7 @@ class Level {
     coins;
     poisons;
     lifes;
-    level_end_x = 4000;
+    level_end_x = 5000;
 
     constructor(pufferEnemies,  jellyEnemies,  backgrounds, poisons, coins, lifes ){
         this.pufferEnemies = pufferEnemies;
