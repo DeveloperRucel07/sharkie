@@ -43,10 +43,10 @@ class Shark extends MovableObject {
     }
 
     moveUpDown() {
-        if (this.world.keyboard.UP && this.y > 0) {
+        if (this.world.keyboard.UP && this.y > -110) {
             this.y -= this.speed;
         }
-        if (this.world.keyboard.DOWN && this.y < this.world.canvas.height - this.height) {
+        if (this.world.keyboard.DOWN && this.y < this.jumHeight - this.height/1.5) {
             this.y += this.speed;
         }
     }
