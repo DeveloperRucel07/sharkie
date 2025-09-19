@@ -10,14 +10,12 @@ class DrawableObject {
 
     loadImage(path) {
         this.img = new Image();
-        this.img.onload = () => { this.imgLoaded = true;}; //set load imLoaded on true when the image ist loaded
         this.img.src = path;
     }
 
     loadImages(arr) {
         arr.forEach((path) => {
             let img = new Image();
-            img.onload = () => { this.imgLoaded = true;};
             img.src = path;
             this.imageCache[path] = img;
         });
@@ -26,20 +24,23 @@ class DrawableObject {
 
     draw(ctx) {
         if(!this.otherDirection){ 
-            if (this.imgLoaded) { 
-                ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-            }else{
-                console.error("Image not loaded yet: " + this.img.src);
-            }
+            ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
         } else {
             ctx.save();
             ctx.scale(-1, 1);
-            if (this.imgLoaded) {
-                ctx.drawImage(this.img, -this.x - this.width, this.y, this.width, this.height);
-            }else{
-                console.error("Image not loaded yet: " + this.img.src);
-            }
+            ctx.drawImage(this.img, -this.x - this.width, this.y, this.width, this.height);
             ctx.restore();
         } 
+    }
+
+    drawBorder(ctx){
+        if(this instanceof Shark || this instanceof Poison || this instanceof Coin || this instanceof Life || this instanceof PufferFishPink || this instanceof PufferFishOrange || this instanceof PufferFishGreen || this instanceof JellyFishYellow || this instanceof JellyFishPink || this instanceof JellyFishLila || this instanceof JellyFishGreen || this instanceof Endboss){
+            ctx.beginPath();
+            ctx.strokeStyle = "red"; 
+            ctx.lineWidth = 2;       
+            ctx.strokeRect(this.x, this.y, this.width, this.height);
+            ctx.stroke(); 
+        }
+        
     }
 }

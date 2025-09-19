@@ -22,7 +22,7 @@ const level1  = new Level(
     [
         //water
         ...Array.from({ length: 23 }, (_, i) =>
-            new Background(899 * i, '../images/3.Background/Layers/5. Water/D.png', 0)
+            new Background(899 * i, '../images/3.Background/Layers/5. Water/L.png', 0)
         ),
 
         // Lights

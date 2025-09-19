@@ -9,6 +9,12 @@ class PufferFishOrange extends MovableObject {
     imagePath = '../images/2.Enemy/1.Puffer fish (3 color options)/1.Swim/2.swim1.png';
     width = 80;
     height = 80;
+    offset = {
+        top:10,
+        bottom:60,
+        left:10,
+        right:10
+    }
 
     constructor(x, y) {
         super().loadImage(this.imagePath);

@@ -16,6 +16,7 @@ class World {
         this.worldWidth = this.level.level_end_x;
         this.shark = new Shark('../images/1.Sharkie/Stay/1.png');
         this.setWorldToShark();
+        this.checkColisions();  
     }
 
     setWorldToShark() {
@@ -23,7 +24,10 @@ class World {
     }
 
     addObjectsToCanvas(array){
-        array.forEach(obj => obj.draw(this.ctx));
+        array.forEach(obj =>{
+            obj.draw(this.ctx);
+            // obj.drawBorder(this.ctx);
+        }); 
     }
 
     draw(ctx) {
@@ -37,6 +41,7 @@ class World {
         this.addObjectsToCanvas(this.level.poisons);
         ctx.restore();
         this.shark.draw(ctx);
+        this.shark.drawBorder(this.ctx);
         this.life_mark.draw(ctx);
         this.coin_mark.draw(ctx);
         this.poison_mark.draw(ctx);
@@ -49,11 +54,25 @@ class World {
         this.level.jellyEnemies.forEach(jelly => jelly.animate());
     }
 
+
+    checkColisions(){
+        setInterval(()=>{
+            this.level.pufferEnemies.forEach((pufferEnemy, index)=>{
+                if(this.shark.isColliding(pufferEnemy)){
+                    this.shark.hit();
+                    console.log(this.shark.energy);
+                }else{
+                    !this.shark.hit();
+                }
+            })
+        })
+    }
+
     gameLoop() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.animatedObjects();
         this.draw(this.ctx);
-        this.animationID = requestAnimationFrame(() => this.gameLoop());
+        this.animationId = requestAnimationFrame(() => this.gameLoop());
     }
 
     start() {
@@ -64,6 +83,8 @@ class World {
         if (this.animationId) {
             cancelAnimationFrame(this.animationId);
             this.animationId = null;
+        }else if(this.animationId == null){
+            this.start();
         }
     }
 }

@@ -8,15 +8,21 @@ class MovableObject extends DrawableObject{
     currentImage = 0;
     speed = 0;
     otherDirection = false;
+    energy = 100;
+
+    offset = {
+        top:0,
+        bottom:0,
+        left:0,
+        right:0
+    }
 
     playAnimation(images){
         let i = this.currentImage % images.length;
         let path = images[i];
         this.img = this.imageCache[path];
-        this.currentImage++;
+        this.currentImage++; 
     }
-
-
 
     moveLeft() {
         this.x -= this.speed;
@@ -36,5 +42,25 @@ class MovableObject extends DrawableObject{
             this.otherDirection = false; 
         }
     }
-  
+
+    isColliding(moObject){
+        return this.x + this.width - this.offset.right > moObject.x + moObject.offset.left && 
+            this.y + this.height - this.offset.bottom > moObject.y + moObject.offset.top &&
+            this.x + this.offset.left < moObject.x + moObject.width - moObject.offset.right &&
+            this.y + this.offset.top < moObject.y + moObject.height - moObject.offset.bottom;
+    }
+
+    hit(){
+        this.energy -= 5;
+        if(this.energy < 0){
+            this.energy = 0;
+        }
+        // console.log(this.energy);
+    }
+
+    isDead(){
+        return this.energy == 0;
+    }
+
+
 }

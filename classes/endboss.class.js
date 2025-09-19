@@ -34,6 +34,12 @@ class Endboss extends MovableObject{
     ]
     width = 350;
     height = 350;
+    offset = {
+        top:15,
+        bottom:15,
+        left:15,
+        right:15
+    }
 
     constructor(x, y) {
         super().loadImage(this.imagePath);

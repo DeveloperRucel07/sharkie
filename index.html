@@ -8,15 +8,19 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <div class="start-game">
+    <div class="start-game d-flex">
         <button id="startBtnGame" class="start-game-btn"> <img src="./images/5.Buttons/Start/1.png" alt="Start Game"></button>
     </div>
     <div class="infos">
         <h1>Sharkie Game</h1>
     </div>
-    <canvas id="gameCanvas">
+    <div class="game-zone d-none">
+        <!-- <button id="tryAgain" class="restart-game-btn"> <img src="./images/5.Buttons/TryAgain/tryAgainYelow.png" alt="Stop Game"></button> -->
+        <canvas id="gameCanvas">
 
-    </canvas>
+        </canvas>  
+    </div>
+    
     <script src="./script.js"></script>
     <script src="./classes/drawable-object.class.js"></script>
     <script src="./classes/movable-object.class.js"></script>

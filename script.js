@@ -1,5 +1,8 @@
 const startBtn = document.getElementById("startBtnGame");
+const tryAgain = document.getElementById("tryAgain");
 const startGameDiv = document.querySelector(".start-game");
+const gameZone = document.querySelector(".game-zone");
+
 START_IMG = [
     "./images/5.Buttons/Start/1.png",
     "./images/5.Buttons/Start/2.png",
@@ -16,6 +19,12 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 startBtn.addEventListener("click", () => {
-    startGameDiv.style.display = "none";
+    startGameDiv.classList.add('d-none');
+    gameZone.classList.remove('d-none');
+    gameZone.classList.add('d-flex');
     init();
 });
+
+// tryAgain.addEventListener('click', ()=>{
+//     stopGame();
+// })

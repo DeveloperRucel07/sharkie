@@ -19,7 +19,6 @@ body{
     background-size: cover;
     background-repeat: no-repeat; 
     background-position: center; 
-    display: flex;
     justify-content: center;
     align-items: center;
 }
@@ -34,7 +33,35 @@ body{
     height: auto;
 }
 
+.game-zone{
+    position: relative;
+    align-items: center;
+    justify-content: center;
+}
+
+.game-zone img{
+    width: 150px;
+    height: auto;
+}
+
 canvas {
     
     
+}
+
+.restart-game-btn{
+    position: absolute;
+    z-index: 1000;
+    background: none;
+    border: none;
+    cursor: pointer;
+
+}
+
+.d-flex{
+    display: flex;
+}
+
+.d-none{
+    display: none;
 }

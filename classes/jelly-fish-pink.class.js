@@ -1,6 +1,12 @@
 class JellyFishPink extends MovableObject{
     width = 90;
     height = 90;
+    offset = {
+        top:15,
+        bottom:15,
+        left:15,
+        right:15
+    }
    
     IMAGES = [
         '../images/2.Enemy/2 Jelly fish/Súper dangerous/Pink 1.png',
