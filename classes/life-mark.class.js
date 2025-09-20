@@ -1,6 +1,6 @@
 class LifeMark extends DrawableObject{
     LIFE_MARK_IMAGES = [];
-    imagePath = '../images/4.Marks/Purple/100_ .png';
+    imagePath = 'images/4.Marks/Purple/100_ .png';
     width = 200;
     height = 40;
     x = 10;

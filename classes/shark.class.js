@@ -2,54 +2,54 @@ class Shark extends MovableObject {
 
     IMAGES_STAY =     
         Array.from({ length: 18 }, (_, i) =>
-            `../images/1.Sharkie/Stay/${i+1}.png`,
+            `images/1.Sharkie/Stay/${i+1}.png`,
     );
 
     IMAGES_LONGSTAY = 
         Array.from({ length: 14 }, (_, i) =>
-            `../images/1.Sharkie/LongStay/i${i+1}.png`,
+            `images/1.Sharkie/LongStay/I${i+1}.png`,
     );
 
     IMAGES_SWIM = 
         Array.from({ length: 6 }, (_, i) =>
-            `../images/1.Sharkie/Swim/${i+1}.png`,
+            `images/1.Sharkie/Swim/${i+1}.png`,
     );
 
     IMAGES_HURT_POISONED = 
         Array.from({ length: 5 }, (_, i) =>
-            `../images/1.Sharkie/Hurt/1.Poisoned/${i+1}.png`,
+            `images/1.Sharkie/Hurt/1.Poisoned/${i+1}.png`,
     );
 
     IMAGES_HURT_ELECTRIC_SHOCK = [ 
         'images/1.Sharkie/Hurt/2.Electric shock/01.png',
         'images/1.Sharkie/Hurt/2.Electric shock/02.png',
         ...Array.from({ length: 3 }, (_, i) =>
-            `../images/1.Sharkie/Hurt/2.Electric shock/${i+1}.png`,
+            `images/1.Sharkie/Hurt/2.Electric shock/${i+1}.png`,
         ),
     ]
     IMAGE_DEAD_POISONED = 
         Array.from({ length: 12 }, (_, i) =>
-            `../images/1.Sharkie/Dead/1.Poisoned/${i+1}.png`,
+            `images/1.Sharkie/Dead/1.Poisoned/${i+1}.png`,
     );
     
     IMAGES_DEAD_ELECTRIC_SHOCK = 
         Array.from({ length: 10 }, (_, i) =>
-            `../images/1.Sharkie/Dead/2.Electro_shock/${i+1}.png`,
+            `images/1.Sharkie/Dead/2.Electro_shock/${i+1}.png`,
     );
 
     ATTACK_BUBBLE = 
         Array.from({ length: 8 }, (_, i) =>
-            `../images/1.Sharkie/Attack/Bubble trap/op1 (with bubble formation)/${i+1}.png`,
+            `images/1.Sharkie/Attack/Bubble trap/op1 (with bubble formation)/${i+1}.png`,
     );
 
     ATTACK_POISONED_BUBBLE=
         Array.from({ length: 8 }, (_, i) =>
-            `../images/1.Sharkie/Attack/Bubble trap/For Whale/${i+1}.png`,
+            `images/1.Sharkie/Attack/Bubble trap/For Whale/${i+1}.png`,
     );
 
     ATTACK_SLAP =
         Array.from({ length: 8 }, (_, i) =>
-            `../images/1.Sharkie/Attack/Fin slap/${i+1}.png`,
+            `images/1.Sharkie/Attack/Fin slap/${i+1}.png`,
     );
 
     world;
@@ -57,10 +57,10 @@ class Shark extends MovableObject {
     y = 400;
     width = 250;
     height = 250;
-    energy = 100000000;
+    energy = 100000;
     offset = {
-        top:150,
-        bottom:70,
+        top:120,
+        bottom:50,
         left:50,
         right:50
     }
@@ -80,50 +80,36 @@ class Shark extends MovableObject {
         this.loadImages(this.ATTACK_BUBBLE);
         this.loadImages(this.ATTACK_SLAP);
         this.jumHeight = 600;
-        this.animate();
         this.y = 600 - this.height;
-        this.speed = 0.15;
+        this.speed = 5;
+        this.isSleeping = false;
+        this.lastMoveTime = Date.now();
+        this.sleepDelay = 5000;
         this.worldWidth = this.worldWidth;
+        setTimeout(()=>{ this.animate();}, 1000);
+        this.checkIfSleeping();
     }
 
 
-    animate() {
-        // this.playAnimation(this.IMAGES_STAY);
+    animate() { 
         if(this.isDead()){
             this.playAnimation(this.IMAGE_DEAD_POISONED); 
-        }else if(this.hit()){
+        }else if(this.isHurt()){
             this.playAnimation(this.IMAGES_HURT_POISONED);
-        }else{ 
-            setTimeout(()=>{
-                this.playAnimation(this.IMAGES_LONGSTAY); 
-            },5000);
-
-            setInterval(() => {
-                this.moveLeftOrRight();
-                this.moveUpDown();
-            }, 1000);
+        }else if(this.isMovingRight()){
+            this.playAnimation(this.IMAGES_SWIM); 
+        }else if(this.isMovingLeft()){
+            this.playAnimation(this.IMAGES_SWIM); 
+        }else if(this.isMovingUp()){
+            this.playAnimation(this.IMAGES_SWIM); 
+        }else if(this.isMovingDown()){
+            this.playAnimation(this.IMAGES_SWIM); 
+        }else if(this.isSleeping){
+            this.playAnimation(this.IMAGES_LONGSTAY); 
+        }else{
+            this.playAnimation(this.IMAGES_STAY); 
         }
-        
-    }
-
-
-    moveLeftOrRight() {
-        if (this.world.keyboard.RIGHT) {
-            this.playAnimation(this.IMAGES_SWIM);
-            this.moveRight();
-        } else if (this.world.keyboard.LEFT) {
-            this.playAnimation(this.IMAGES_SWIM);
-            this.moveLeft();
-        }
-    }
-
-    moveUpDown() {
-        if (this.world.keyboard.UP && this.y > -110) {
-            this.y -= this.speed;
-        }
-        if (this.world.keyboard.DOWN && this.y < this.jumHeight - this.height/1.5) {
-            this.y += this.speed;
-        }
+ 
     }
 
     moveRight() {
@@ -153,5 +139,54 @@ class Shark extends MovableObject {
         this.x = Math.max(this.x, 0);
     }
 
+    changeSleepTime(){
+        this.lastMoveTime = Date.now();
+        this.isSleeping = false;
+    }
+
+    checkIfSleeping() {
+        setInterval(() => {
+            if (Date.now() - this.lastMoveTime > this.sleepDelay) {
+                this.isSleeping = true;
+            }
+        }, 1000 / 30);
+    }
+
+
+    isMovingLeft(){
+        if (this.world.keyboard.LEFT) {
+            this.moveLeft();
+            this.changeSleepTime();
+            return true;
+        }
+    }
+
+    isMovingRight(){
+        if (this.world.keyboard.RIGHT) {
+            this.moveRight();
+            this.changeSleepTime();
+            return true;
+        }
+    }
+
+    isMovingDown(){
+        if (this.world.keyboard.DOWN && this.y < this.jumHeight - this.height/1.5) {
+            this.y += this.speed;
+            this.changeSleepTime();
+            return true;
+        }
+    }
+
+    isMovingUp(){
+        if (this.world.keyboard.UP && this.y > -110) {
+            this.y -= this.speed;
+            this.changeSleepTime();
+            return true;
+        }
+    }
+
 }
+
+
+
 

@@ -43,4 +43,15 @@ class DrawableObject {
         }
         
     }
+
+    drawBorderOffset(ctx){
+        if(this instanceof Shark || this instanceof Poison || this instanceof Coin || this instanceof Life || this instanceof PufferFishPink || this instanceof PufferFishOrange || this instanceof PufferFishGreen || this instanceof JellyFishYellow || this instanceof JellyFishPink || this instanceof JellyFishLila || this instanceof JellyFishGreen || this instanceof Endboss){
+            ctx.beginPath();
+            ctx.strokeStyle = "green"; 
+            ctx.lineWidth = 3;       
+            ctx.strokeRect(this.x+this.offset.left, this.y + this.offset.top, this.width - this.offset.left - this.offset.right, this.height - this.offset.top - this.offset.bottom);
+            ctx.stroke(); 
+        }
+        
+    }
 }

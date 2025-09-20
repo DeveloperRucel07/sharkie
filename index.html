@@ -7,14 +7,14 @@
     <title>Sharkie Game</title>
     <link rel="stylesheet" href="./style.css">
 </head>
-<body>
-    <div class="start-game d-flex">
+<body onload="init();">
+    <div class="start-game d-none">
         <button id="startBtnGame" class="start-game-btn"> <img src="./images/5.Buttons/Start/1.png" alt="Start Game"></button>
     </div>
     <div class="infos">
         <h1>Sharkie Game</h1>
     </div>
-    <div class="game-zone d-none">
+    <div class="game-zone d-flex">
         <!-- <button id="tryAgain" class="restart-game-btn"> <img src="./images/5.Buttons/TryAgain/tryAgainYelow.png" alt="Stop Game"></button> -->
         <canvas id="gameCanvas">
 
@@ -34,7 +34,6 @@
     <script src="./classes/puffer-fish-green.class.js"></script>
     <script src="./classes/puffer-fish-orange.class.js"></script>
     <script src="./classes/puffer-fish-pink.class.js"></script>
-    <script src="./classes/jelly.class.js"></script>
     <script src="./classes/life.class.js"></script>
     <script src="./classes/life-mark.class.js"></script>
     <script src="./classes/poison.class.js"></script>

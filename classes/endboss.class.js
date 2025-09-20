@@ -1,42 +1,42 @@
 class Endboss extends MovableObject{
     IMAGES_COME = [
-        '../images/2.Enemy/3 Final Enemy/1.Introduce/1.png',
-        '../images/2.Enemy/3 Final Enemy/1.Introduce/2.png',
-        '../images/2.Enemy/3 Final Enemy/1.Introduce/3.png',
-        '../images/2.Enemy/3 Final Enemy/1.Introduce/4.png',
-        '../images/2.Enemy/3 Final Enemy/1.Introduce/5.png',
-        '../images/2.Enemy/3 Final Enemy/1.Introduce/6.png',
-        '../images/2.Enemy/3 Final Enemy/1.Introduce/7.png',
-        '../images/2.Enemy/3 Final Enemy/1.Introduce/8.png',
-        '../images/2.Enemy/3 Final Enemy/1.Introduce/9.png',
-        '../images/2.Enemy/3 Final Enemy/1.Introduce/10.png',
+        'images/2.Enemy/3 Final Enemy/1.Introduce/1.png',
+        'images/2.Enemy/3 Final Enemy/1.Introduce/2.png',
+        'images/2.Enemy/3 Final Enemy/1.Introduce/3.png',
+        'images/2.Enemy/3 Final Enemy/1.Introduce/4.png',
+        'images/2.Enemy/3 Final Enemy/1.Introduce/5.png',
+        'images/2.Enemy/3 Final Enemy/1.Introduce/6.png',
+        'images/2.Enemy/3 Final Enemy/1.Introduce/7.png',
+        'images/2.Enemy/3 Final Enemy/1.Introduce/8.png',
+        'images/2.Enemy/3 Final Enemy/1.Introduce/9.png',
+        'images/2.Enemy/3 Final Enemy/1.Introduce/10.png',
         
     ];
 
     IMAGES_SWIM = [
-        '../images/2.Enemy/3 Final Enemy/2.floating/1.png',
-        '../images/2.Enemy/3 Final Enemy/2.floating/2.png',
-        '../images/2.Enemy/3 Final Enemy/2.floating/3.png',
-        '../images/2.Enemy/3 Final Enemy/2.floating/4.png',
-        '../images/2.Enemy/3 Final Enemy/2.floating/5.png',
-        '../images/2.Enemy/3 Final Enemy/2.floating/6.png',
-        '../images/2.Enemy/3 Final Enemy/2.floating/7.png',
-        '../images/2.Enemy/3 Final Enemy/2.floating/8.png',
-        '../images/2.Enemy/3 Final Enemy/2.floating/9.png',
-        '../images/2.Enemy/3 Final Enemy/2.floating/10.png',
-        '../images/2.Enemy/3 Final Enemy/2.floating/11.png',
-        '../images/2.Enemy/3 Final Enemy/2.floating/12.png',
-        '../images/2.Enemy/3 Final Enemy/2.floating/13.png',
+        'images/2.Enemy/3 Final Enemy/2.floating/1.png',
+        'images/2.Enemy/3 Final Enemy/2.floating/2.png',
+        'images/2.Enemy/3 Final Enemy/2.floating/3.png',
+        'images/2.Enemy/3 Final Enemy/2.floating/4.png',
+        'images/2.Enemy/3 Final Enemy/2.floating/5.png',
+        'images/2.Enemy/3 Final Enemy/2.floating/6.png',
+        'images/2.Enemy/3 Final Enemy/2.floating/7.png',
+        'images/2.Enemy/3 Final Enemy/2.floating/8.png',
+        'images/2.Enemy/3 Final Enemy/2.floating/9.png',
+        'images/2.Enemy/3 Final Enemy/2.floating/10.png',
+        'images/2.Enemy/3 Final Enemy/2.floating/11.png',
+        'images/2.Enemy/3 Final Enemy/2.floating/12.png',
+        'images/2.Enemy/3 Final Enemy/2.floating/13.png',
     ]
-    imagePath = '../images/2.Enemy/3 Final Enemy/1.Introduce/5.png';
+    imagePath = 'images/2.Enemy/3 Final Enemy/1.Introduce/5.png';
     IMAGES_SWIM = [
-        '../images/2.Enemy/3 Final Enemy/2.floating/13.png',
+        'images/2.Enemy/3 Final Enemy/2.floating/13.png',
     ]
     width = 350;
     height = 350;
     offset = {
-        top:15,
-        bottom:15,
+        top:140,
+        bottom:40,
         left:15,
         right:15
     }

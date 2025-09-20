@@ -22,7 +22,7 @@ const level1  = new Level(
     [
         //water
         ...Array.from({ length: 23 }, (_, i) =>
-            new Background(899 * i, '../images/3.Background/Layers/5. Water/L.png', 0)
+            new Background(899 * i, 'images/3.Background/Layers/5. Water/L.png', 0)
         ),
 
         // Lights
@@ -37,17 +37,17 @@ const level1  = new Level(
 
         //first fond
         ...Array.from({ length: 23 }, (_, i) =>
-            new Fond(675 * i, 60, '../images/3.Background/Layers/4.Fondo 2/D.png', 0.5)
+            new Fond(675 * i, 60, 'images/3.Background/Layers/4.Fondo 2/D.png', 0.5)
         ),
         
         //second fond
         ...Array.from({ length: 23 }, (_, i) =>
-            new Fond(675 * i, 120, '../images/3.Background/Layers/3.Fondo 1/L.png', 0.25)
+            new Fond(675 * i, 120, 'images/3.Background/Layers/3.Fondo 1/L.png', 0.25)
         ),
         
         //floor
         ...Array.from({ length: 23 }, (_, i) =>
-            new Fond(675 * i, 170, '../images/3.Background/Layers/2. Floor/L.png', 0.15)
+            new Fond(675 * i, 170, 'images/3.Background/Layers/2. Floor/L.png', 0.15)
         ),
 
     ],

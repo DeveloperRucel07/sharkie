@@ -2,20 +2,20 @@ class JellyFishPink extends MovableObject{
     width = 90;
     height = 90;
     offset = {
-        top:15,
-        bottom:15,
-        left:15,
-        right:15
+        top:8,
+        bottom:8,
+        left:8,
+        right:8
     }
    
     IMAGES = [
-        '../images/2.Enemy/2 Jelly fish/Súper dangerous/Pink 1.png',
-        '../images/2.Enemy/2 Jelly fish/Súper dangerous/Pink 2.png',
-        '../images/2.Enemy/2 Jelly fish/Súper dangerous/Pink 3.png',
-        '../images/2.Enemy/2 Jelly fish/Súper dangerous/Pink 4.png',
+        'images/2.Enemy/2 Jelly fish/Súper dangerous/Pink 1.png',
+        'images/2.Enemy/2 Jelly fish/Súper dangerous/Pink 2.png',
+        'images/2.Enemy/2 Jelly fish/Súper dangerous/Pink 3.png',
+        'images/2.Enemy/2 Jelly fish/Súper dangerous/Pink 4.png',
     ];
 
-    imagePath = '../images/2.Enemy/2 Jelly fish/Súper dangerous/Pink 1.png';
+    imagePath = 'images/2.Enemy/2 Jelly fish/Súper dangerous/Pink 1.png';
     constructor(x){
         super().loadImage(this.imagePath);
         this.loadImages(this.IMAGES);

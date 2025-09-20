@@ -1,15 +1,15 @@
 class Poison extends MovableObject{
     POISON_IMAGES = [
-        '../images/4.Marks/Posión/Animada/1.png',
-        '../images/4.Marks/Posión/Animada/2.png',
-        '../images/4.Marks/Posión/Animada/6.png',
-        '../images/4.Marks/Posión/Animada/3.png',
-        '../images/4.Marks/Posión/Animada/4.png',
-        '../images/4.Marks/Posión/Animada/7.png',
-        '../images/4.Marks/Posión/Animada/5.png',
-        '../images/4.Marks/Posión/Animada/8.png',
+        'images/4.Marks/Posión/Animada/1.png',
+        'images/4.Marks/Posión/Animada/2.png',
+        'images/4.Marks/Posión/Animada/6.png',
+        'images/4.Marks/Posión/Animada/3.png',
+        'images/4.Marks/Posión/Animada/4.png',
+        'images/4.Marks/Posión/Animada/7.png',
+        'images/4.Marks/Posión/Animada/5.png',
+        'images/4.Marks/Posión/Animada/8.png',
     ]
-    imagePath = '../images/4.Marks/Posión/Animada/1.png';
+    imagePath = 'images/4.Marks/Posión/Animada/1.png';
     width = 50;
     height = 50;
     constructor(x){

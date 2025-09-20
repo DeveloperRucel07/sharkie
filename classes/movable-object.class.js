@@ -17,6 +17,8 @@ class MovableObject extends DrawableObject{
         right:0
     }
 
+    lastHit = 0;
+
     playAnimation(images){
         let i = this.currentImage % images.length;
         let path = images[i];
@@ -51,11 +53,18 @@ class MovableObject extends DrawableObject{
     }
 
     hit(){
-        this.energy -= 5;
+        this.energy -= 1;
         if(this.energy < 0){
             this.energy = 0;
+        }else{
+            this.lastHit  = new Date().getTime();
         }
-        // console.log(this.energy);
+    }
+
+    isHurt(){
+        let timepassed = new Date().getTime() - this.lastHit;
+        timepassed = timepassed / 1000;
+        return timepassed < 1;
     }
 
     isDead(){

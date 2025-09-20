@@ -1,18 +1,18 @@
 class PufferFishPink extends MovableObject {
     IMAGES_SWIM = [
-        '../images/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim1.png',
-        '../images/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim5.png',
-        '../images/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim3.png',
-        '../images/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim4.png',
-        '../images/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim5.png',
+        'images/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim1.png',
+        'images/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim5.png',
+        'images/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim3.png',
+        'images/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim4.png',
+        'images/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim5.png',
     ];
-    imagePath = '../images/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim1.png';
+    imagePath = 'images/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim1.png';
     width = 100;
     height = 100;
     offset = {
-        top:10,
-        bottom:60,
-        left:10,
+        top:8,
+        bottom:25,
+        left:0,
         right:10
     }
 

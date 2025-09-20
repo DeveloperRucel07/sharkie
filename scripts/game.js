@@ -7,7 +7,6 @@ let world = new World(canvas, ctx, keyboard);
 canvas.width = 900;
 canvas.height = 600;
 
-// let world = new World(canvas, ctx);
 
 function init() {
     world.start();
@@ -35,3 +34,5 @@ window.addEventListener("keyup", (e) => {
     if (e.code === "Space") keyboard.SPACE = false;
     if (e.code === "Enter") keyboard.ENTER = false;
 });
+
+
