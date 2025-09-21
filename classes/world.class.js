@@ -6,6 +6,7 @@ class World {
     life_mark = new LifeMark();
     coin_mark = new CoinMark();
     poison_mark = new PoisonMark();
+    bubbles = [];
     ctx;
     camera_x = 0;
     collectedCoins = 0;
@@ -41,6 +42,7 @@ class World {
         this.addObjectsToCanvas(this.level.coins);
         this.addObjectsToCanvas(this.level.lifes);
         this.addObjectsToCanvas(this.level.poisons);
+        this.addObjectsToCanvas(this.bubbles);
         this.shark.draw(ctx);
         ctx.restore();
         this.life_mark.draw(ctx);
@@ -53,6 +55,7 @@ class World {
         this.shark.animate();
         this.level.pufferEnemies.forEach(enemy => enemy.animateFish());
         this.level.jellyEnemies.forEach(jelly => jelly.animate());
+        this.bubbles.forEach(bubble => bubble.throw());
     }
 
 
@@ -117,7 +120,7 @@ class World {
                 this.life_mark.setPercentageLife(this.shark.energy);
             }
         })
-        
+
     }
 
 

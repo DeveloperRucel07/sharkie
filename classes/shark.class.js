@@ -110,8 +110,14 @@ class Shark extends MovableObject {
             this.playAnimation(this.IMAGES_SWIM); 
         }else if(this.isSleeping){
             this.playAnimation(this.IMAGES_LONGSTAY); 
+        }else if(this.world.keyboard.D){
+            this.playAnimation(this.ATTACK_BUBBLE);
+            this.throwBubble('normal');
+        }else if(this.world.keyboard.F){
+            this.playAnimation(this.ATTACK_POISONED_BUBBLE);
+            this.throwBubble('poison');
         }else{
-            this.playAnimation(this.IMAGES_STAY); 
+            this.playAnimation(this.IMAGES_STAY);
         }
  
     }
@@ -195,6 +201,14 @@ class Shark extends MovableObject {
             return true;
         }
     }
+
+    throwBubble(type){
+        let bubbleX = this.otherDirection ? this.x - 20 : this.x + this.width;
+        let bubbleY = this.y + this.height / 2;
+        let bubble = new ThrowableObject(bubbleX, bubbleY, type);
+        bubble.otherDirection = this.otherDirection; 
+        this.world.bubbles.push(bubble);
+    }  
 
 }
 
