@@ -8,6 +8,9 @@ class World {
     poison_mark = new PoisonMark();
     ctx;
     camera_x = 0;
+    collectedCoins = 0;
+    collectedPoisons = 0;
+    collectedLifes = 0;
     worldWidth;
     constructor(canvas, ctx, keyboard) {
         this.canvas = canvas;
@@ -38,9 +41,8 @@ class World {
         this.addObjectsToCanvas(this.level.coins);
         this.addObjectsToCanvas(this.level.lifes);
         this.addObjectsToCanvas(this.level.poisons);
-        ctx.restore();
         this.shark.draw(ctx);
-        this.shark.drawBorderOffset(ctx);
+        ctx.restore();
         this.life_mark.draw(ctx);
         this.coin_mark.draw(ctx);
         this.poison_mark.draw(ctx);
@@ -55,19 +57,69 @@ class World {
 
 
     checkColisions(){
+
         setInterval(()=>{
-            this.level.pufferEnemies.forEach((pufferEnemy)=>{
-                if(this.shark.isColliding(pufferEnemy)){
-                    this.shark.hit();
-                }
-            })
-            this.level.jellyEnemies.forEach((jellyEnemy)=>{
-                if(this.shark.isColliding(jellyEnemy)){
-                    this.shark.hit();
-                }
-            })
+            this.sharkCollisionWithPufferFishes();
+            this.sharkCollisionWithJellyFishes(); 
+            this.sharkCollisionWithCoins();
+            this.sharkCollisionWithPoisons();
+            this.sharkCollisionWithLifes();
+        }, 200) 
+    }
+
+
+
+    sharkCollisionWithPufferFishes(){
+        this.level.pufferEnemies.forEach((pufferEnemy, index)=>{
+            if(this.shark.isColliding(pufferEnemy)){
+                this.shark.hit();
+                this.life_mark.setPercentageLife(this.shark.energy);
+            }
         })
     }
+
+    sharkCollisionWithJellyFishes(){
+        this.level.jellyEnemies.forEach((jellyEnemy, index)=>{
+            if(this.shark.isColliding(jellyEnemy)){
+                this.shark.electro();
+                this.life_mark.setPercentageLife(this.shark.energy);
+            }
+        })
+    }
+
+    sharkCollisionWithCoins(){
+        this.level.coins.forEach((coin, index) => {
+            if (this.shark.isColliding(coin)) {
+                this.collectedCoins++;
+                this.level.coins.splice(index, 1);
+                this.coin_mark.setPercentageCoin(this.collectedCoins);
+            }
+        })
+    }
+    
+    sharkCollisionWithPoisons(){
+        this.level.poisons.forEach((poison, index) => {
+            if (this.shark.isColliding(poison)) {
+                this.collectedPoisons++;
+                this.level.poisons.splice(index, 1);
+                this.poison_mark.setPercentagePoison(this.collectedPoisons);
+            }
+        })
+    }
+    
+    sharkCollisionWithLifes(){
+        this.level.lifes.forEach((life, index) => {
+            if (this.shark.isColliding(life)) {
+                this.collectedLifes++;
+                let newEnergy = this.collectedLifes*10;
+                this.shark.energy = this.shark.energy + newEnergy;
+                this.level.lifes.splice(index, 1);
+                this.life_mark.setPercentageLife(this.shark.energy);
+            }
+        })
+        
+    }
+
 
     gameLoop() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);

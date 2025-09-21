@@ -1,11 +1,27 @@
+@font-face {
+  font-family: "Luckiest Guy";
+  src: url("../fonts/luckiest-guy-v18-latin-regular.woff2") format("woff2"),
+       url("../fonts/luckiest-guy-v18-latin-regular.woff") format("woff"),
+       url("../fonts/luckiest-guy-v18-latin-regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+
 body{
-    font-family: Arial, sans-serif;
+    font-family: "Luckiest Guy", Arial, sans-serif;
     margin: 0;
     padding: 0;
     display: flex;
     align-items: center;
     flex-direction: column;
     position: relative;
+    background-image: url('./images/background1.jpg');
+    background-size: cover;
+    background-repeat: no-repeat; 
+    background-position: center; 
+    justify-content: center;
+    align-items: center;
     
 }
 

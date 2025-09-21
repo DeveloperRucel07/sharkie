@@ -18,6 +18,7 @@ class MovableObject extends DrawableObject{
     }
 
     lastHit = 0;
+    lastChock= 0;
 
     playAnimation(images){
         let i = this.currentImage % images.length;
@@ -45,15 +46,18 @@ class MovableObject extends DrawableObject{
         }
     }
 
-    isColliding(moObject){
-        return this.x + this.width - this.offset.right > moObject.x + moObject.offset.left && 
-            this.y + this.height - this.offset.bottom > moObject.y + moObject.offset.top &&
-            this.x + this.offset.left < moObject.x + moObject.width - moObject.offset.right &&
-            this.y + this.offset.top < moObject.y + moObject.height - moObject.offset.bottom;
+    isColliding(moObject) {
+        return (
+            this.x + this.offset.left < moObject.x + moObject.width - moObject.offset.right && 
+            this.x + this.width - this.offset.right > moObject.x + moObject.offset.left &&   
+            this.y + this.offset.top < moObject.y + moObject.height - moObject.offset.bottom && 
+            this.y + this.height - this.offset.bottom > moObject.y + moObject.offset.top     
+        );
     }
 
+
     hit(){
-        this.energy -= 1;
+        this.energy -= 2;
         if(this.energy < 0){
             this.energy = 0;
         }else{
@@ -61,8 +65,23 @@ class MovableObject extends DrawableObject{
         }
     }
 
+    electro(){
+        this.energy -= 4;
+        if(this.energy < 0){
+            this.energy = 0;
+        }else{
+            this.lastChock  = new Date().getTime();
+        }
+    }
+
     isHurt(){
         let timepassed = new Date().getTime() - this.lastHit;
+        timepassed = timepassed / 1000;
+        return timepassed < 1;
+    }
+
+    isHurtElectric(){
+        let timepassed = new Date().getTime() - this.lastChock;
         timepassed = timepassed / 1000;
         return timepassed < 1;
     }

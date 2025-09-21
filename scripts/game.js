@@ -3,9 +3,9 @@ let ctx;
 canvas = document.getElementById('gameCanvas');
 ctx = canvas.getContext('2d');
 let keyboard = new Keyboard();
-let world = new World(canvas, ctx, keyboard);
 canvas.width = 900;
 canvas.height = 600;
+let world = new World(canvas, ctx, keyboard);
 
 
 function init() {

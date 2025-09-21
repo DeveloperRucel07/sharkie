@@ -25,6 +25,6 @@ startBtn.addEventListener("click", () => {
     init();
 });
 
-// tryAgain.addEventListener('click', ()=>{
-//     stopGame();
-// })
+tryAgain.addEventListener('click', ()=>{
+    window.location.reload();
+})

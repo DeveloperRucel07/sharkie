@@ -57,7 +57,7 @@ class Shark extends MovableObject {
     y = 400;
     width = 250;
     height = 250;
-    energy = 100000;
+    energy = 100;
     offset = {
         top:120,
         bottom:50,
@@ -86,16 +86,20 @@ class Shark extends MovableObject {
         this.lastMoveTime = Date.now();
         this.sleepDelay = 5000;
         this.worldWidth = this.worldWidth;
-        setTimeout(()=>{ this.animate();}, 1000);
+        setTimeout(()=>{ this.animate();}, 200);
         this.checkIfSleeping();
     }
 
 
     animate() { 
         if(this.isDead()){
+            document.getElementById("tryAgain").classList.remove("d-none");
+            document.getElementById("tryAgain").classList.add("d-flex");
             this.playAnimation(this.IMAGE_DEAD_POISONED); 
         }else if(this.isHurt()){
             this.playAnimation(this.IMAGES_HURT_POISONED);
+        }else if(this.isHurtElectric()){
+            this.playAnimation(this.IMAGES_HURT_ELECTRIC_SHOCK);
         }else if(this.isMovingRight()){
             this.playAnimation(this.IMAGES_SWIM); 
         }else if(this.isMovingLeft()){
@@ -114,29 +118,36 @@ class Shark extends MovableObject {
 
     moveRight() {
         this.otherDirection = false;
-        this.worldWidth = this.world.worldWidth;
-        if (this.x < (this.world.canvas.width - this.width*2) ) {
+        if (this.x + this.width < this.world.worldWidth) {
             this.x += this.speed;
-        } else {
-            const maxCameraX = this.worldWidth - this.world.canvas.width;
-            this.world.camera_x = Math.max(
-                Math.min(this.world.camera_x - this.speed, 0),
-                -maxCameraX                                   
-            );
+            if (this.x > this.world.canvas.width / 2) {
+                this.world.camera_x = -(this.x - this.world.canvas.width / 2);
+            }
+        }
+    }
+
+    moveRight() {
+        this.otherDirection = false;
+        if (this.x + this.width < this.world.worldWidth) {
+            this.x += this.speed;
+            this.updateCamera();
         }
     }
 
     moveLeft() {
         this.otherDirection = true;
-        if (this.x > 0 && this.world.camera_x === 0){
+        if (this.x > 0) {
             this.x -= this.speed;
+            this.updateCamera();
         }
-        else if (this.x > this.world.canvas.width / 4) {
-            this.x -= this.speed;
-        } else {
-            this.world.camera_x = Math.min(this.world.camera_x + this.speed, 0);
-        }
-        this.x = Math.max(this.x, 0);
+    }
+
+    updateCamera() {
+        const halfCanvas = this.world.canvas.width / 2;
+        let cam = -this.x + halfCanvas;
+        cam = Math.min(0, cam); 
+        cam = Math.max(cam, -(this.world.worldWidth - this.world.canvas.width));
+        this.world.camera_x = cam;
     }
 
     changeSleepTime(){
