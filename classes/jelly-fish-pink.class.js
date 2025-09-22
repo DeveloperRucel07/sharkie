@@ -21,7 +21,7 @@ class JellyFishPink extends MovableObject{
         this.loadImages(this.IMAGES);
         this.y = this.y = 600 - this.height;
         this.x = x;
-        this.speed = 0.01 + Math.random() * 0.3;
+        this.speed = 1 + Math.random() * 0.3;
         this.jumHeight = 600;
         this.animate();
     }

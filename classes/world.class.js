@@ -74,8 +74,13 @@ class World {
 
     sharkCollisionWithPufferFishes(){
         this.level.pufferEnemies.forEach((pufferEnemy, index)=>{
-            if(this.shark.isColliding(pufferEnemy)){
+            if(this.shark.slap && this.shark.isColliding(pufferEnemy)){
+                pufferEnemy.isDead();
+                // this.level.pufferEnemies.splice(index, 1);
+            }
+            else if(this.shark.isColliding(pufferEnemy) && this.shark.isVulnerable && !this.shark.slap){
                 this.shark.hit();
+                this.shark.changeVulnerability();
                 this.life_mark.setPercentageLife(this.shark.energy);
             }
         })
@@ -83,8 +88,9 @@ class World {
 
     sharkCollisionWithJellyFishes(){
         this.level.jellyEnemies.forEach((jellyEnemy, index)=>{
-            if(this.shark.isColliding(jellyEnemy)){
+            if(this.shark.isColliding(jellyEnemy) && this.shark.isVulnerable && !this.shark.slap){
                 this.shark.electro();
+                this.shark.changeVulnerability();
                 this.life_mark.setPercentageLife(this.shark.energy);
             }
         })

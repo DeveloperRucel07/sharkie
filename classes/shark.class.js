@@ -58,6 +58,7 @@ class Shark extends MovableObject {
     width = 250;
     height = 250;
     energy = 100;
+    slap = false;
     offset = {
         top:120,
         bottom:50,
@@ -81,21 +82,26 @@ class Shark extends MovableObject {
         this.loadImages(this.ATTACK_SLAP);
         this.jumHeight = 600;
         this.y = 600 - this.height;
-        this.speed = 5;
+        this.speed = 10;
         this.isSleeping = false;
         this.lastMoveTime = Date.now();
         this.sleepDelay = 5000;
+        this.lastHurt = Date.now();
+        this.isVulnerable = true;
+        this.isVulnerableDelay = 2000;
         this.worldWidth = this.worldWidth;
         setTimeout(()=>{ this.animate();}, 200);
         this.checkIfSleeping();
+        this.alreadyVulnerable();
     }
 
 
     animate() { 
+        
         if(this.isDead()){
+            this.playAnimation(this.IMAGE_DEAD_POISONED); 
             document.getElementById("tryAgain").classList.remove("d-none");
             document.getElementById("tryAgain").classList.add("d-flex");
-            this.playAnimation(this.IMAGE_DEAD_POISONED); 
         }else if(this.isHurt()){
             this.playAnimation(this.IMAGES_HURT_POISONED);
         }else if(this.isHurtElectric()){
@@ -116,11 +122,29 @@ class Shark extends MovableObject {
         }else if(this.world.keyboard.F){
             this.playAnimation(this.ATTACK_POISONED_BUBBLE);
             this.throwBubble('poison');
-        }else{
+        }else if(this.world.keyboard.SPACE){
+            this.slap = true;
+            this.playAnimation(this.ATTACK_SLAP);
+        }
+        else{
             this.playAnimation(this.IMAGES_STAY);
         }
+
+        setTimeout(()=>{
+            this.slap = false
+        }, 5000);
  
     }
+
+
+    alreadyVulnerable(){
+        setInterval(() => {
+            if (Date.now() - this.lastHurt > this.isVulnerableDelay) {
+                this.isVulnerable = true;
+            }
+        }, 1000 / 30);
+    }
+
 
     moveRight() {
         this.otherDirection = false;
@@ -159,6 +183,11 @@ class Shark extends MovableObject {
     changeSleepTime(){
         this.lastMoveTime = Date.now();
         this.isSleeping = false;
+    }
+
+    changeVulnerability(){
+        this.lastHurt = Date.now();
+        this.isVulnerable = false;
     }
 
     checkIfSleeping() {

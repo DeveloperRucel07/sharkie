@@ -21,7 +21,7 @@ class JellyFishGreen extends MovableObject{
         this.loadImages(this.IMAGES);
         this.y = 600 - this.height;
         this.x = x;
-        this.speed = 0.015 + Math.random() * 0.3;
+        this.speed = 0.7 + Math.random() * 0.3;
         this.jumHeight = 600;
         this.animate();
     }
