@@ -7,6 +7,7 @@ class DrawableObject {
     height = 100;
     width = 100;
     otherDirection = false;
+    max_x_fishes = 3300;
 
     loadImage(path) {
         this.img = new Image();

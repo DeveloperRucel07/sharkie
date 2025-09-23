@@ -19,6 +19,7 @@ class World {
         this.keyboard = keyboard;
         this.worldWidth = this.level.level_end_x;
         this.shark = new Shark('images/1.Sharkie/Stay/1.png');
+        this.endboss =  new Endboss(3800, 200);
         this.setWorldToShark();
         this.checkColisions();  
     }
@@ -44,6 +45,7 @@ class World {
         this.addObjectsToCanvas(this.level.poisons);
         this.addObjectsToCanvas(this.bubbles);
         this.shark.draw(ctx);
+        this.endboss.draw(ctx);
         ctx.restore();
         this.life_mark.draw(ctx);
         this.coin_mark.draw(ctx);
@@ -53,6 +55,7 @@ class World {
     animatedObjects() {
         this.level.backgrounds.forEach(layer => layer.animate());
         this.shark.animate();
+        this.endboss.animateFish();
         this.level.pufferEnemies.forEach(enemy => enemy.animateFish());
         this.level.jellyEnemies.forEach(jelly => jelly.animate());
         this.bubbles.forEach(bubble => bubble.throw());
@@ -67,6 +70,7 @@ class World {
             this.sharkCollisionWithCoins();
             this.sharkCollisionWithPoisons();
             this.sharkCollisionWithLifes();
+            this.checkBubbleEndbossCollision();
         }, 200) 
     }
 
@@ -127,6 +131,16 @@ class World {
             }
         })
 
+    }
+
+
+    checkBubbleEndbossCollision() {
+        this.bubbles.forEach(bubble => {
+            if (this.endboss && this.endboss.isColliding(bubble)) {
+                this.endboss.hit();
+                console.log("OHH is Colliding!") 
+            }
+        });
     }
 
 

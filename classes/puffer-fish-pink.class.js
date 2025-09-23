@@ -29,7 +29,7 @@ class PufferFishPink extends MovableObject {
         this.imageCache = {};
         this.loadImages(this.IMAGES_SWIM);
         this.animateFish();
-        this.speed = 5 + Math.random() * 0.5;
+        this.speed = 10 + Math.random() * 0.5;
         
     }
 

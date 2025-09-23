@@ -8,7 +8,9 @@ const level1  = new Level(
         new PufferFishOrange(1900, 300),
         new PufferFishPink(2700, 400),
         new PufferFishGreen(3000, 500),
-        new Endboss(3800, 200),
+        new PufferFishOrange(3200, 400),
+        new PufferFishPink(3100, 100),
+        new PufferFishGreen(3300, 10),
     ],
 
     [
@@ -17,6 +19,11 @@ const level1  = new Level(
         new JellyFishPink(950),
         new JellyFishGreen(1250),
         new JellyFishGreen(1600),
+        new JellyFishYellow(2000),
+        new JellyFishLila(2200),
+        new JellyFishPink(3000),
+        new JellyFishLila(3200),
+        new JellyFishGreen(2800),
     ],
 
     [
@@ -53,14 +60,16 @@ const level1  = new Level(
     ],
 
     [
-        new Poison(350),
-        new Poison(2250),
-        new Poison(3450),
+        new Poison(450),
+        new Poison(1000),
+        new Poison(2450),
         new Poison(600),
         new Poison(800),
         new Poison(1200),
         new Poison(1500),
         new Poison(1800),
+        new Poison(2000),
+        new Poison(2800),
 
     ],
 
@@ -70,7 +79,11 @@ const level1  = new Level(
         new Coin(1100, 10),
         new Coin(1500, 350),
         new Coin(1900, 150),
-        new Coin(2300, 450),
+        new Coin(2300, 50),
+        new Coin(2400, 250),
+        new Coin(2600, 350),
+        new Coin(3300, 10),
+        new Coin(3000, 450),
     ],
 
     [
@@ -81,7 +94,7 @@ const level1  = new Level(
         new Life(2300, 300),
         new Life(2800, 100),
 
-    ]
+    ],
 
 
 );

@@ -34,15 +34,25 @@ class MovableObject extends DrawableObject{
             this.speed *= -1;
             this.otherDirection = !this.otherDirection;
         }
+        if(this.x + this.width>= this.max_x_fishes){
+            this.x = this.max_x_fishes - this.width;
+            this.speed *= -1;
+            this.otherDirection = !this.otherDirection;
+        }
     }
 
     moveRight() {
         this.otherDirection = true;
         this.x += this.speed;
-        if (this.x + this.width >= 900) {
-            this.x = 900 - this.width;
+        if (this.x + this.width >= this.max_x_fishes) {
+            this.x = this.max_x_fishes - this.width;
             this.speed *= -1;
-            this.otherDirection = false; 
+            this.otherDirection = !this.otherDirection;
+        }
+        if(this.x <= 0){
+            this.x = 0;
+            this.speed *= -1;
+            this.otherDirection = !this.otherDirection;
         }
     }
 
