@@ -1,10 +1,10 @@
 let canvas;
 let ctx;
 canvas = document.getElementById('gameCanvas');
-ctx = canvas.getContext('2d');
-let keyboard = new Keyboard();
 canvas.width = 900;
 canvas.height = 600;
+ctx = canvas.getContext('2d');
+let keyboard = new Keyboard();
 let world = new World(canvas, ctx, keyboard);
 
 

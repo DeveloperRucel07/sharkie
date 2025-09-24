@@ -80,8 +80,6 @@ class Shark extends MovableObject {
         this.loadImages(this.ATTACK_POISONED_BUBBLE);
         this.loadImages(this.ATTACK_BUBBLE);
         this.loadImages(this.ATTACK_SLAP);
-        this.jumHeight = 600;
-        this.y = 600 - this.height;
         this.speed = 10;
         this.isSleeping = false;
         this.lastMoveTime = Date.now();
@@ -90,16 +88,21 @@ class Shark extends MovableObject {
         this.isVulnerable = true;
         this.isVulnerableDelay = 2000;
         this.worldWidth = this.worldWidth;
-        setTimeout(()=>{ this.animate();}, 200);
+        setTimeout(()=>{ 
+            this.animate();
+            this.jumHeight = this.world.canvas.height;
+            this.y = this.jumHeight - this.height;
+
+        }, 200);
         this.checkIfSleeping();
-        this.alreadyVulnerable();
+        this.alreadyVulnerable(); 
     }
 
 
     animate() { 
-        
         if(this.isDead()){
             this.playAnimation(this.IMAGE_DEAD_POISONED); 
+            this.animateDeathToTop();
             document.getElementById("tryAgain").classList.remove("d-none");
             document.getElementById("tryAgain").classList.add("d-flex");
         }else if(this.isHurt()){

@@ -22,7 +22,7 @@ class PoisonMark extends DrawableObject{
     setPercentagePoison(percentage){
         this.percentage = percentage;
 
-        if(this.percentage == 10){
+        if( this.percentage == 9 || this.percentage == 10){
             this.loadImage(this.POISON_MARK_IMAGES[5]);
         }else if(this.percentage == 7 || this.percentage == 8){
             this.loadImage(this.POISON_MARK_IMAGES[4]);

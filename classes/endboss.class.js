@@ -1,5 +1,6 @@
 class Endboss extends MovableObject{
     IMAGES_COME = [
+        '',
         'images/2.Enemy/3 Final Enemy/1.Introduce/1.png',
         'images/2.Enemy/3 Final Enemy/1.Introduce/2.png',
         'images/2.Enemy/3 Final Enemy/1.Introduce/3.png',
@@ -34,10 +35,29 @@ class Endboss extends MovableObject{
         'images/2.Enemy/3 Final Enemy/Hurt/3.png',
         'images/2.Enemy/3 Final Enemy/Hurt/4.png',
         'images/2.Enemy/3 Final Enemy/Hurt/2.png'
-    ]
+    ];
+    IMAGES_DEAD = [
+        'images/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2.png',
+        'images/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 6.png',
+        'images/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 7.png',
+        'images/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 9.png',
+        'images/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 8.png',
+        'images/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 10.png',
+    ];
+
+    IMAGES_ATTACK = [
+        'images/2.Enemy/3 Final Enemy/Attack/1.png',
+        'images/2.Enemy/3 Final Enemy/Attack/2.png',
+        'images/2.Enemy/3 Final Enemy/Attack/4.png',
+        'images/2.Enemy/3 Final Enemy/Attack/5.png',
+        'images/2.Enemy/3 Final Enemy/Attack/3.png',
+    ];
+
     imagePath = 'images/2.Enemy/3 Final Enemy/1.Introduce/5.png';
     width = 350;
     height = 350;
+    x = 3800;
+    y = 200;
     offset = {
         top:140,
         bottom:40,
@@ -45,22 +65,82 @@ class Endboss extends MovableObject{
         right:15
     }
 
-    constructor(x, y) {
+    isComing = false;
+    hasArrived = false;
+    comeAnimationFrame = 0;
+
+    constructor() {
         super().loadImage(this.imagePath);
-        this.x = x;
-        this.y = y;
         this.imageCache = {};
         this.loadImages(this.IMAGES_SWIM);
         this.loadImages(this.IMAGES_HURT);
-        this.speed = 0;
+        this.loadImages(this.IMAGES_DEAD);
+        this.loadImages(this.IMAGES_ATTACK);
+        this.speed = 3;
     }
 
     animateFish(){
-        if(this.isHurt()){
+        if(this.isDead()){
+            this.playAnimation(this.IMAGES_DEAD);
+            this.animateDeathToTop();
+        }else if(this.isHurt()){
             this.playAnimation(this.IMAGES_HURT);
         }else{
             this.playAnimation(this.IMAGES_SWIM);
         }
 
     }
+
+
+    checkIfSharkComming(shark){
+        if (!this.isComing && shark.x >= 3650 && !this.hasArrived) {
+            this.isComing = true;
+            this.comeAnimationFrame = 0;
+        }
+
+        if (this.isComing && !this.hasArrived) {
+            this.playComeAnimation();
+        } else if (this.hasArrived) {
+            this.animateFish();
+            this.moveTowardsShark(shark);
+        }
+    }
+
+
+
+    playComeAnimation() {
+        if (this.comeAnimationFrame < this.IMAGES_COME.length) {
+            this.loadImage(this.IMAGES_COME[this.comeAnimationFrame]);
+            this.comeAnimationFrame++;
+        } else {
+            this.isComing = false;
+            this.hasArrived = true;
+            this.comeAnimationFrame = 0;
+        }
+    }
+
+    moveTowardsShark(shark) {
+        const distanceX = Math.abs(this.x - shark.x);
+        const distanceY = Math.abs(this.y - shark.y);
+        const nearThreshold = 75;
+
+        if (distanceX < nearThreshold && distanceY < nearThreshold) {
+            this.playAnimation(this.IMAGES_ATTACK);
+        }
+
+        if (this.x > shark.x) {
+            this.x -= this.speed;
+        } else if (this.x < shark.x) {
+            this.x += this.speed;
+        }
+
+        if (this.y > shark.y) {
+            this.y -= this.speed / 2;
+        } else if (this.y < shark.y) {
+            this.y += this.speed / 2;
+        }
+
+    }
+
+
 }

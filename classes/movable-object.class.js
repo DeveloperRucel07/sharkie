@@ -100,5 +100,18 @@ class MovableObject extends DrawableObject{
         return this.energy == 0;
     }
 
+    animateDeathToTop() {
+        if (this.y > 0) {
+            this.y -= 10; 
+            if (this.y < 0){
+                if(this instanceof Shark || this instanceof Endboss){
+                    this.y = -100;
+                }else{
+                    this.y = 0;
+                }
+            };
+        }
+    }
+
 
 }

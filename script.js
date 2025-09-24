@@ -28,3 +28,27 @@ startBtn.addEventListener("click", () => {
 tryAgain.addEventListener('click', ()=>{
     window.location.reload();
 })
+
+
+
+function getDeviceType() {
+    const ua = navigator.userAgent;
+     console.log(ua);
+    if (/android/i.test(ua)) {
+        return "Android";
+    }
+    if (/iPad|iPhone|Mac|iPod/.test(ua) && !window.MSStream) {
+        return "iOS";
+    }
+    if (/tablet|ipad|playbook|silk/i.test(ua)) {
+        return "Tablet";
+    }
+    if (/Mobile|iP(hone|od)|Android|BlackBerry|IEMobile|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(ua)) {
+        return "Mobile";
+    }
+   
+    return "Desktop";
+}
+
+console.log("Device type:", getDeviceType());
+
