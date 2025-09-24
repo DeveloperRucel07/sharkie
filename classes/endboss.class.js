@@ -36,6 +36,7 @@ class Endboss extends MovableObject{
         'images/2.Enemy/3 Final Enemy/Hurt/4.png',
         'images/2.Enemy/3 Final Enemy/Hurt/2.png'
     ];
+
     IMAGES_DEAD = [
         'images/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2.png',
         'images/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 6.png',
@@ -83,6 +84,8 @@ class Endboss extends MovableObject{
         if(this.isDead()){
             this.playAnimation(this.IMAGES_DEAD);
             this.animateDeathToTop();
+            document.getElementById("youWin").classList.remove("d-none");
+            document.getElementById("youWin").classList.add("d-flex");
         }else if(this.isHurt()){
             this.playAnimation(this.IMAGES_HURT);
         }else{
@@ -107,7 +110,6 @@ class Endboss extends MovableObject{
     }
 
 
-
     playComeAnimation() {
         if (this.comeAnimationFrame < this.IMAGES_COME.length) {
             this.loadImage(this.IMAGES_COME[this.comeAnimationFrame]);
@@ -122,8 +124,8 @@ class Endboss extends MovableObject{
     moveTowardsShark(shark) {
         const distanceX = Math.abs(this.x - shark.x);
         const distanceY = Math.abs(this.y - shark.y);
-        const nearThreshold = 75;
-
+        const nearThreshold = 100;
+        this.otherDirection = !shark.otherDirection;
         if (distanceX < nearThreshold && distanceY < nearThreshold) {
             this.playAnimation(this.IMAGES_ATTACK);
         }

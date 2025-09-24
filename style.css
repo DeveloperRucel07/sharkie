@@ -84,13 +84,18 @@ canvas {
     height: 600px;
 }
 
-.restart-game-btn{
+.restart-game-btn, .you-win{
     position: absolute;
     z-index: 1000;
     background: none;
     border: none;
     cursor: pointer;
 
+}
+
+.you-win img{
+    width: 900px;
+    height: 605px;
 }
 
 .d-flex{
@@ -107,7 +112,7 @@ canvas {
         display: none;
     }
 
-    canvas{
+    canvas, .you-win img{
         height: 100vh;
         width: 100%;
     }
@@ -119,7 +124,7 @@ canvas {
         display: none;
     }
 
-    canvas{
+    canvas, .you-win img{
         height: 100vh;
         width: 100%;
     }

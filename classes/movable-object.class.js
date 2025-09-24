@@ -106,6 +106,7 @@ class MovableObject extends DrawableObject{
             if (this.y < 0){
                 if(this instanceof Shark || this instanceof Endboss){
                     this.y = -100;
+                    this.loadImage(this.imagePath);
                 }else{
                     this.y = 0;
                 }
