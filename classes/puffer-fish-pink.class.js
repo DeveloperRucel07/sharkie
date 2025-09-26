@@ -35,9 +35,12 @@ class PufferFishPink extends MovableObject {
 
     animateFish(){
         if(this.isDead()){
+            this.playAnimation(this.IMAGES_DIE);
+            this.animateDeathToTop();
+        }else{
+
             this.playAnimation(this.IMAGES_SWIM);
         }
-        this.playAnimation(this.IMAGES_SWIM);
         this.moveLeft();
     }
  

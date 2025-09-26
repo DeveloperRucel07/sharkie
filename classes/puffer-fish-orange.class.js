@@ -31,14 +31,16 @@ class PufferFishOrange extends MovableObject {
         this.loadImages(this.IMAGES_SWIM);
         this.animateFish();
         this.speed = 4 + Math.random() * 0.5;
-        this.moveLeft();
     }
 
     animateFish(){
         if(this.isDead()){
+            this.playAnimation(this.IMAGES_DIE);
+            this.animateDeathToTop();
+        }else{
+
             this.playAnimation(this.IMAGES_SWIM);
         }
-        this.playAnimation(this.IMAGES_SWIM);
         this.moveLeft();
     }
  

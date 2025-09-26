@@ -19,6 +19,7 @@ class MovableObject extends DrawableObject{
 
     lastHit = 0;
     lastChock= 0;
+    lastEndBossHurt = 0
 
     playAnimation(images){
         let i = this.currentImage % images.length;
@@ -67,7 +68,7 @@ class MovableObject extends DrawableObject{
 
 
     hit(){
-        this.energy -= 2;
+        this.energy -= 4;
         if(this.energy < 0){
             this.energy = 0;
         }else{
@@ -75,8 +76,17 @@ class MovableObject extends DrawableObject{
         }
     }
 
+    endbosshit(){
+        this.energy -= 10;
+        if(this.energy < 0){
+            this.energy = 0;
+        }else{
+            this.lastEndBossHurt  = new Date().getTime();
+        }
+    }
+
     electro(){
-        this.energy -= 4;
+        this.energy -= 6;
         if(this.energy < 0){
             this.energy = 0;
         }else{

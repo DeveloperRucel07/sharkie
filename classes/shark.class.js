@@ -128,14 +128,16 @@ class Shark extends MovableObject {
         }else if(this.world.keyboard.SPACE){
             this.slap = true;
             this.playAnimation(this.ATTACK_SLAP);
+
+            setTimeout(()=>{
+                this.slap = false;
+            }, 1000);
+            
         }
         else{
             this.playAnimation(this.IMAGES_STAY);
         }
 
-        setTimeout(()=>{
-            this.slap = false
-        }, 5000);
  
     }
 

@@ -84,7 +84,7 @@ class World {
                 pufferEnemy.isDead();
                 // this.level.pufferEnemies.splice(index, 1);
             }
-            else if(this.shark.isColliding(pufferEnemy) && this.shark.isVulnerable && !this.shark.slap){
+            else if(  this.shark.isVulnerable && this.shark.isColliding(pufferEnemy) && !this.shark.slap){
                 this.shark.hit();
                 this.shark.changeVulnerability();
                 this.life_mark.setPercentageLife(this.shark.energy);
@@ -94,10 +94,13 @@ class World {
 
     sharkCollisionWithJellyFishes(){
         this.level.jellyEnemies.forEach((jellyEnemy, index)=>{
-            if(this.shark.isColliding(jellyEnemy) && this.shark.isVulnerable && !this.shark.slap){
+            if( this.shark.isVulnerable && this.shark.isColliding(jellyEnemy)  && !this.shark.slap){
                 this.shark.electro();
                 this.shark.changeVulnerability();
                 this.life_mark.setPercentageLife(this.shark.energy);
+            } else if(this.shark.slap && this.shark.isColliding(jellyEnemy)){
+                jellyEnemy.isDead();
+                // this.level.jellyEnemies.splice(index, 1);
             }
         })
     }
@@ -148,7 +151,7 @@ class World {
     sharkCollisionWithEndboss() {
         if (this.endboss.isColliding(this.shark) && this.shark.isVulnerable) {
             this.endboss.playAnimation(this.endboss.IMAGES_ATTACK);
-            this.shark.hit();
+            this.shark.endbosshit();
             this.shark.changeVulnerability();
             this.life_mark.setPercentageLife(this.shark.energy);
         }
