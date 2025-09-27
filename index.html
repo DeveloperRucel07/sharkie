@@ -7,14 +7,34 @@
     <title>Sharkie Game</title>
     <link rel="stylesheet" href="./style.css">
 </head>
-<body onload="init();">
-    <div class="start-game d-none">
-        <button id="startBtnGame" class="start-game-btn"> <img src="./images/5.Buttons/Start/1.png" alt="Start Game"></button>
+<body>
+    <div id="orientation">
+        <p>🔄 Please rotate your device to play in landscape mode.</p>
+    </div>
+    <div class="start-game d-flex">
+        <div class="history" id="historyGame">
+                <div class="history-text card">
+                    <h2 class="title">Deep under the waves, in the mysterious Coral Kingdom, lives a brave little shark named Sharkie.</h2>
+                    <p>
+                        Long ago, the Coral Kingdom was a place of peace and beauty...
+                        Puffer fishes gang swims across, blocking the path.
+                        Jelly fishes glow menacingly.
+                        Bottles of poison float slowly to set the mood. 
+                        Only one hero can save the ocean...
+                        Sharkie, the Ocean Guardian!
+                    </p>
+                    <div class="next">
+                        <span></span>
+                        <button type="button" onclick="nextToMision()">Next</button>
+                    </div>
+                </div>
+                
+        </div>
     </div>
     <div class="infos">
-        <h1>Sharkie Game</h1>
+        <h1>Sharkie</h1>
     </div>
-    <div class="game-zone d-flex" id="gameZone">
+    <div class="game-zone d-none" id="gameZone">
         <div class="you-win d-none" id="youWin"> <img src="./images/5.Buttons/Decisions/Wins/youWin.png" alt="Stop Game"></div>
         <button id="tryAgain" class="restart-game-btn d-none"> <img src="./images/5.Buttons/TryAgain/tryAgainYelow.png" alt="Stop Game"></button>
         <canvas id="gameCanvas">
@@ -22,6 +42,7 @@
         </canvas>  
     </div>
     
+    <script src="./scripts/template.js"></script>
     <script src="./script.js"></script>
     <script src="./classes/drawable-object.class.js"></script>
     <script src="./classes/movable-object.class.js"></script>
