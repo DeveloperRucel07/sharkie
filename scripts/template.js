@@ -41,9 +41,12 @@ function templateMission(){
 function templateReadyToPlay(){
     return `
 
-        <div class="start-btn">
+        <div class="start-btn card">
             <h5 class="title">Are you ready to help Sharkie save the ocean?</h5>
-            <button id="startBtnGame" class="start-game-btn" onclick="startGame()"> <img src="./images/5.Buttons/Start/1.png" alt="Start Game"></button>
+            <div class="next">
+                <button type="button" onclick="nextToMision()">Previous</button>
+                <button type="button" id="startBtnGame" class="start-game-btn" onclick="startGame()">Start</button>
+            </div>
         </div>
     `
 }

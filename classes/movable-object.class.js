@@ -67,21 +67,12 @@ class MovableObject extends DrawableObject{
     }
 
 
-    hit(){
-        this.energy -= 4;
+    hit(damage){
+        this.energy -= damage;
         if(this.energy < 0){
             this.energy = 0;
         }else{
             this.lastHit  = new Date().getTime();
-        }
-    }
-
-    endbosshit(){
-        this.energy -= 10;
-        if(this.energy < 0){
-            this.energy = 0;
-        }else{
-            this.lastEndBossHurt  = new Date().getTime();
         }
     }
 
@@ -95,6 +86,7 @@ class MovableObject extends DrawableObject{
     }
 
     isHurt(){
+        if (!this.lastHit) return false;
         let timepassed = new Date().getTime() - this.lastHit;
         timepassed = timepassed / 1000;
         return timepassed < 1;

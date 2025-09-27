@@ -85,7 +85,7 @@ class World {
                 // this.level.pufferEnemies.splice(index, 1);
             }
             else if(  this.shark.isVulnerable && this.shark.isColliding(pufferEnemy) && !this.shark.slap){
-                this.shark.hit();
+                this.shark.hit(4);
                 this.shark.changeVulnerability();
                 this.life_mark.setPercentageLife(this.shark.energy);
             }
@@ -142,7 +142,7 @@ class World {
     checkBubbleEndbossCollision() {
         this.bubbles.forEach(bubble => {
             if (this.endboss && this.endboss.isColliding(bubble)) {
-                this.endboss.hit();
+                this.endboss.hit(3);
                 console.log("OHH is Colliding!") 
             }
         });
@@ -151,7 +151,7 @@ class World {
     sharkCollisionWithEndboss() {
         if (this.endboss.isColliding(this.shark) && this.shark.isVulnerable) {
             this.endboss.playAnimation(this.endboss.IMAGES_ATTACK);
-            this.shark.endbosshit();
+            this.shark.hit(10);
             this.shark.changeVulnerability();
             this.life_mark.setPercentageLife(this.shark.energy);
         }
