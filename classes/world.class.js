@@ -27,6 +27,7 @@ class World {
 
     setWorldToShark() {
         this.shark.world = this;
+        this.endboss.world = this;
     }
 
     addObjectsToCanvas(array){
@@ -171,12 +172,20 @@ class World {
         this.gameLoop();
     }
 
-    stop() {
+    pauseGame(){
         if (this.animationId) {
             cancelAnimationFrame(this.animationId);
             this.animationId = null;
         }else if(this.animationId == null){
             this.start();
+        }
+    }
+
+
+    stop() {
+        if (this.animationId) {
+            cancelAnimationFrame(this.animationId);
+            this.animationId = null;
         }
     }
 }

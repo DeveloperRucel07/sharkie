@@ -17,6 +17,43 @@ function stopGame(){
 }
 
 
+
+function moveLeftMobile(event, value){
+    event.preventDefault();
+    keyboard.LEFT = value;
+}
+
+function moveRightMobile(event, value){
+    event.preventDefault();
+    keyboard.RIGHT = value;
+}
+
+function moveUpMobile(event, value){
+    event.preventDefault();
+    keyboard.UP = value;
+}
+
+function moveDownMobile(event, value){
+    event.preventDefault();
+    keyboard.DOWN = value;
+}
+
+function slap(event, value){
+    event.preventDefault();
+    keyboard.SPACE = value;
+}
+
+function normalBubble(event, value){
+    event.preventDefault();
+    keyboard.D = value;
+}
+
+function poisonBubble(event, value){
+    event.preventDefault();
+    keyboard.F = value;
+}
+
+
 window.addEventListener("keydown", (e) => {
     if (e.code === "ArrowLeft") keyboard.LEFT = true;
     if (e.code === "ArrowRight") keyboard.RIGHT = true;

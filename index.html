@@ -41,8 +41,21 @@
         <button id="tryAgain" class="restart-game-btn d-none"> <img src="./images/5.Buttons/TryAgain/tryAgainYelow.png" alt="Stop Game"></button>
         <canvas id="gameCanvas">
 
-        </canvas>  
+        </canvas>
     </div>
+    <div class="mobile-buttons d-none" id="mobileButtons">
+        <div class="left-side">
+            <button ontouchstart="moveUpMobile(event, true)" ontouchend="moveUpMobile(event, false)" onmousedown="moveUpMobile(event, true)" onmouseup="moveUpMobile(event, false)"><img src="./images/5.Buttons/Key/arow-up.png" alt="up"></button>
+            <button ontouchstart="moveLeftMobile(event, true)" ontouchend="moveLeftMobile(event, false)" onmousedown="moveLeftMobile(event, true)" onmouseup="moveLeftMobile(event, false)"><img src="./images/5.Buttons/Key/arow-left.png" alt="left"></button>
+            <button ontouchstart="moveRightMobile(event, true)" ontouchend="moveRightMobile(event, false)" onmousedown="moveRightMobile(event, true)" onmouseup="moveRightMobile(event, false)"><img src="./images/5.Buttons/Key/arow-right.png" alt="right"></button>
+            <button ontouchstart="moveDownMobile(event, true)" ontouchend="moveDownMobile(event, false)" onmousedown ="moveDownMobile(event, true)" onmouseup ="moveDownMobile(event, false)"><img src="./images/5.Buttons/Key/arow-down.png" alt="down"></button>
+        </div>
+        <div class="right-side">
+            <button ontouchstart="poisonBubble(event, true)" ontouchend="poisonBubble(event, false)" onmousedown="poisonBubble(event, true)" onmouseup="poisonBubble(event, false)"><img src="./images/5.Buttons/Key/poison-bubble.png" alt="poison"></button>
+            <button ontouchstart="normalBubble(event, true)" ontouchend="normalBubble(event, false)" onmousedown="normalBubble(event, true)" onmouseup="normalBubble(event, false)"><img src="./images/5.Buttons/Key/normal-bubble.png" alt="normal"></button>
+            <button ontouchstart="slap(event, true)" ontouchend="slap(event, false)" onmousedown="slap(event, true)" onmouseup="slap(event, false)"><img src="./images/5.Buttons/Key/slap-shark.png" alt="slap"></button>
+        </div>
+    </div> 
     
     <script src="./scripts/template.js"></script>
     <script src="./script.js"></script>

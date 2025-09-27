@@ -2,6 +2,7 @@ const tryAgain = document.getElementById("tryAgain");
 const startGameDiv = document.querySelector(".start-game");
 const gameZone = document.querySelector(".game-zone");
 const historyGame = document.getElementById('historyGame');
+const mobileButton = document.getElementById('mobileButtons');
 let startBtn = document.getElementById("startBtnGame");
 let imgIndex = 0;
 
@@ -15,7 +16,7 @@ function startGame(){
 
 
 tryAgain.addEventListener('click', ()=>{
-    init();
+    location.reload();
 })
 
 
@@ -36,15 +37,33 @@ function nextToStartGame(){
     historyGame.innerHTML = templateReadyToPlay();
 }
 
+function isTouchDevice() {
+  return (
+    "ontouchstart" in window ||
+    navigator.maxTouchPoints > 0 || 
+    navigator.msMaxTouchPoints > 0  
+  );
+}
+
+if (isTouchDevice()) {
+  mobileButton.classList.remove('d-none');
+  mobileButton.classList.add('d-flex');
+} else {
+  mobileButton.classList.add('d-none');
+  mobileButton.classList.remove('d-flex');
+}
+
+
+
 
 function checkOrientation() {
   if (window.innerHeight > window.innerWidth) {
     document.getElementById("orientation").style.display = "flex";
   } else {
-
     document.getElementById("orientation").style.display = "none";
   }
 }
+
 
 window.addEventListener("load", checkOrientation);
 window.addEventListener("resize", checkOrientation);
