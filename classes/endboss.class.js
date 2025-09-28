@@ -84,9 +84,7 @@ class Endboss extends MovableObject{
         if(this.isDead()){
             this.playAnimation(this.IMAGES_DEAD);
             this.animateDeathToTop();
-            setTimeout(()=>{
-                this.world.stop();
-            }, 4000)
+            this.endbossDead();
             document.getElementById("youWin").classList.remove("d-none");
             document.getElementById("youWin").classList.add("d-flex");
 
@@ -96,6 +94,12 @@ class Endboss extends MovableObject{
             this.playAnimation(this.IMAGES_SWIM);
         }
 
+    }
+
+    endbossDead(){
+        setTimeout(()=>{
+            this.world.stop();
+        }, 4000)
     }
 
 

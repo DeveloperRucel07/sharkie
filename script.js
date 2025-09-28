@@ -11,6 +11,13 @@ function startGame(){
     startGameDiv.classList.add('d-none');
     gameZone.classList.remove('d-none');
     gameZone.classList.add('d-flex');
+    if (isTouchDevice()) {
+      mobileButton.classList.remove('d-none');
+      mobileButton.classList.add('d-flex');
+    } else {
+      mobileButton.classList.add('d-none');
+      mobileButton.classList.remove('d-flex');
+    }
     init();
 }
 
@@ -45,13 +52,7 @@ function isTouchDevice() {
   );
 }
 
-if (isTouchDevice()) {
-  mobileButton.classList.remove('d-none');
-  mobileButton.classList.add('d-flex');
-} else {
-  mobileButton.classList.add('d-none');
-  mobileButton.classList.remove('d-flex');
-}
+
 
 
 

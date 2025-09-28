@@ -88,14 +88,19 @@ class Shark extends MovableObject {
         this.isVulnerable = true;
         this.isVulnerableDelay = 2000;
         this.worldWidth = this.worldWidth;
+        this.startSharkanimation();
+        this.checkIfSleeping();
+        this.alreadyVulnerable(); 
+    }
+
+
+    startSharkanimation(){
         setTimeout(()=>{ 
             this.animate();
             this.jumHeight = this.world.canvas.height;
             this.y = this.jumHeight - this.height;
 
         }, 200);
-        this.checkIfSleeping();
-        this.alreadyVulnerable(); 
     }
 
 
@@ -103,6 +108,7 @@ class Shark extends MovableObject {
         if(this.isDead()){
             this.playAnimation(this.IMAGE_DEAD_POISONED); 
             this.animateDeathToTop();
+            this.sharkDead();
             document.getElementById("tryAgain").classList.remove("d-none");
             document.getElementById("tryAgain").classList.add("d-flex");
         }else if(this.isHurt()){
@@ -119,16 +125,19 @@ class Shark extends MovableObject {
             this.playAnimation(this.IMAGES_SWIM); 
         }else if(this.isSleeping){
             this.playAnimation(this.IMAGES_LONGSTAY); 
+            this.world.sounds.playEffect(this.world.sounds.shark_sleeping_sound);
         }else if(this.world.keyboard.D){
             this.playAnimation(this.ATTACK_BUBBLE);
             this.throwBubble('normal');
+            this.world.sounds.playEffect(this.world.sounds.shark_bubble_sound);
         }else if(this.world.keyboard.F){
             this.playAnimation(this.ATTACK_POISONED_BUBBLE);
             this.throwBubble('poison');
+            this.world.sounds.playEffect(this.world.sounds.shark_poison_sound);
         }else if(this.world.keyboard.SPACE){
             this.slap = true;
+            this.world.sounds.playEffect(this.world.sounds.shark_slap_sound);
             this.playAnimation(this.ATTACK_SLAP);
-
             setTimeout(()=>{
                 this.slap = false;
             }, 1000);
@@ -136,9 +145,16 @@ class Shark extends MovableObject {
         }
         else{
             this.playAnimation(this.IMAGES_STAY);
+            this.world.sounds.playEffect(this.world.sounds.water_sound);
         }
 
- 
+    }
+
+
+    sharkDead(){
+        setTimeout(()=>{
+            this.world.stop();
+        }, 4500);
     }
 
 
@@ -161,6 +177,7 @@ class Shark extends MovableObject {
         }
     }
 
+
     moveRight() {
         this.otherDirection = false;
         if (this.x + this.width < this.world.worldWidth) {
@@ -168,6 +185,7 @@ class Shark extends MovableObject {
             this.updateCamera();
         }
     }
+
 
     moveLeft() {
         this.otherDirection = true;
@@ -177,6 +195,7 @@ class Shark extends MovableObject {
         }
     }
 
+
     updateCamera() {
         const halfCanvas = this.world.canvas.width / 2;
         let cam = -this.x + halfCanvas;
@@ -185,15 +204,18 @@ class Shark extends MovableObject {
         this.world.camera_x = cam;
     }
 
+
     changeSleepTime(){
         this.lastMoveTime = Date.now();
         this.isSleeping = false;
     }
 
+
     changeVulnerability(){
         this.lastHurt = Date.now();
         this.isVulnerable = false;
     }
+
 
     checkIfSleeping() {
         setInterval(() => {
@@ -212,6 +234,7 @@ class Shark extends MovableObject {
         }
     }
 
+
     isMovingRight(){
         if (this.world.keyboard.RIGHT) {
             this.moveRight();
@@ -219,6 +242,7 @@ class Shark extends MovableObject {
             return true;
         }
     }
+
 
     isMovingDown(){
         if (this.world.keyboard.DOWN && this.y < this.jumHeight - this.height/1.5) {
@@ -228,6 +252,7 @@ class Shark extends MovableObject {
         }
     }
 
+
     isMovingUp(){
         if (this.world.keyboard.UP && this.y > -110) {
             this.y -= this.speed;
@@ -235,6 +260,7 @@ class Shark extends MovableObject {
             return true;
         }
     }
+
 
     throwBubble(type){
         let bubbleX = this.otherDirection ? this.x - 20 : this.x + this.width;
