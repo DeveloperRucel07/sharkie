@@ -4,8 +4,14 @@ const gameZone = document.querySelector(".game-zone");
 const historyGame = document.getElementById('historyGame');
 const mobileButton = document.getElementById('mobileButtons');
 let startBtn = document.getElementById("startBtnGame");
+const settingBtn = document.getElementById('setting');
+let instructions = document.getElementById("instructions");
 let imgIndex = 0;
 
+
+settingBtn?.addEventListener('click', function(){
+  instructions.classList.toggle('d-none');
+})
 
 function startGame(){
     startGameDiv.classList.add('d-none');

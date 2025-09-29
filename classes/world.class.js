@@ -14,6 +14,7 @@ class World {
     collectedPoisons = 0;
     collectedLifes = 0;
     worldWidth;
+    intervalCheckCollision;
 
     constructor(canvas, ctx, keyboard) {
         this.canvas = canvas;
@@ -70,7 +71,7 @@ class World {
 
 
     checkColisions(){
-        setInterval(()=>{
+        this.intervalCheckCollision = setInterval(()=>{
             this.sharkCollisionWithPufferFishes();
             this.sharkCollisionWithJellyFishes(); 
             this.sharkCollisionWithCoins();
@@ -204,7 +205,7 @@ class World {
         if (this.animationId) {
             cancelAnimationFrame(this.animationId);
             this.sounds.background_music.pause();
-            this.sounds = 0;
+            clearInterval(this.intervalCheckCollision);
             this.animationId = null;
         }
     }

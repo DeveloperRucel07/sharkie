@@ -61,6 +61,8 @@ body {
 #orientation {
   display: none;
   position: fixed;
+  flex-direction: column;
+  gap: 20px;
   top: 0;
   left: 0;
   width: 100%;
@@ -68,11 +70,94 @@ body {
   background: rgba(2, 2, 2, 1);
   color: white;
   font-size: 24px;
-  font-family: Arial, sans-serif;
+  font-family:"Luckiest Guy", Verdana, Geneva, Tahoma, sans-serif;
   text-align: center;
   justify-content: center;
   align-items: center;
   z-index: 9999;
+}
+
+#orientation img{
+  scale: 1.2;
+  transform: rotate(60deg);
+  animation: spin 2s linear infinite ;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg) scale(1.2);
+  }
+  to {
+    transform: rotate(135deg) scale(1.2);
+  }
+}
+
+.settings{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.settings .img-setting{
+  position: absolute;
+  top: 30px;
+  right: 30px;
+}
+
+.container-intructions{
+  position: absolute;
+  width: 700px;
+  min-height: 250px;
+  max-height: 550px;
+  top: 100px;
+  color: aqua;
+  background-color: rgba(0, 0, 0, 0.9);
+  border-radius: 20px;
+  padding: 10px;
+  /* left: 50%; */
+  /* transform: translate(-50%, -50%); */
+}
+
+.instructions{
+  min-height: 250px;
+  max-height: 550px;
+  overflow-y: auto;
+}
+
+.instructions::-webkit-scrollbar {
+  width: 3px;
+}
+
+.instructions::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.9); 
+  border-radius: 10px;
+}
+
+.instructions::-webkit-scrollbar-thumb {
+  background: #00bcd4;
+  border-radius: 10px;
+  border: 2px solid rgba(0,0,0,0.9);
+}
+
+.instructions::-webkit-scrollbar-thumb:hover {
+  background: #0097a7;
+}
+
+.instructions {
+  scrollbar-width: thin;
+  scrollbar-color: #00bcd4 rgba(0,0,0,0.3);
+}
+
+
+.instructions ol img{
+  width: 50px;
+  height: 50px;
+}
+
+.span-key{
+  font-size: 60px;
+  color: mediumpurple;
 }
 
 .card {

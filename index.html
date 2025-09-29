@@ -9,7 +9,11 @@
 </head>
 <body>
     <div id="orientation">
-        <p>🔄 Please rotate your device to play in landscape mode.</p>
+        <img src="./images/5.Buttons/Key/rotate_device.png" alt="rotate device">
+        <p>Please rotate your device to play in landscape mode.</p>
+    </div>
+    <div class="infos">
+        <h1>Sharkie</h1>
     </div>
     <div class="start-game d-flex">
         <div class="history" id="historyGame">
@@ -33,9 +37,35 @@
                 
         </div>
     </div>
-    <div class="infos">
-        <h1>Sharkie</h1>
+    <div class="settings">
+        <img class="img-setting" id="setting" src="./images/5.Buttons/Key/settings_full.png" alt="setting image">
     </div>
+    <div class="container-intructions" id="instructions">
+        <div class="instructions">
+            <h3>How to Play</h3>
+            <ol>
+                <li>Moves:
+                    <ul>
+                        <li> Move Left: use <img src="./images/5.Buttons/Key/arow-left.png" alt=""> or use the <span class="span-key">LEFT</span> key</li>
+                        <li>Move Right: use <img src="./images/5.Buttons/Key/arow-right.png" alt=""> or use the <span class="span-key">RIGHT</span> key</li>
+                        <li>Move Up: use <img src="./images/5.Buttons/Key/arow-up.png" alt=""> or use the <span class="span-key">UP</span> key</li>
+                        <li>Move Down: use <img src="./images/5.Buttons/Key/arow-down.png" alt=""> or use the <span class="span-key">DOWN</span> key</li>
+                    </ul>
+                </li>
+
+                <li>
+                    Attacks:
+                    <ul>
+                        <li>normal Bubble attack: use <img src="./images/5.Buttons/Key/normal-bubble.png" alt=""> or use the <span class="span-key">D</span> key</li>
+                        <li>Poison Bubble attack: use <img src="./images/5.Buttons/Key/poison-bubble.png" alt=""> or use the <span class="span-key">F</span> key</li>
+                        <li>Slap attack: use <img src="./images/5.Buttons/Key/slap-shark.png" alt=""> or use the <span class="span-key">SPACE</span> key </li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+
+    </div>
+
     <div class="game-zone d-none" id="gameZone">
         <div class="you-win d-none" id="youWin"> <img src="./images/5.Buttons/Decisions/Wins/youWin.png" alt="Stop Game"></div>
         <button id="tryAgain" class="restart-game-btn d-none"> <img src="./images/5.Buttons/TryAgain/tryAgainYelow.png" alt="Stop Game"></button>

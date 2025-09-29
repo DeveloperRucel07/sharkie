@@ -27,7 +27,7 @@ class SoundManager {
     }
 
     playEffect(sound) {
-        sound.currentTime = 0; 
-        sound.play();
+        sound.currentTime = 0;
+        sound && sound.play();
     }
 }

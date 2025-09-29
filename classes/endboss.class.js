@@ -85,6 +85,7 @@ class Endboss extends MovableObject{
             this.playAnimation(this.IMAGES_DEAD);
             this.animateDeathToTop();
             this.endbossDead();
+            this.world.sounds.playEffect(this.world.sounds.endboss_dead_sound);
             document.getElementById("youWin").classList.remove("d-none");
             document.getElementById("youWin").classList.add("d-flex");
 
@@ -92,6 +93,7 @@ class Endboss extends MovableObject{
             this.playAnimation(this.IMAGES_HURT);
         }else{
             this.playAnimation(this.IMAGES_SWIM);
+            this.world.sounds.playEffect(this.world.sounds.endboss_background_sound);
         }
 
     }
@@ -127,6 +129,7 @@ class Endboss extends MovableObject{
             this.hasArrived = true;
             this.comeAnimationFrame = 0;
         }
+        this.world.sounds.playEffect(this.world.sounds.entry_endboss_sound);
     }
 
     moveTowardsShark(shark) {
@@ -136,6 +139,7 @@ class Endboss extends MovableObject{
         this.otherDirection = !shark.otherDirection;
         if (distanceX < nearThreshold && distanceY < nearThreshold) {
             this.playAnimation(this.IMAGES_ATTACK);
+            this.world.sounds.playEffect(this.world.sounds.endboss_attack_sound);
         }
 
         if (this.x > shark.x) {
