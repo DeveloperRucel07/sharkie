@@ -16,6 +16,17 @@ function stopGame(){
     world.stop();
 }
 
+function fullscreen() {
+  if (canvas.requestFullscreen) {
+    canvas.requestFullscreen();
+  } else if (canvas.webkitRequestFullscreen) { 
+    canvas.webkitRequestFullscreen();
+  } else if (canvas.msRequestFullscreen) {
+    canvas.msRequestFullscreen();
+  }
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
 
 
 function moveLeftMobile(event, value){

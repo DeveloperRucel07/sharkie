@@ -13,6 +13,7 @@ body {
   padding: 0;
   box-sizing: border-box;
   display: flex;
+  height: 100vh;
   align-items: center;
   flex-direction: column;
   position: relative;
@@ -99,27 +100,47 @@ body {
   right: 0;
 }
 
+.settings .fullscreen{
+  position: absolute;
+    top: 30px;
+    left: 20px;
+    width: 70px;
+    height: 50px;
+}
+
+.settings .img-volume{
+  position: absolute;
+  top: 90px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+}
+
 .settings .img-setting{
   position: absolute;
   top: 30px;
   right: 30px;
+  width: 50px;
+  height: 50px;
 }
 
 .container-intructions{
   position: absolute;
-  width: 700px;
-  min-height: 250px;
-  max-height: 550px;
-  top: 100px;
+  max-width: 700px;
+  background-color: rgba(0,0,0,0.9);
+  height: auto;
   color: aqua;
-  background-color: rgba(0, 0, 0, 0.9);
   border-radius: 20px;
   padding: 10px;
-  /* left: 50%; */
-  /* transform: translate(-50%, -50%); */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .instructions{
+  background-color: rgba(27, 27, 26, 0.9);
+  max-width: 700px;
   min-height: 250px;
   max-height: 550px;
   overflow-y: auto;
@@ -421,10 +442,55 @@ canvas {
     height: 95%;
     padding: 0;
   }
+  
+  .settings .fullscreen{
+    top: 10px;
+    left: 10px;
+    width: 40px;
+    height: 30px;
+  }
+
+  .settings .img-setting{
+    top: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .settings .img-volume{
+    position: absolute;
+    top: 70px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .container-intructions{
+    position: absolute;
+    width: 80%;
+    height: 100vh;
+    color: aqua;
+    border-radius: 20px;
+    padding: 5px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    
+  }
+
+  .instructions{
+    background-color: rgba(0,0,0,0.9);
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    padding: 10px;
+  }
+
+  .span-key{
+    font-size: 30px;
+    color: orange;
+  }
+
 }
 
-@media (hover: none) and (pointer: coarse) {
-  button {
-    background: green;
-  }
-}
