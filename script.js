@@ -7,6 +7,7 @@ const settingBtn = document.getElementById('setting');
 let startBtn = document.getElementById("startBtnGame");
 let volumeIcon = document.getElementById("volume");
 const volumeStatus = document.querySelector('.img-volume');
+const fullscreenContainer = document.querySelector('#fullscreen');
 let instructions = document.getElementById("instructions");
 let volume = true;
 
@@ -29,6 +30,8 @@ function startGame(){
     startGameDiv.classList.add('d-none');
     gameZone.classList.remove('d-none');
     gameZone.classList.add('d-flex');
+    fullscreenContainer.classList.remove('d-none');
+    fullscreenContainer.classList.add('d-flex');
     if (isTouchDevice()) {
       mobileButton.classList.remove('d-none');
       mobileButton.classList.add('d-flex');

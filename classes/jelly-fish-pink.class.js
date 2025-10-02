@@ -21,7 +21,7 @@ class JellyFishPink extends MovableObject{
         this.loadImages(this.IMAGES);
         this.y = this.y = 600 - this.height;
         this.x = x;
-        this.speed = 1 + Math.random() * 0.3;
+        this.speed = 3 + Math.random() * 0.3;
         this.jumHeight = 600;
         this.animate();
     }
@@ -35,14 +35,12 @@ class JellyFishPink extends MovableObject{
 
 
     moveUpDown(){
-        setInterval(() => {
-            this.y -= this.speed;
-            if (this.y <= 0 || this.y <= -this.jumHeight) {
-                this.speed *= -1;
-            }else if (this.y >= this.jumHeight) {
-                this.speed *= -1;
-            }
-        }, 1000);
+        this.y -= this.speed;
+        if (this.y <= 0 || this.y <= -this.jumHeight) {
+            this.speed *= -1;
+        }else if (this.y >= this.jumHeight -this.height+20) {
+            this.speed *= -1;
+        }
     }
 
 }

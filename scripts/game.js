@@ -17,6 +17,10 @@ function stopGame(){
 }
 
 function fullscreen() {
+    const widthObj = window.innerWidth;
+    const heightObj = window.innerHeight;
+    const ratio = canvas.width/ canvas.height;
+    maintainObjWidthHeight(widthObj, heightObj, ratio);
   if (canvas.requestFullscreen) {
     canvas.requestFullscreen();
   } else if (canvas.webkitRequestFullscreen) { 
@@ -24,8 +28,17 @@ function fullscreen() {
   } else if (canvas.msRequestFullscreen) {
     canvas.msRequestFullscreen();
   }
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  
+}
+
+function maintainObjWidthHeight(widthObj, heightObj, ratio){
+    if((widthObj / heightObj) > ratio){
+        canvas.height = heightObj;
+        canvas.width = heightObj * ratio;
+    }else{
+        canvas.width = widthObj;
+        canvas.height = canvas.width / ratio;
+    }
 }
 
 

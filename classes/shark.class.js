@@ -245,7 +245,7 @@ class Shark extends MovableObject {
 
 
     isMovingDown(){
-        if (this.world.keyboard.DOWN && this.y < this.jumHeight - this.height/1.5) {
+        if (this.world.keyboard.DOWN && this.y < this.jumHeight - this.height + 60) {
             this.y += this.speed;
             this.changeSleepTime();
             return true;
