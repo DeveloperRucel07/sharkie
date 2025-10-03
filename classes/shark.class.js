@@ -65,6 +65,11 @@ class Shark extends MovableObject {
         left:50,
         right:50
     }
+    lastMoveTime = 0;
+    poisonBubblesThrown = 0;
+    normalBubblesThrown = 0;
+    slapReady = true;
+
 
 
     constructor(imagePath) {
@@ -82,7 +87,6 @@ class Shark extends MovableObject {
         this.loadImages(this.ATTACK_SLAP);
         this.speed = 10;
         this.isSleeping = false;
-        this.lastMoveTime = Date.now();
         this.sleepDelay = 5000;
         this.lastHurt = Date.now();
         this.isVulnerable = true;
@@ -98,8 +102,6 @@ class Shark extends MovableObject {
         setTimeout(()=>{ 
             this.animate();
             this.jumHeight = this.world.canvas.height;
-            this.y = this.jumHeight - this.height;
-
         }, 200);
     }
 
@@ -125,28 +127,22 @@ class Shark extends MovableObject {
             this.playAnimation(this.IMAGES_SWIM); 
         }else if(this.isSleeping){
             this.playAnimation(this.IMAGES_LONGSTAY); 
-            this.world.sounds.playEffect(this.world.sounds.shark_sleeping_sound);
+            // this.world.sounds.shark_sleeping_sound.play();
         }else if(this.world.keyboard.D){
             this.playAnimation(this.ATTACK_BUBBLE);
             this.throwBubble('normal');
-            this.world.sounds.playEffect(this.world.sounds.shark_bubble_sound);
+            this.world.sounds.shark_bubble_sound.play();
         }else if(this.world.keyboard.F){
             this.playAnimation(this.ATTACK_POISONED_BUBBLE);
             this.throwBubble('poison');
-            this.world.sounds.playEffect(this.world.sounds.shark_poison_sound);
-        }else if(this.world.keyboard.SPACE){
-            this.slap = true;
-            this.world.sounds.playEffect(this.world.sounds.shark_slap_sound);
-            this.playAnimation(this.ATTACK_SLAP);
-            setTimeout(()=>{
-                this.slap = false;
-            }, 1000);
-            
+            this.world.sounds.shark_poison_sound.play();
         }
         else{
             this.playAnimation(this.IMAGES_STAY);
-            this.world.sounds.playEffect(this.world.sounds.water_sound);
+            // this.world.sounds.water_sound.play();
         }
+
+        this.sharkSlap()
 
     }
 
@@ -261,13 +257,44 @@ class Shark extends MovableObject {
         }
     }
 
+    sharkSlap(){
+        if (this.world.keyboard.SPACE && this.slapReady && !this.slap) {
+            this.slap = true;
+            this.world.sounds.shark_slap_sound.play();
+            this.playAnimation(this.ATTACK_SLAP);
+            this.slapStartTime = Date.now();
+        }
+        if (!this.world.keyboard.SPACE) {
+            this.slapReady = true;
+        }
+        if (this.slap && Date.now() - this.slapStartTime > 1000) {
+            this.slap = false;
+        }
+    }
+
 
     throwBubble(type){
+        if (this.world.bubbles.length >= 30) return;
         let bubbleX = this.otherDirection ? this.x - 20 : this.x + this.width;
         let bubbleY = this.y + this.height / 2;
-        let bubble = new ThrowableObject(bubbleX, bubbleY, type);
-        bubble.otherDirection = this.otherDirection; 
-        this.world.bubbles.push(bubble);
+        if(type ==='poison' && this.world.collectedPoisons > 0){
+            if(this.poisonBubblesThrown < 10){
+                let bubble = new ThrowableObject(bubbleX, bubbleY, type);
+                bubble.otherDirection = this.otherDirection;
+                this.world.bubbles.push(bubble);
+                this.poisonBubblesThrown++;
+                this.world.collectedPoisons = Math.max(0, this.world.collectedPoisons - 1);
+                this.world.poison_mark.setPercentagePoison(this.world.collectedPoisons);
+            }
+        }
+        else{
+            if(this.normalBubblesThrown < (30 - this.world.collectedPoisons) && this.normalBubblesThrown < 10){
+                let bubble = new ThrowableObject(bubbleX, bubbleY, type);
+                bubble.otherDirection = this.otherDirection;
+                this.world.bubbles.push(bubble);
+                this.normalBubblesThrown++;
+            }
+        }
     }  
 
 }

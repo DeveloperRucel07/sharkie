@@ -7,7 +7,7 @@
     <title>Sharkie Game</title>
     <link rel="stylesheet" href="./style.css">
 </head>
-<body>
+<body onclick="closeMenu(event)">
     <div id="orientation">
         <img src="./images/5.Buttons/Key/rotate_device.png" alt="rotate device">
         <p>Please rotate your device to play in landscape mode.</p>
@@ -16,34 +16,15 @@
         <h1>Sharkie</h1>
     </div>
     <div class="start-game d-flex">
-        <div class="history" id="historyGame">
-                <div class="history-text card">
-                    <div class="contain">
-                        <h2 class="title">Deep under the waves, in the mysterious Coral Kingdom, lives a brave little shark named Sharkie.</h2>
-                        <p>
-                            Long ago, the Coral Kingdom was a place of peace and beauty...
-                            Puffer fishes gang swims across, blocking the path.
-                            Jelly fishes glow menacingly.
-                            Bottles of poison float slowly to set the mood. 
-                            Only one hero can save the ocean...
-                            Sharkie, the Ocean Guardian!
-                        </p>
-                    </div>
-                    <div class="next">
-                        <span></span>
-                        <button type="button" onclick="nextToMision()">Next</button>
-                    </div>
-                </div>
-                
-        </div>
+        <button type="button" id="startBtnGame" class="start-game-btn" onclick="startGame(); init();"><img src="./images/5.Buttons/Start/3.png" alt="" srcset=""></button>
     </div>
     <div class="settings">
         <img class="fullscreen d-none" id="fullscreen" src="./images/5.Buttons/Key/fullscreen.png" alt="setting image" onclick="fullscreen()">
-        <img class="img-volume volume_true" id="volume" src="./images/5.Buttons/Key/volume.png" alt="setting image">
-        <img class="img-setting" id="setting" src="./images/5.Buttons/Key/settings_full.png" alt="setting image">
+        <img class="img-volume  volume_true" id="volume" src="./images/5.Buttons/Key/volume.png" alt="setting image">
+        <img class="img-setting" id="setting" src="./images/5.Buttons/Key/home.png" alt="menu image">
     </div>
     <div class="container-intructions d-none" id="instructions">
-        <div class="instructions">
+        <div class="instructions" id="menuInfos">
             <h3>How to Play</h3>
             <ol>
                 <li>Moves:
@@ -64,6 +45,11 @@
                     </ul>
                 </li>
             </ol>
+        </div>
+        <div class="icon-menu">
+            
+            <img class="img-setting" id="setting" src="./images/5.Buttons/Key/settings_full.png" alt="setting image" onclick="startIntructons(event)">
+            <img class="img-setting" id="historyContain" src="./images/5.Buttons/Key/histoty_castle.png" alt="setting image" onclick="startHistory(event)">
         </div>
 
     </div>
@@ -87,7 +73,11 @@
             <button ontouchstart="normalBubble(event, true)" ontouchend="normalBubble(event, false)" onmousedown="normalBubble(event, true)" onmouseup="normalBubble(event, false)"><img src="./images/5.Buttons/Key/normal-bubble.png" alt="normal"></button>
             <button ontouchstart="slap(event, true)" ontouchend="slap(event, false)" onmousedown="slap(event, true)" onmouseup="slap(event, false)"><img src="./images/5.Buttons/Key/slap-shark.png" alt="slap"></button>
         </div>
-    </div> 
+    </div>
+    
+    <footer id="footer">
+        <a href="./legacy-notice.html" target="_blank">Impressum</a>
+    </footer>
     
     <script src="./scripts/template.js"></script>
     <script src="./script.js"></script>

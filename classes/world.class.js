@@ -6,7 +6,6 @@ class World {
     life_mark = new LifeMark();
     coin_mark = new CoinMark();
     poison_mark = new PoisonMark();
-    sounds = new SoundManager();
     bubbles = [];
     ctx;
     camera_x = 0;
@@ -16,9 +15,10 @@ class World {
     worldWidth;
     intervalCheckCollision;
 
-    constructor(canvas, ctx, keyboard) {
+    constructor(canvas, ctx, keyboard, sounds) {
         this.canvas = canvas;
         this.ctx = ctx;
+        this.sounds = sounds;
         this.keyboard = keyboard;
         this.worldWidth = this.level.level_end_x;
         this.shark = new Shark('images/1.Sharkie/Stay/1.png');
@@ -62,7 +62,7 @@ class World {
 
     animatedObjects() {
         this.level.backgrounds.forEach(layer => layer.animate());
-        this.shark.animate();
+        this.shark.startSharkanimation();
         this.endboss.checkIfSharkComming(this.shark);
         this.level.pufferEnemies.forEach(enemy => enemy.animateFish());
         this.level.jellyEnemies.forEach(jelly => jelly.animate());
@@ -85,15 +85,16 @@ class World {
 
     sharkCollisionWithPufferFishes(){
         this.level.pufferEnemies.forEach((pufferEnemy, index)=>{
-           if(  this.shark.isVulnerable && this.shark.isColliding(pufferEnemy) && !this.shark.slap){
-                this.shark.hit(4);
-                this.sounds.playEffect(this.sounds.shark_hurt_sound);
-                this.shark.changeVulnerability();
-                this.life_mark.setPercentageLife(this.shark.energy);
-            }else if(this.shark.slap && this.shark.isColliding(pufferEnemy)){
+            if(this.shark.slap && this.shark.isColliding(pufferEnemy)){
                 pufferEnemy.isDead();
                 this.sounds.playEffect(this.sounds.shark_slap_sound);
-                // this.level.pufferEnemies.splice(index, 1);
+                this.level.pufferEnemies.splice(index, 1);
+            }else
+                if(this.shark.isVulnerable && this.shark.isColliding(pufferEnemy)){
+                this.shark.hit(4);
+                this.sounds.shark_hurt_sound.play();
+                this.shark.changeVulnerability();
+                this.life_mark.setPercentageLife(this.shark.energy);
             }
         })
     }
@@ -101,14 +102,14 @@ class World {
 
     sharkCollisionWithJellyFishes(){
         this.level.jellyEnemies.forEach((jellyEnemy, index)=>{
-            if( this.shark.isVulnerable && this.shark.isColliding(jellyEnemy)  && !this.shark.slap){
+            if( this.shark.isVulnerable && this.shark.isColliding(jellyEnemy)){
                 this.shark.electro();
-                this.sounds.playEffect(this.sounds.electric_sound);
+                this.sounds.electric_sound.play();
                 this.shark.changeVulnerability();
                 this.life_mark.setPercentageLife(this.shark.energy);
             } else if(this.shark.slap && this.shark.isColliding(jellyEnemy)){
                 jellyEnemy.isDead();
-                this.sounds.playEffect(this.sounds.shark_slap_sound);
+                this.sounds.shark_slap_sound.play();
                 // this.level.jellyEnemies.splice(index, 1);
             }
         })
@@ -119,7 +120,7 @@ class World {
         this.level.coins.forEach((coin, index) => {
             if (this.shark.isColliding(coin)) {
                 this.collectedCoins++;
-                this.sounds.playEffect(this.sounds.collect_coin_sound);
+                this.sounds.collect_coin_sound.play();
                 this.level.coins.splice(index, 1);
                 this.coin_mark.setPercentageCoin(this.collectedCoins);
             }
@@ -131,7 +132,7 @@ class World {
         this.level.poisons.forEach((poison, index) => {
             if (this.shark.isColliding(poison)) {
                 this.collectedPoisons++;
-                this.sounds.playEffect(this.sounds.collect_poison_sound);
+                this.sounds.collect_poison_sound.play();
                 this.level.poisons.splice(index, 1);
                 this.poison_mark.setPercentagePoison(this.collectedPoisons);
             }
@@ -143,7 +144,7 @@ class World {
         this.level.lifes.forEach((life, index) => {
             if (this.shark.isColliding(life)) {
                 this.collectedLifes++;
-                this.sounds.playEffect(this.sounds.collect_life_sound);
+                this.sounds.collect_life_sound.play();
                 let newEnergy = this.collectedLifes*10;
                 this.shark.energy = this.shark.energy + newEnergy;
                 this.level.lifes.splice(index, 1);
@@ -158,7 +159,7 @@ class World {
         this.bubbles.forEach(bubble => {
             if (this.endboss && this.endboss.isColliding(bubble)) {
                 this.endboss.hit(3);
-                this.sounds.playEffect(this.sounds.endboss_hurt_sound);
+                this.sounds.endboss_hurt_sound.play();
             }
         });
     }
@@ -168,7 +169,7 @@ class World {
         if (this.endboss.isColliding(this.shark) && this.shark.isVulnerable) {
             this.endboss.playAnimation(this.endboss.IMAGES_ATTACK);
             this.shark.hit(10);
-            this.sounds.playEffect(this.sounds.shark_hurt_sound);
+            this.sounds.shark_hurt_sound.play();
             this.shark.changeVulnerability();
             this.life_mark.setPercentageLife(this.shark.energy);
         }
@@ -178,7 +179,6 @@ class World {
     gameLoop() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.draw(this.ctx);
-        this.sounds.background_music.play();
         this.animationId = requestAnimationFrame(() => this.gameLoop());
     }
 
@@ -204,7 +204,7 @@ class World {
     stop() {
         if (this.animationId) {
             cancelAnimationFrame(this.animationId);
-            this.sounds.background_music.pause();
+            this.sounds.stopAllSounds();
             clearInterval(this.intervalCheckCollision);
             this.animationId = null;
         }

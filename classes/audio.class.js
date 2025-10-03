@@ -26,8 +26,31 @@ class SoundManager {
 
     }
 
-    playEffect(sound) {
-        sound.currentTime = 0;
-        sound && sound.play();
+
+    stopAllSounds() {
+        for (const key in this) {
+            if (this[key] instanceof Audio) {
+                this[key].pause();
+                this[key].currentTime = 0;
+            }
+        }
     }
+
+    muteAllSounds() {
+        for (const key in this) {
+            if (this[key] instanceof Audio) {
+                this[key].muted = true;
+            }
+        }
+    }
+
+    
+    unmuteAllSounds() {
+        for (const key in this) {
+            if (this[key] instanceof Audio) {
+                this[key].muted = false;
+            }
+        }
+    }
+
 }

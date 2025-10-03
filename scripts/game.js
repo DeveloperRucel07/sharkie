@@ -1,18 +1,24 @@
 let canvas;
 let ctx;
-canvas = document.getElementById('gameCanvas');
-canvas.width = 900;
-canvas.height = 600;
-ctx = canvas.getContext('2d');
+let sounds = new SoundManager();
 let keyboard = new Keyboard();
-let world = new World(canvas, ctx, keyboard);
+
 
 
 function init() {
-    world.start();
+    canvas = document.getElementById('gameCanvas');
+    canvas.width = 900;
+    canvas.height = 600;
+    ctx = canvas.getContext('2d');
+    let world = new World(canvas, ctx, keyboard, sounds);
+    sounds.background_music.play();
+    setTimeout(()=>{
+        world.start();
+    },100)
 }
 
 function stopGame(){
+    sounds.stopAllSounds();
     world.stop();
 }
 
@@ -39,6 +45,9 @@ function maintainObjWidthHeight(widthObj, heightObj, ratio){
         canvas.width = widthObj;
         canvas.height = canvas.width / ratio;
     }
+
+    // let zoom = canvas.height / ratio;
+    // context.scale(zoom,zoom);
 }
 
 

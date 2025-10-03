@@ -28,6 +28,10 @@ body {
   overflow: hidden;
 }
 
+button{
+  cursor: pointer;
+}
+
 .start-game {
   position: absolute;
   top: 0;
@@ -117,12 +121,42 @@ body {
   height: 50px;
 }
 
+.start-game-btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70px;
+  height: 50px;
+  border: unset;
+  background: transparent;
+  cursor: pointer;
+}
+
+.start-game-btn img{
+  width: 150px;
+  height: 70px;
+
+}
+
+.icon-menu{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.icon-menu img{
+  width: 50px;
+  height: 50px;
+}
+
 .settings .img-setting{
   position: absolute;
   top: 30px;
   right: 30px;
   width: 50px;
   height: 50px;
+  cursor: pointer;
 }
 
 .container-intructions{
@@ -137,13 +171,13 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  z-index: 2;
 }
 
 .instructions{
   background-color: rgba(27, 27, 26, 0.9);
-  max-width: 700px;
-  min-height: 250px;
-  max-height: 550px;
+  width: 600px;
+  height: 550px;
   overflow-y: auto;
 }
 
@@ -366,6 +400,12 @@ canvas {
 
 .d-none {
   display: none;
+}
+
+footer{
+  position: absolute;
+  bottom: 0;
+  padding: 10px;
 }
 
 @media (max-width: 870px) {
