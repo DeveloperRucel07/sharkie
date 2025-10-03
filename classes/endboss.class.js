@@ -88,6 +88,7 @@ class Endboss extends MovableObject{
             this.world.sounds.endboss_dead_sound.play();
             document.getElementById("youWin").classList.remove("d-none");
             document.getElementById("youWin").classList.add("d-flex");
+            this.world.sounds.win_sound.play();
 
         }else if(this.isHurt()){
             this.playAnimation(this.IMAGES_HURT);
@@ -100,7 +101,7 @@ class Endboss extends MovableObject{
 
     endbossDead(){
         setTimeout(()=>{
-            this.world.stop();
+            stopGame();
         }, 4000)
     }
 
@@ -135,7 +136,7 @@ class Endboss extends MovableObject{
     moveTowardsShark(shark) {
         const distanceX = Math.abs(this.x - shark.x);
         const distanceY = Math.abs(this.y - shark.y);
-        const nearThreshold = 100;
+        const nearThreshold = 150;
         this.otherDirection = !shark.otherDirection;
         if (distanceX < nearThreshold && distanceY < nearThreshold) {
             this.playAnimation(this.IMAGES_ATTACK);

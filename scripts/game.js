@@ -2,6 +2,7 @@ let canvas;
 let ctx;
 let sounds = new SoundManager();
 let keyboard = new Keyboard();
+let world;
 
 
 
@@ -10,7 +11,7 @@ function init() {
     canvas.width = 900;
     canvas.height = 600;
     ctx = canvas.getContext('2d');
-    let world = new World(canvas, ctx, keyboard, sounds);
+    world = new World(canvas, ctx, keyboard, sounds);
     sounds.background_music.play();
     setTimeout(()=>{
         world.start();
@@ -18,22 +19,29 @@ function init() {
 }
 
 function stopGame(){
-    sounds.stopAllSounds();
+    world.sounds.stopAllSounds();
     world.stop();
 }
 
+
+function isMobileDevice() {
+    return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+}
+
 function fullscreen() {
-    const widthObj = window.innerWidth;
-    const heightObj = window.innerHeight;
-    const ratio = canvas.width/ canvas.height;
-    maintainObjWidthHeight(widthObj, heightObj, ratio);
-  if (canvas.requestFullscreen) {
+    if (!isMobileDevice()) {
+        const widthObj = window.innerWidth;
+        const heightObj = window.innerHeight;
+        const ratio = canvas.width / canvas.height;
+        maintainObjWidthHeight(widthObj, heightObj, ratio);
+    }
+    if (canvas.requestFullscreen) {
     canvas.requestFullscreen();
-  } else if (canvas.webkitRequestFullscreen) { 
+    } else if (canvas.webkitRequestFullscreen) { 
     canvas.webkitRequestFullscreen();
-  } else if (canvas.msRequestFullscreen) {
+    } else if (canvas.msRequestFullscreen) {
     canvas.msRequestFullscreen();
-  }
+    }
   
 }
 
@@ -45,9 +53,6 @@ function maintainObjWidthHeight(widthObj, heightObj, ratio){
         canvas.width = widthObj;
         canvas.height = canvas.width / ratio;
     }
-
-    // let zoom = canvas.height / ratio;
-    // context.scale(zoom,zoom);
 }
 
 

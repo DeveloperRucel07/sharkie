@@ -203,8 +203,8 @@ class World {
 
     stop() {
         if (this.animationId) {
-            cancelAnimationFrame(this.animationId);
             this.sounds.stopAllSounds();
+            cancelAnimationFrame(this.animationId);
             clearInterval(this.intervalCheckCollision);
             this.animationId = null;
         }

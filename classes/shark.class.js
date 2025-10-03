@@ -89,6 +89,7 @@ class Shark extends MovableObject {
         this.isSleeping = false;
         this.sleepDelay = 5000;
         this.lastHurt = Date.now();
+        this.lastMoveTime = Date.now();
         this.isVulnerable = true;
         this.isVulnerableDelay = 2000;
         this.worldWidth = this.worldWidth;
@@ -111,6 +112,7 @@ class Shark extends MovableObject {
             this.playAnimation(this.IMAGE_DEAD_POISONED); 
             this.animateDeathToTop();
             this.sharkDead();
+            this.world.sounds.shark_dead_sound.play();
             document.getElementById("tryAgain").classList.remove("d-none");
             document.getElementById("tryAgain").classList.add("d-flex");
         }else if(this.isHurt()){
@@ -127,7 +129,7 @@ class Shark extends MovableObject {
             this.playAnimation(this.IMAGES_SWIM); 
         }else if(this.isSleeping){
             this.playAnimation(this.IMAGES_LONGSTAY); 
-            // this.world.sounds.shark_sleeping_sound.play();
+            this.world.sounds.shark_sleeping_sound.play();
         }else if(this.world.keyboard.D){
             this.playAnimation(this.ATTACK_BUBBLE);
             this.throwBubble('normal');
@@ -139,7 +141,7 @@ class Shark extends MovableObject {
         }
         else{
             this.playAnimation(this.IMAGES_STAY);
-            // this.world.sounds.water_sound.play();
+            this.world.sounds.water_sound.play();
         }
 
         this.sharkSlap()
@@ -149,7 +151,7 @@ class Shark extends MovableObject {
 
     sharkDead(){
         setTimeout(()=>{
-            this.world.stop();
+            stopGame();
         }, 4500);
     }
 
