@@ -29,8 +29,10 @@ class PufferFishOrange extends MovableObject {
         this.y = y;
         this.imageCache = {};
         this.loadImages(this.IMAGES_SWIM);
+        this.loadImages(this.IMAGES_DIE);
         this.animateFish();
         this.speed = 4 + Math.random() * 0.5;
+        this.die = false;
     }
 
 
@@ -42,7 +44,7 @@ class PufferFishOrange extends MovableObject {
         *
     */
     animateFish(){
-        if(this.isDead()){
+        if(this.die){
             this.playAnimation(this.IMAGES_DIE);
             this.animateDeathToTop();
         }else{

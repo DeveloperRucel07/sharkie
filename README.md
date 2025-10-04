@@ -73,7 +73,7 @@ Touch the on-screen buttons for movement and attacks.
 
 ## License
 
-This project is developed as a personal project for my Trainig at ![Developer Akademie](https://developerakademie.com/) . Please contact the developer for usage permissions.
+This project is developed as a personal project for my Trainig at [Developer Akademie](https://developerakademie.com/) . Please contact the developer for usage permissions.
 
 ---
 

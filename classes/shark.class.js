@@ -144,12 +144,15 @@ class Shark extends MovableObject {
             this.playAnimation(this.ATTACK_POISONED_BUBBLE);
             this.throwBubble('poison');
             this.world.sounds.shark_poison_sound.play();
+        }else if(this.slap){
+            this.playAnimation(this.ATTACK_SLAP);
         }
         else{
             this.playAnimation(this.IMAGES_STAY);
-            this.world.sounds.water_sound.play();
+            this.world.sounds.swim_sound.play();
         }
-
+        
+        this.world.sounds.swim_sound.play();
         this.sharkSlap()
 
     }
@@ -342,10 +345,7 @@ class Shark extends MovableObject {
             this.playAnimation(this.ATTACK_SLAP);
             this.slapStartTime = Date.now();
         }
-        if (!this.world.keyboard.SPACE) {
-            this.slapReady = true;
-        }
-        if (this.slap && Date.now() - this.slapStartTime > 1500) {
+        if (this.slap && Date.now() - this.slapStartTime > 500) {
             this.slap = false;
         }
     }

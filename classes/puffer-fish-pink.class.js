@@ -11,7 +11,8 @@ class PufferFishPink extends MovableObject {
         'images/2.Enemy/1.Puffer fish (3 color options)/4.DIE/3.2.png',
         'images/2.Enemy/1.Puffer fish (3 color options)/4.DIE/3.3.png',
         'images/2.Enemy/1.Puffer fish (3 color options)/4.DIE/3.png',
-    ]
+    ];
+
     imagePath = 'images/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim1.png';
     width = 100;
     height = 100;
@@ -28,8 +29,10 @@ class PufferFishPink extends MovableObject {
         this.y = y;
         this.imageCache = {};
         this.loadImages(this.IMAGES_SWIM);
+        this.loadImages(this.IMAGES_DIE);
         this.animateFish();
         this.speed = 10 + Math.random() * 0.5;
+        this.die = false;
         
     }
 
@@ -42,7 +45,7 @@ class PufferFishPink extends MovableObject {
         *
     */
     animateFish(){
-        if(this.isDead()){
+        if(this.die){
             this.playAnimation(this.IMAGES_DIE);
             this.animateDeathToTop();
         }else{

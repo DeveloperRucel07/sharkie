@@ -9,11 +9,19 @@ class DrawableObject {
     otherDirection = false;
     max_x_fishes = 3300;
 
+    /**
+     * Loads an image from the given path and assigns it to this.img.
+     * @param {string} path - The path to the image file.
+     */
     loadImage(path) {
         this.img = new Image();
         this.img.src = path;
     }
 
+    /**
+     * Loads multiple images from an array of paths and caches them in this.imageCache.
+     * @param {string[]} arr - Array of image paths.
+     */
     loadImages(arr) {
         arr.forEach((path) => {
             let img = new Image();
@@ -23,6 +31,10 @@ class DrawableObject {
 
     }
 
+    /**
+     * Draws the object's image on the canvas context. Flips horizontally if otherDirection is true.
+     * @param {CanvasRenderingContext2D} ctx - The canvas rendering context.
+     */
     draw(ctx) {
         if(!this.otherDirection){ 
             ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
@@ -34,6 +46,10 @@ class DrawableObject {
         } 
     }
 
+    /**
+     * Draws a red border around the object if it is an instance of specific enemy or item classes.
+     * @param {CanvasRenderingContext2D} ctx - The canvas rendering context.
+     */
     drawBorder(ctx){
         if(this instanceof Shark || this instanceof Poison || this instanceof Coin || this instanceof Life || this instanceof PufferFishPink || this instanceof PufferFishOrange || this instanceof PufferFishGreen || this instanceof JellyFishYellow || this instanceof JellyFishPink || this instanceof JellyFishLila || this instanceof JellyFishGreen || this instanceof Endboss){
             ctx.beginPath();
@@ -45,6 +61,10 @@ class DrawableObject {
         
     }
 
+    /**
+     * Draws a green border around the object with offset adjustments if it is an instance of specific enemy or item classes.
+     * @param {CanvasRenderingContext2D} ctx - The canvas rendering context.
+     */
     drawBorderOffset(ctx){
         if(this instanceof Shark || this instanceof Poison || this instanceof Coin || this instanceof Life || this instanceof PufferFishPink || this instanceof PufferFishOrange || this instanceof PufferFishGreen || this instanceof JellyFishYellow || this instanceof JellyFishPink || this instanceof JellyFishLila || this instanceof JellyFishGreen || this instanceof Endboss){
             ctx.beginPath();

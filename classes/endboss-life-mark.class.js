@@ -22,6 +22,12 @@ class EndBossLife extends DrawableObject{
         
     }
 
+
+    /**
+     *Updates the life/health bar display based on current life percentage.
+     * Maps `percentage` value (0–100) to the correct life mark image.
+     * @param {number} percentage 
+     */
     setPercentageLife(percentage){
         this.percentage = percentage;
 

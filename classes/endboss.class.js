@@ -80,6 +80,10 @@ class Endboss extends MovableObject{
         this.speed = 3;
     }
 
+
+    /**
+     * Animates the Endboss based on its state (dead, hurt, or swimming).
+     */
     animateFish(){
         if(this.isDead()){
             this.playAnimation(this.IMAGES_DEAD);
@@ -99,6 +103,10 @@ class Endboss extends MovableObject{
 
     }
 
+
+    /**
+     * Handles the death sequence of the Endboss.
+     */
     endbossDead(){
         setTimeout(()=>{
             stopGame();
@@ -106,6 +114,10 @@ class Endboss extends MovableObject{
     }
 
 
+    /**
+     * Checks if the shark is close enough to trigger the Endboss's arrival animation.
+     * @param {Shark} shark - The shark object.
+     */
     checkIfSharkComming(shark){
         if (!this.isComing && shark.x >= 3650 && !this.hasArrived) {
             this.isComing = true;
@@ -121,6 +133,9 @@ class Endboss extends MovableObject{
     }
 
 
+    /**
+     * Plays the introduction animation for the Endboss.
+     */
     playComeAnimation() {
         if (this.comeAnimationFrame < this.IMAGES_COME.length) {
             this.loadImage(this.IMAGES_COME[this.comeAnimationFrame]);
@@ -133,6 +148,11 @@ class Endboss extends MovableObject{
         this.world.sounds.entry_endboss_sound.play();
     }
 
+
+    /**
+     * Moves the Endboss towards the shark and attacks if close.
+     * @param {Shark} shark - The shark object.
+     */
     moveTowardsShark(shark) {
         const distanceX = Math.abs(this.x - shark.x);
         const distanceY = Math.abs(this.y - shark.y);
@@ -142,19 +162,20 @@ class Endboss extends MovableObject{
             this.playAnimation(this.IMAGES_ATTACK);
             this.world.sounds.endboss_attack_sound.play();
         }
-
         this.endbossFollowShark(shark);
-
     }
 
 
+    /**
+     * Makes the Endboss follow the shark's position.
+     * @param {Shark} shark - The shark object.
+     */
     endbossFollowShark(shark){
         if (this.x > shark.x) {
             this.x -= this.speed;
         } else if (this.x < shark.x) {
             this.x += this.speed;
         }
-
         if (this.y > shark.y) {
             this.y -= this.speed / 2;
         } else if (this.y < shark.y &&this.y + this.height < this.world.canvas.height - 60) {

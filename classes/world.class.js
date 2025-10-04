@@ -108,9 +108,11 @@ class World {
     sharkCollisionWithPufferFishes(){
         this.level.pufferEnemies.forEach((pufferEnemy, index)=>{
             if(this.shark.slap && this.shark.isColliding(pufferEnemy)){
-                pufferEnemy.isDead();
-                this.sounds.playEffect(this.sounds.shark_slap_sound);
-                this.level.pufferEnemies.splice(index, 1);
+                pufferEnemy.die = true;
+                this.sounds.shark_slap_sound.play();
+                setTimeout(()=>{
+                    this.level.pufferEnemies.splice(index, 1);
+                }, 4000);
             }else
                 if(this.shark.isVulnerable && this.shark.isColliding(pufferEnemy)){
                 this.shark.hit(4);
@@ -138,7 +140,9 @@ class World {
             } else if(this.shark.slap && this.shark.isColliding(jellyEnemy)){
                 jellyEnemy.isDead();
                 this.sounds.shark_slap_sound.play();
-                // this.level.jellyEnemies.splice(index, 1);
+                setTimeout(()=>{
+                    this.level.jellyEnemies.splice(index, 1);
+                }, 4000);
             }
         })
     }
