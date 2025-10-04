@@ -33,6 +33,14 @@ class PufferFishPink extends MovableObject {
         
     }
 
+
+    /**
+        *Animates puffer fish behavior.
+        * - If dead -> play death animation and move upwards.
+        * - If alive -> play swim animation.
+        * start to move Left
+        *
+    */
     animateFish(){
         if(this.isDead()){
             this.playAnimation(this.IMAGES_DIE);

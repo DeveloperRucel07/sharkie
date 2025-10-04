@@ -20,6 +20,14 @@ class ThrowableObject extends MovableObject {
     }
 
 
+    /**
+     * Updates projectile (e.g., bubble) movement each frame.
+     *
+     * - Moves left/right depending on `otherDirection`.
+     * - Applies horizontal (`vx`) and vertical (`vy`) velocity.
+     * - Applies gravity effect to `vy`.
+     * - Stops updating if projectile leaves top or left screen bounds.
+     */
     throw(){
         if(this.otherDirection){
             this.x -= this.speed;

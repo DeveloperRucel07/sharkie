@@ -21,6 +21,15 @@ class MovableObject extends DrawableObject{
     lastChock= 0;
     lastEndBossHurt = 0
 
+
+    /**
+     * Updates the current sprite image for animation.
+     * Loop through the provided array of `images`
+     * Uses `currentImage` to determine the next frame.
+     * Updates `this.img` with the image from `imageCache`.
+     * Increments `currentImage` for the next frame.
+     * @param {Array} images Array of image paths representing animation frames
+     */
     playAnimation(images){
         let i = this.currentImage % images.length;
         let path = images[i];
@@ -28,6 +37,8 @@ class MovableObject extends DrawableObject{
         this.currentImage++; 
     }
 
+    
+    
     moveLeft() {
         this.x -= this.speed;
         if (this.x <= 0) {
@@ -41,6 +52,7 @@ class MovableObject extends DrawableObject{
             this.otherDirection = !this.otherDirection;
         }
     }
+
 
     moveRight() {
         this.otherDirection = true;

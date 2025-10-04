@@ -4,7 +4,6 @@ const gameZone = document.querySelector(".game-zone");
 const menuInfos = document.getElementById('menuInfos');
 const mobileButton = document.getElementById('mobileButtons');
 const settingBtn = document.getElementById('setting');
-const footer = document.getElementById('footer');
 let startBtn = document.getElementById("startBtnGame");
 let volumeIcon = document.getElementById("volume");
 const volumeStatus = document.querySelector('.img-volume');
@@ -13,7 +12,9 @@ const fullscreenContainer = document.querySelector('#fullscreen');
 let instructions = document.getElementById("instructions");
 let volume = true;
 
-
+/**
+ * open the menu infos
+ */
 settingBtn?.addEventListener('click', function(event){
   event.stopPropagation();
   if(instructions.classList.contains('d-none')){
@@ -24,7 +25,12 @@ settingBtn?.addEventListener('click', function(event){
   }
 })
 
-volumeIcon?.addEventListener('click', function(){
+
+/**
+ * change the Sound status for Muted or Unmuted.
+ */
+volumeIcon?.addEventListener('click', function(event){
+  event.stopPropagation();
   volume = !volume;
   if(!volume){
     sounds.muteAllSounds();
@@ -36,10 +42,16 @@ volumeIcon?.addEventListener('click', function(){
 })
 
 
+/**
+ * start the Game
+ * set the gameZone class to d-flex
+ * check if the current device is a touch device he show the MobileMove Keys
+ * 
+ * initiate the Level.
+ */
 function startGame(){
     startGameDiv.classList.add('d-none');
     gameZone.classList.remove('d-none');
-    footer.classList.add('d-none');
     gameZone.classList.add('d-flex');
     fullscreenContainer.classList.remove('d-none');
     fullscreenContainer.classList.add('d-flex');
@@ -55,11 +67,18 @@ function startGame(){
 }
 
 
+/**
+ * replay the Game
+ */
 tryAgain.addEventListener('click', ()=>{
-    location.reload();
+  init();
 })
 
 
+/**
+ * show the history in the Menuinfos
+ * @param {Event} event 
+ */
 function startHistory(event){
   event.stopPropagation();
     menuInfos.innerHTML  = '';
@@ -67,6 +86,10 @@ function startHistory(event){
 }
 
 
+/**
+ * show the controls in the Menuinfos
+ * @param {Event} event 
+ */
 function startIntructons(event){
   event.stopPropagation();
     menuInfos.innerHTML  = '';
@@ -74,6 +97,21 @@ function startIntructons(event){
 }
 
 
+/**
+ * show the Impressum in the Menuinfos
+ * @param {Event} event 
+ */
+function impressum(event){
+  event.stopPropagation();
+    menuInfos.innerHTML  = '';
+    menuInfos.innerHTML = templateImpressum();
+}
+
+
+/**
+ * close the Menu when the user out of the menu click.
+ * @param {Event} event 
+ */
 function closeMenu(event){
   instructions.classList.add('d-none');
   event.stopPropagation();
@@ -81,7 +119,10 @@ function closeMenu(event){
 }
 
 
-
+/**
+ * check if the current device is a touchable device or not.
+ * @returns true or false
+ */
 function isTouchDevice() {
   return (
     "ontouchstart" in window ||
@@ -91,6 +132,10 @@ function isTouchDevice() {
 }
 
 
+/**
+ * check the device oriantation
+ * show the turn your device message if the width < height
+ */
 function checkOrientation() {
   if (window.innerHeight > window.innerWidth) {
     document.getElementById("orientation").style.display = "flex";

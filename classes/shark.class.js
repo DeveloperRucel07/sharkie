@@ -98,7 +98,10 @@ class Shark extends MovableObject {
         this.alreadyVulnerable(); 
     }
 
-
+    /**
+     * start the animate function after 200ms
+     * set the jumHeight equal to the canvas height.
+     */
     startSharkanimation(){
         setTimeout(()=>{ 
             this.animate();
@@ -106,7 +109,10 @@ class Shark extends MovableObject {
         }, 200);
     }
 
-
+    
+    /**
+     * handle Shark Movement base on Key value and ifhe is Sleeping, Hurt or Dead
+     */
     animate() { 
         if(this.isDead()){
             this.playAnimation(this.IMAGE_DEAD_POISONED); 
@@ -149,6 +155,10 @@ class Shark extends MovableObject {
     }
 
 
+    /**
+     * Handles the shark's death sequence by stopping the game after a delay.
+     * Initiates a 4.5-second timeout before calling the stopGame function.
+     */
     sharkDead(){
         setTimeout(()=>{
             stopGame();
@@ -156,6 +166,12 @@ class Shark extends MovableObject {
     }
 
 
+    /**
+     * Starts an interval that checks if the shark should be vulnarable based on the time since its last hurt.
+     * If the time elapsed exceeds the vulnarable delay, sets the `isVulnerable` property to true.
+     *
+     * @returns {void}
+     */
     alreadyVulnerable(){
         setInterval(() => {
             if (Date.now() - this.lastHurt > this.isVulnerableDelay) {
@@ -165,6 +181,11 @@ class Shark extends MovableObject {
     }
 
 
+    /**
+     * Moves the shark character to the right by increasing its x-coordinate.
+     * Sets the direction to 'right' and updates the camera position.
+     * Movement is restricted to within the lright boundary (this.x + this.width < this.world.worldWidth).
+     */
     moveRight() {
         this.otherDirection = false;
         if (this.x + this.width < this.world.worldWidth) {
@@ -176,6 +197,11 @@ class Shark extends MovableObject {
     }
 
 
+    /**
+     * Moves the shark character to the right by increasing its x-coordinate.
+     * Sets the direction to 'right' and updates the camera position.
+     * Movement is restricted to within the lright boundary (this.x + this.width < this.world.worldWidth).
+     */
     moveRight() {
         this.otherDirection = false;
         if (this.x + this.width < this.world.worldWidth) {
@@ -185,6 +211,11 @@ class Shark extends MovableObject {
     }
 
 
+    /**
+     * Moves the shark character to the left by decreasing its x-coordinate.
+     * Sets the direction to 'left' and updates the camera position.
+     * Movement is restricted to within the left boundary (x > 0).
+     */
     moveLeft() {
         this.otherDirection = true;
         if (this.x > 0) {
@@ -194,6 +225,13 @@ class Shark extends MovableObject {
     }
 
 
+    /**
+        * Updates the horizontal camera position so that it follows the player
+        * while ensuring the camera does not move outside the world boundaries.
+        *Algorithm:
+        * - Centers the camera on the player's `x` position.
+        * - Clamps the camera so it cannot scroll beyond the left or right edges of the world.
+    */
     updateCamera() {
         const halfCanvas = this.world.canvas.width / 2;
         let cam = -this.x + halfCanvas;
@@ -203,18 +241,32 @@ class Shark extends MovableObject {
     }
 
 
+    /**
+     * Sets the shark's isSleeping status to false and updates the last Move timestamp.
+     * Typically called when the shark is sleeping.
+     */
     changeSleepTime(){
         this.lastMoveTime = Date.now();
         this.isSleeping = false;
     }
 
 
+    /**
+     * Sets the shark's vulnerability status to false and updates the last hurt timestamp.
+     * Typically called when the shark becomes invulnerable after taking damage.
+     */
     changeVulnerability(){
         this.lastHurt = Date.now();
         this.isVulnerable = false;
     }
 
 
+    /**
+     * Starts an interval that checks if the shark should be sleeping based on the time since its last movement.
+     * If the time elapsed exceeds the sleep delay, sets the `isSleeping` property to true.
+     *
+     * @returns {void}
+     */
     checkIfSleeping() {
         setInterval(() => {
             if (Date.now() - this.lastMoveTime > this.sleepDelay) {
@@ -224,6 +276,11 @@ class Shark extends MovableObject {
     }
 
 
+    /**
+     * Checks if the shark is moving left based on keyboard input.
+     * If moving left, updates the shark's position and sleep time.
+     * @returns {boolean|undefined} Returns true if the shark moves left, otherwise undefined.
+     */
     isMovingLeft(){
         if (this.world.keyboard.LEFT) {
             this.moveLeft();
@@ -233,6 +290,11 @@ class Shark extends MovableObject {
     }
 
 
+    /**
+     * Checks if the shark is moving right based on keyboard input.
+     * If moving right, updates the shark's position and sleep time.
+     * @returns {boolean|undefined} Returns true if the shark moves right, otherwise undefined.
+     */
     isMovingRight(){
         if (this.world.keyboard.RIGHT) {
             this.moveRight();
@@ -242,8 +304,13 @@ class Shark extends MovableObject {
     }
 
 
+    /**
+     * Checks if the shark is moving down based on keyboard input and canvas boundaries.
+     * If moving down, updates the shark's position and sleep time.
+     * @returns {boolean|undefined} Returns true if the shark moves down, otherwise undefined.
+     */
     isMovingDown(){
-        if (this.world.keyboard.DOWN && this.y < this.jumHeight - this.height + 60) {
+        if (this.world.keyboard.DOWN && this.y + this.height - 60< this.world.canvas.height) {
             this.y += this.speed;
             this.changeSleepTime();
             return true;
@@ -251,6 +318,11 @@ class Shark extends MovableObject {
     }
 
 
+    /**
+     * Checks if the shark is moving Up based on keyboard input and canvas boundaries.
+     * If moving Up, updates the shark's position and sleep time.
+     * @returns {boolean|undefined} Returns true if the shark moves Up, otherwise undefined.
+     */
     isMovingUp(){
         if (this.world.keyboard.UP && this.y > -110) {
             this.y -= this.speed;
@@ -259,6 +331,10 @@ class Shark extends MovableObject {
         }
     }
 
+
+    /**
+     * set Slap at true for 1500 after that it become false.
+     */
     sharkSlap(){
         if (this.world.keyboard.SPACE && this.slapReady && !this.slap) {
             this.slap = true;
@@ -269,35 +345,62 @@ class Shark extends MovableObject {
         if (!this.world.keyboard.SPACE) {
             this.slapReady = true;
         }
-        if (this.slap && Date.now() - this.slapStartTime > 1000) {
+        if (this.slap && Date.now() - this.slapStartTime > 1500) {
             this.slap = false;
         }
     }
 
 
+    /**
+     * throw a bubble
+     * @param {string} type type of the bubble (normal or poison)
+     * @returns null
+     */
     throwBubble(type){
-        if (this.world.bubbles.length >= 30) return;
+        if (this.world.bubbles.length >= 20) return;
         let bubbleX = this.otherDirection ? this.x - 20 : this.x + this.width;
         let bubbleY = this.y + this.height / 2;
         if(type ==='poison' && this.world.collectedPoisons > 0){
-            if(this.poisonBubblesThrown < 10){
-                let bubble = new ThrowableObject(bubbleX, bubbleY, type);
-                bubble.otherDirection = this.otherDirection;
-                this.world.bubbles.push(bubble);
-                this.poisonBubblesThrown++;
-                this.world.collectedPoisons = Math.max(0, this.world.collectedPoisons - 1);
-                this.world.poison_mark.setPercentagePoison(this.world.collectedPoisons);
-            }
+            this.setPoisonBubble(bubbleX, bubbleY, type);
         }
         else{
-            if(this.normalBubblesThrown < (30 - this.world.collectedPoisons) && this.normalBubblesThrown < 10){
-                let bubble = new ThrowableObject(bubbleX, bubbleY, type);
-                bubble.otherDirection = this.otherDirection;
-                this.world.bubbles.push(bubble);
-                this.normalBubblesThrown++;
-            }
+           this.setNormalBubble(bubbleX, bubbleY, type)
         }
     }  
+
+
+    /**
+     * create poison bubble
+     * @param {number} bubbleX the x value of the bubble
+     * @param {*number} bubbleY  the y value of the bubble
+     * @param {*string} type type of the bubble (normal or poison)
+     */
+    setPoisonBubble(bubbleX, bubbleY, type){
+         if(this.poisonBubblesThrown < 10){
+            let bubble = new ThrowableObject(bubbleX, bubbleY, type);
+            bubble.otherDirection = this.otherDirection;
+            this.world.bubbles.push(bubble);
+            this.poisonBubblesThrown++;
+            this.world.collectedPoisons = Math.max(0, this.world.collectedPoisons - 1);
+            this.world.poison_mark.setPercentagePoison(this.world.collectedPoisons);
+        }
+    }
+
+
+    /**
+     * create normal bubble
+     * @param {number} bubbleX the x value of the bubble
+     * @param {*number} bubbleY  the y value of the bubble
+     * @param {*string} type type of the bubble (normal or poison)
+     */
+    setNormalBubble(bubbleX, bubbleY, type){
+        if(this.normalBubblesThrown < (20 - this.world.collectedPoisons) && this.normalBubblesThrown < 10){
+            let bubble = new ThrowableObject(bubbleX, bubbleY, type);
+            bubble.otherDirection = this.otherDirection;
+            this.world.bubbles.push(bubble);
+            this.normalBubblesThrown++;
+        }
+    }
 
 }
 

@@ -1,3 +1,7 @@
+/**
+ * 
+ * @returns HTML template for the History
+ */
 function TemplateHistory(){
     return `
             <h2 class="title">Deep under the waves, in the mysterious Coral Kingdom, lives a brave little shark named Sharkie.</h2>
@@ -16,13 +20,19 @@ function TemplateHistory(){
                 <li>Defeat the enemies with your powers ⚔️</li>
                 <li>And bring peace back to the deep blue sea 🌍💙</li>
             </ul>
+            <h2 class="title">Are you ready to Help Sharkie Recover the Ocean?</h2>
     
     `
 }
 
+
+/**
+ * 
+ * @returns HTML template for controls(how tonplay the Game);
+ */
 function templateHowToPlay(){
     return `
-            <h3>How to Play</h3>
+            <h3 class="title">How to Play</h3>
             <ol>
                 <li>Moves:
                     <ul>
@@ -42,6 +52,27 @@ function templateHowToPlay(){
                     </ul>
                 </li>
             </ol>
+            
 
     `
+}
+
+/**
+ * 
+ * @returns HTML Template for the Impressum
+ */
+function templateImpressum(){
+    return `
+        <h1 class="title">Impressum</h1>
+
+        <p>Rucel Tsafack<br />
+        An d. Trave 30 <br />
+        23795 Bad Segeberg</p>
+
+        <h2>Kontakt</h2>
+        <p>Telefon: 015563633814<br />
+        E-Mail: tsafackrucel@gmail.com</p>
+        <p>Quelle: <a href="https://www.e-recht24.de">https://www.e-recht24.de</a></p>
+    
+    `;
 }

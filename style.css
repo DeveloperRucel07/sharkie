@@ -103,14 +103,16 @@ button{
   top: 0;
   left: 0;
   right: 0;
+
 }
 
 .settings .fullscreen{
   position: absolute;
-    top: 30px;
-    left: 20px;
-    width: 70px;
-    height: 50px;
+  top: 30px;
+  left: 20px;
+  width: 70px;
+  height: 50px;
+  z-index: 2;
 }
 
 .settings .img-volume{
@@ -119,6 +121,7 @@ button{
   right: 30px;
   width: 50px;
   height: 50px;
+    z-index: 2;
 }
 
 .start-game-btn{
@@ -141,13 +144,14 @@ button{
 .icon-menu{
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between !important;
+  flex-direction: row;
   gap: 24px;
 }
 
 .icon-menu img{
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
 }
 
 .settings .img-setting{
@@ -216,38 +220,28 @@ button{
   color: mediumpurple;
 }
 
-.card {
+.icon-menu button {
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  max-width: 450px;
-  max-height: 500px;
-  padding: 20px;
-  gap: 30px;
-}
-
-.card button {
-  width: 100px;
-  height: 40px;
-  border: #e73b06 1px solid;
-  background: transparent;
-  cursor: pointer;
-  color: aqua;
-}
-
-.card button:focus {
-  color: #15b86c !important;
-}
-
-.card button:hover {
-  border: 1px solid #15b86c;
-  color: #15b86c !important;
-}
-
-.next {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
+  width: 140px;
+  height: 40px;
+  border: unset;
+  background: transparent;
+  background: linear-gradient(90deg, #e73b06, #15b86c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 20px;
+  cursor: pointer;
+  margin: 5px 20px;
+  padding: 10px;
+  gap: 10px;
+}
+
+.icon-menu button:hover{
+  border: #0097a7 solid 2px;
+
 }
 
 .title {

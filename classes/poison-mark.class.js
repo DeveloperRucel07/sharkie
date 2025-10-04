@@ -19,6 +19,11 @@ class PoisonMark extends DrawableObject{
     }
 
 
+    /**
+     * Updates poison status display based on collected percentage.
+     * Maps `percentage` value (0–10) to the correct poison mark image.
+     * @param {number} percentage 
+     */
     setPercentagePoison(percentage){
         this.percentage = percentage;
 

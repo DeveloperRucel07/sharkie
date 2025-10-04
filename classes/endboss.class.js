@@ -143,6 +143,12 @@ class Endboss extends MovableObject{
             this.world.sounds.endboss_attack_sound.play();
         }
 
+        this.endbossFollowShark(shark);
+
+    }
+
+
+    endbossFollowShark(shark){
         if (this.x > shark.x) {
             this.x -= this.speed;
         } else if (this.x < shark.x) {
@@ -151,10 +157,9 @@ class Endboss extends MovableObject{
 
         if (this.y > shark.y) {
             this.y -= this.speed / 2;
-        } else if (this.y < shark.y) {
+        } else if (this.y < shark.y &&this.y + this.height < this.world.canvas.height - 60) {
             this.y += this.speed / 2;
         }
-
     }
 
 

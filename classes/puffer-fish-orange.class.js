@@ -33,6 +33,14 @@ class PufferFishOrange extends MovableObject {
         this.speed = 4 + Math.random() * 0.5;
     }
 
+
+    /**
+        *Animates puffer fish behavior.
+        * - If dead -> play death animation and move upwards.
+        * - If alive -> play swim animation.
+        * start to move Left
+        *
+    */
     animateFish(){
         if(this.isDead()){
             this.playAnimation(this.IMAGES_DIE);

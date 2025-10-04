@@ -5,7 +5,9 @@ let keyboard = new Keyboard();
 let world;
 
 
-
+/**
+ * iniatate the game with New World and set the Width and Height for the Canvas.
+ */
 function init() {
     canvas = document.getElementById('gameCanvas');
     canvas.width = 900;
@@ -18,16 +20,30 @@ function init() {
     },100)
 }
 
+
+/**
+ * Stop the Game 
+ * stop all sounds and movable objects in the World.
+ */
 function stopGame(){
     world.sounds.stopAllSounds();
     world.stop();
 }
 
 
+/**
+ * check if the actual device is a mobile device or not.
+ * @returns return true or false
+ */
 function isMobileDevice() {
     return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 }
 
+
+/**
+ * Set a fullscreen for better experince
+ * but the fullscreen is in mobile device desable.
+ */
 function fullscreen() {
     if (!isMobileDevice()) {
         const widthObj = window.innerWidth;
@@ -45,6 +61,14 @@ function fullscreen() {
   
 }
 
+
+/**
+ * set to the canvas the new width and height, when we use fullscreen
+ * maintain the aspect ratio of the canvas.
+ * @param {number} widthObj new width of the canvas (the InnerWidth)
+ * @param {*number} heightObj new height of the canvas (the InnerHeight)
+ * @param {*number} ratio the ratio 
+ */
 function maintainObjWidthHeight(widthObj, heightObj, ratio){
     if((widthObj / heightObj) > ratio){
         canvas.height = heightObj;
@@ -56,36 +80,77 @@ function maintainObjWidthHeight(widthObj, heightObj, ratio){
 }
 
 
+/**
+ * move the shark left 
+ * @param {Event} event 
+ * @param {*boolean} value true or false
+ */
 function moveLeftMobile(event, value){
     event.preventDefault();
     keyboard.LEFT = value;
 }
 
+
+/**
+ * move the shark right
+ * @param {Event} event 
+ * @param {*boolean} value true or false
+ */
 function moveRightMobile(event, value){
     event.preventDefault();
     keyboard.RIGHT = value;
 }
 
+
+/**
+ * move the shark Up 
+ * @param {Event} event 
+ * @param {*boolean} value true or false
+ */
 function moveUpMobile(event, value){
     event.preventDefault();
     keyboard.UP = value;
 }
 
+
+/**
+ * move the shark Down 
+ * @param {Event} event 
+ * @param {*boolean} value true or false
+ */
 function moveDownMobile(event, value){
     event.preventDefault();
     keyboard.DOWN = value;
 }
 
+
+/**
+ * set the slap value of the shark 
+ * @param {Event} event 
+ * @param {*boolean} value true or false
+ */
 function slap(event, value){
     event.preventDefault();
     keyboard.SPACE = value;
 }
 
+
+/**
+ * throw normal bubble 
+ * @param {Event} event 
+ * @param {*boolean} value true or false
+ */
 function normalBubble(event, value){
     event.preventDefault();
     keyboard.D = value;
 }
 
+
+/**
+ * throw poison bubble 
+ * @param {Event} event 
+ * @param {*boolean} value true or false
+ */
 function poisonBubble(event, value){
     event.preventDefault();
     keyboard.F = value;
@@ -102,6 +167,7 @@ window.addEventListener("keydown", (e) => {
     if (e.code === "KeyD") keyboard.D = true;
     if (e.code === "KeyF") keyboard.F = true;
 });
+
 
 window.addEventListener("keyup", (e) => {
     if (e.code === "ArrowLeft") keyboard.LEFT = false;

@@ -17,6 +17,10 @@ class Life extends MovableObject{
         this.y = y;
     }
 
+
+    /**
+     * animate life continously in the interval
+     */
     animateLife(){
         setInterval(()=>{
             this.playAnimation(this.LIFE_IMAGES)
