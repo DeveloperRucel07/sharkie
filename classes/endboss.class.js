@@ -58,7 +58,7 @@ class Endboss extends MovableObject{
     width = 350;
     height = 350;
     x = 3800;
-    y = 200;
+    y = -200;
     offset = {
         top:140,
         bottom:40,
@@ -109,7 +109,8 @@ class Endboss extends MovableObject{
      */
     endbossDead(){
         setTimeout(()=>{
-            stopGame();
+            this.world.stop();
+            this.world.sounds.stopAllSounds();
         }, 4000)
     }
 

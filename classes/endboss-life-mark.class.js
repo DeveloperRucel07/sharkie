@@ -1,22 +1,22 @@
 class EndBossLife extends DrawableObject{
     LIFE_MARK_IMAGES = [
-        'images/4.Marks/Purple/0_ .png',
-        'images/4.Marks/Purple/20_ .png',
-        'images/4.Marks/Purple/40_ .png',
-        'images/4.Marks/Purple/60_ .png',
-        'images/4.Marks/Purple/80_ .png',
-        'images/4.Marks/Purple/100_ .png',
+        'images/4.Marks/red_endboss/0_endboss.png',
+        'images/4.Marks/red_endboss/20_endboss.png',
+        'images/4.Marks/red_endboss/40_endboss.png',
+        'images/4.Marks/red_endboss/60_endboss.png',
+        'images/4.Marks/red_endboss/80_endboss.png',
+        'images/4.Marks/red_endboss/100_endboss.png'
+
     ];
     width = 200;
     height = 40;
-    x = 10;
+    x = 700;
     y = 0;
 
     percentage = 100;
 
     constructor(){
         super();
-        // this.percentage = percentage;
         this.loadImages(this.LIFE_MARK_IMAGES);
         this.setPercentageLife(this.percentage);
         

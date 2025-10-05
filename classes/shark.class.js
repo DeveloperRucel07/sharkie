@@ -111,7 +111,7 @@ class Shark extends MovableObject {
 
     
     /**
-     * handle Shark Movement base on Key value and ifhe is Sleeping, Hurt or Dead
+     * handle Shark Movement base on Key value and if he is Sleeping, Hurt or Dead
      */
     animate() { 
         if(this.isDead()){
@@ -119,12 +119,14 @@ class Shark extends MovableObject {
             this.animateDeathToTop();
             this.sharkDead();
             this.world.sounds.shark_dead_sound.play();
-            document.getElementById("tryAgain").classList.remove("d-none");
-            document.getElementById("tryAgain").classList.add("d-flex");
+            document.getElementById("gameOver").classList.remove("d-none");
+            document.getElementById("gameOver").classList.add("d-flex");
         }else if(this.isHurt()){
             this.playAnimation(this.IMAGES_HURT_POISONED);
+            this.changeSleepTime();
         }else if(this.isHurtElectric()){
             this.playAnimation(this.IMAGES_HURT_ELECTRIC_SHOCK);
+            this.changeSleepTime();
         }else if(this.isMovingRight()){
             this.playAnimation(this.IMAGES_SWIM); 
         }else if(this.isMovingLeft()){
@@ -139,11 +141,13 @@ class Shark extends MovableObject {
         }else if(this.world.keyboard.D){
             this.playAnimation(this.ATTACK_BUBBLE);
             this.throwBubble('normal');
+            this.changeSleepTime();
             this.world.sounds.shark_bubble_sound.play();
         }else if(this.world.keyboard.F){
             this.playAnimation(this.ATTACK_POISONED_BUBBLE);
             this.throwBubble('poison');
             this.world.sounds.shark_poison_sound.play();
+            this.changeSleepTime();
         }else if(this.slap){
             this.playAnimation(this.ATTACK_SLAP);
         }
@@ -164,7 +168,8 @@ class Shark extends MovableObject {
      */
     sharkDead(){
         setTimeout(()=>{
-            stopGame();
+            this.world.stop();
+            this.world.sounds.stopAllSounds();
         }, 4500);
     }
 

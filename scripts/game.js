@@ -14,8 +14,8 @@ function init() {
     canvas.height = 600;
     ctx = canvas.getContext('2d');
     world = new World(canvas, ctx, keyboard, sounds);
-    sounds.background_music.play();
     setTimeout(()=>{
+        sounds.background_music.play();
         world.start();
     },100)
 }

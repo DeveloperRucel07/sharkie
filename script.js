@@ -4,6 +4,8 @@ const gameZone = document.querySelector(".game-zone");
 const menuInfos = document.getElementById('menuInfos');
 const mobileButton = document.getElementById('mobileButtons');
 const settingBtn = document.getElementById('setting');
+const settingGameOver = document.getElementById('settingGameOver');
+const gameOver = document.getElementById('gameOver');
 let startBtn = document.getElementById("startBtnGame");
 let volumeIcon = document.getElementById("volume");
 const volumeStatus = document.querySelector('.img-volume');
@@ -71,7 +73,17 @@ function startGame(){
  * replay the Game
  */
 tryAgain.addEventListener('click', ()=>{
+  gameOver.classList.add('d-none');
+  tryAgain.classList.add('d-none');
+  settingGameOver.classList.add('d-none');
+  startGame();
   init();
+  setTimeout(()=>{
+    if(sounds){
+        sounds.background_music.play();
+      }
+  }, 200);
+  
 })
 
 

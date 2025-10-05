@@ -8,9 +8,9 @@ class CoinMark extends DrawableObject{
         'images/4.Marks/orange/100_coin.png'
 ,
     ];
-    width = 200;
+    width = 180;
     height = 40;
-    x = 270;
+    x = 220;
     y = 0;
     percentage = 0;
     constructor(){

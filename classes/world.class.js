@@ -6,6 +6,7 @@ class World {
     life_mark = new LifeMark();
     coin_mark = new CoinMark();
     poison_mark = new PoisonMark();
+    endboss_mark = new EndBossLife();
     bubbles = [];
     ctx;
     camera_x = 0;
@@ -65,6 +66,7 @@ class World {
         this.life_mark.draw(ctx);
         this.coin_mark.draw(ctx);
         this.poison_mark.draw(ctx);
+        this.endboss_mark.draw(ctx);
     }
 
 
@@ -213,6 +215,8 @@ class World {
             if (this.endboss && this.endboss.isColliding(bubble)) {
                 this.endboss.hit(3);
                 this.sounds.endboss_hurt_sound.play();
+                this.endboss_mark.setPercentageLife(this.endboss.energy);
+
             }
         });
     }
@@ -270,7 +274,6 @@ class World {
      */
     stop() {
         if (this.animationId) {
-            this.sounds.stopAllSounds();
             cancelAnimationFrame(this.animationId);
             clearInterval(this.intervalCheckCollision);
             this.animationId = null;

@@ -27,6 +27,19 @@ class SoundManager {
 
 
     /**
+     * check every instance of Audio and play them.
+     */
+    playAllSounds() {
+        for (const key in this) {
+            if (this[key] instanceof Audio) {
+                this[key].play();
+                this[key].currentTime = 0;
+            }
+        }
+    }
+
+
+    /**
      * check every instance of Audio and pause them.
      */
     stopAllSounds() {

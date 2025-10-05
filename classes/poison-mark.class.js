@@ -7,9 +7,9 @@ class PoisonMark extends DrawableObject{
         'images/4.Marks/green/poisoned bubbles/80_ copia 2.png',
         'images/4.Marks/green/poisoned bubbles/100_ copia 3.png',
     ];
-    width = 200;
+    width = 180;
     height = 40;
-    x = 520;
+    x = 420;
     y = 0;
     percentage = 0;
     constructor(){

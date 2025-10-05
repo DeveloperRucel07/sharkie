@@ -374,13 +374,29 @@ canvas {
   height: 60px;
 }
 
-.restart-game-btn,
+.game-over,
 .you-win {
   position: absolute;
   z-index: 1000;
   background: none;
   border: none;
   cursor: pointer;
+}
+
+.game-over img{
+  width: 70px;
+  height: 70px;margin: 30px;
+} 
+
+.restart-game-btn{
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.restart-game-btn img{
+  width: 150px;
+  height: 70px;
 }
 
 .you-win img {
@@ -426,10 +442,14 @@ footer{
     grid-template-columns: repeat(3, 40px);
     grid-template-rows: repeat(3, 40px);
   }
+    .mobile-buttons button{
+      z-index: 1000;
+    }
 
   .mobile-buttons button img {
     width: 40px;
     height: 40px;
+
   }
 }
 

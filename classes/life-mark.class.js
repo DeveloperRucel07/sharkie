@@ -7,7 +7,7 @@ class LifeMark extends DrawableObject{
         'images/4.Marks/Purple/80_ .png',
         'images/4.Marks/Purple/100_ .png',
     ];
-    width = 200;
+    width = 180;
     height = 40;
     x = 10;
     y = 0;
