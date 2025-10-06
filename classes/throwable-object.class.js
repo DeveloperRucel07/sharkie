@@ -1,7 +1,7 @@
 class ThrowableObject extends MovableObject {
     type;
-    width = 40;
-    height = 40;
+    width = 60;
+    height = 60;
     speed = 5;
     vx = 1; // horizontal velocity
     vy = 1; // vertical velocity

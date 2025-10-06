@@ -4,7 +4,6 @@ const gameZone = document.querySelector(".game-zone");
 const menuInfos = document.getElementById('menuInfos');
 const mobileButton = document.getElementById('mobileButtons');
 const settingBtn = document.getElementById('setting');
-const settingGameOver = document.getElementById('settingGameOver');
 const gameOver = document.getElementById('gameOver');
 let startBtn = document.getElementById("startBtnGame");
 let volumeIcon = document.getElementById("volume");
@@ -17,7 +16,7 @@ let volume = true;
 /**
  * open the menu infos
  */
-settingBtn?.addEventListener('click', function(event){
+function openMenu(event){
   event.stopPropagation();
   if(instructions.classList.contains('d-none')){
     instructions.classList.remove('d-none');
@@ -25,7 +24,7 @@ settingBtn?.addEventListener('click', function(event){
   }else{
     instructions.classList.add('d-none');
   }
-})
+}
 
 
 /**
@@ -64,6 +63,12 @@ function startGame(){
       mobileButton.classList.add('d-none');
       mobileButton.classList.remove('d-flex');
     }
+
+    setTimeout(() => {
+      settingBtn.setAttribute('onclick', 'openMenu(event)');
+      // world.pauseGame();
+    }, 2000);
+    
     initLevel();
     
 }
@@ -75,7 +80,6 @@ function startGame(){
 tryAgain.addEventListener('click', ()=>{
   gameOver.classList.add('d-none');
   tryAgain.classList.add('d-none');
-  settingGameOver.classList.add('d-none');
   startGame();
   init();
   setTimeout(()=>{
@@ -102,7 +106,7 @@ function startHistory(event){
  * show the controls in the Menuinfos
  * @param {Event} event 
  */
-function startIntructons(event){
+function startIntructions(event){
   event.stopPropagation();
     menuInfos.innerHTML  = '';
     menuInfos.innerHTML = templateHowToPlay();

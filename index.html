@@ -21,7 +21,7 @@
     <div class="settings">
         <img class="fullscreen d-none" id="fullscreen" src="./images/5.Buttons/Key/fullscreen.png" alt="fullscreen image" onclick="fullscreen()">
         <img class="img-volume  volume_true" id="volume" src="./images/5.Buttons/Key/volume.png" alt="sound image">
-        <img class="img-setting" id="setting" src="./images/5.Buttons/Key/home.png" alt="menu image">
+        <img class="img-setting" id="setting" src="./images/5.Buttons/Key/home.png" alt="menu image" onclick="openMenu(event)">
     </div>
     <div class="container-intructions d-none" id="instructions">
         <div class="instructions" id="menuInfos">
@@ -47,7 +47,7 @@
             </ol>
         </div>
         <div class="icon-menu">
-            <button onclick="startIntructons(event)"><img class="img-setting" id="setting" src="./images/5.Buttons/Key/settings_full.png" alt="setting image"> Controls</button>
+            <button onclick="startIntructions(event)"><img class="img-setting" id="setting" src="./images/5.Buttons/Key/settings_full.png" alt="setting image"> Controls</button>
             <button onclick="startHistory(event)"><img class="img-setting" id="historyContain" src="./images/5.Buttons/Key/histoty_castle.png" alt="setting image"> History</button>
             <button  onclick="impressum(event)"><img class="img-setting" id="impressum" src="./images/5.Buttons/Key/impress.png" alt="setting image" > Impressum</button>
         </div>
@@ -58,7 +58,6 @@
         <div class="you-win d-none" id="youWin"> <img src="./images/5.Buttons/Decisions/Wins/youWin.png" alt="Stop Game"></div>
         <div class="game-over d-none" id="gameOver"> 
             <button id="tryAgain" class="restart-game-btn"> <img src="./images/5.Buttons/TryAgain/tryAgainYelow.png" alt="Stop Game"></button>
-            <img class="img-setting" id="settingGameOver" src="./images/5.Buttons/Key/home.png" alt="menu image">
         </div>
         <canvas id="gameCanvas">
 
@@ -79,7 +78,6 @@
     </div>
     
     <script src="./scripts/template.js"></script>
-    <script src="./script.js"></script>
     <script src="./classes/audio.class.js"></script>
     <script src="./classes/drawable-object.class.js"></script>
     <script src="./classes/movable-object.class.js"></script>
@@ -107,5 +105,6 @@
     <script src="./levels/level1.js"></script>
     <script src="./classes/world.class.js"></script>
     <script src="./scripts/game.js"></script>
+    <script src="./script.js"></script>
 </body>
 </html>

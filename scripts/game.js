@@ -86,7 +86,9 @@ function maintainObjWidthHeight(widthObj, heightObj, ratio){
  * @param {*boolean} value true or false
  */
 function moveLeftMobile(event, value){
-    event.preventDefault();
+    if (event.cancelable) {
+        event.preventDefault();
+    }
     keyboard.LEFT = value;
 }
 
@@ -97,7 +99,9 @@ function moveLeftMobile(event, value){
  * @param {*boolean} value true or false
  */
 function moveRightMobile(event, value){
-    event.preventDefault();
+    if (event.cancelable) {
+        event.preventDefault();
+    }
     keyboard.RIGHT = value;
 }
 
@@ -108,7 +112,9 @@ function moveRightMobile(event, value){
  * @param {*boolean} value true or false
  */
 function moveUpMobile(event, value){
-    event.preventDefault();
+    if (event.cancelable) {
+        event.preventDefault();
+    }
     keyboard.UP = value;
 }
 
@@ -119,7 +125,9 @@ function moveUpMobile(event, value){
  * @param {*boolean} value true or false
  */
 function moveDownMobile(event, value){
-    event.preventDefault();
+    if (event.cancelable) {
+        event.preventDefault();
+    }
     keyboard.DOWN = value;
 }
 
@@ -130,7 +138,9 @@ function moveDownMobile(event, value){
  * @param {*boolean} value true or false
  */
 function slap(event, value){
-    event.preventDefault();
+    if (event.cancelable) {
+        event.preventDefault();
+    }
     keyboard.SPACE = value;
 }
 
@@ -141,7 +151,9 @@ function slap(event, value){
  * @param {*boolean} value true or false
  */
 function normalBubble(event, value){
-    event.preventDefault();
+    if (event.cancelable) {
+        event.preventDefault();
+    }
     keyboard.D = value;
 }
 
@@ -152,7 +164,9 @@ function normalBubble(event, value){
  * @param {*boolean} value true or false
  */
 function poisonBubble(event, value){
-    event.preventDefault();
+    if (event.cancelable) {
+        event.preventDefault();
+    }
     keyboard.F = value;
 }
 

@@ -28,6 +28,7 @@ class World {
         this.checkColisions();  
     }
 
+
     /**
      * set the world to shark and Endboss.
      */
@@ -35,6 +36,7 @@ class World {
         this.shark.world = this;
         this.endboss.world = this;
     }
+
 
     /**
      * take an array and Draw all element in the context
@@ -45,6 +47,7 @@ class World {
             obj.draw(this.ctx);
         }); 
     }
+
 
     /**
      * draw all element in the context
@@ -127,6 +130,27 @@ class World {
 
 
     /**
+     * Handles collisions between bubble and puffer fish.
+     * If bubble collides with a puffer -> kill puffer, play electric sound,
+     * remove puffer and bubble.
+     */
+    bubbleCollisionWithPufferFishes(){
+        this.level.pufferEnemies.forEach((pufferEnemy, index)=>{
+            this.bubbles.forEach((bubble, bubbleIndex)=>{
+                if(bubble.isColliding(pufferEnemy)){
+                    pufferEnemy.die = true;
+                    this.sounds.electric_sound.play();
+                    setTimeout(()=>{
+                        this.level.pufferEnemies.splice(index, 1);
+                    }, 4000);
+                    this.bubbles.splice(bubbleIndex, 1);
+                }
+            })
+        })
+    }
+
+
+    /**
      * Handles collisions between shark and jelly fish .
      * If shark is slapping -> kill jelly, play slap sound, remove enemy.
      * If shark is vulnerable and collides -> shark takes damage, play hurt sound,
@@ -146,6 +170,26 @@ class World {
                     this.level.jellyEnemies.splice(index, 1);
                 }, 4000);
             }
+        })
+    }
+
+    /**
+     * Handles collisions between bubble and jelly fish.
+     * If bubble collides with a jelly -> kill jelly, play electric sound,
+     * remove jelly and bubble.
+     */
+    bubbleCollisionWithJellyFishes(){
+        this.level.jellyEnemies.forEach((jellyEnemy, index)=>{
+            this.bubbles.forEach((bubble, bubbleIndex)=>{
+                if(bubble.isColliding(jellyEnemy)){
+                    jellyEnemy.isDead();
+                    this.sounds.electric_sound.play();
+                    setTimeout(()=>{
+                        this.level.jellyEnemies.splice(index, 1);
+                    }, 4000);
+                    this.bubbles.splice(bubbleIndex, 1);
+                }
+            })
         })
     }
 
@@ -214,6 +258,7 @@ class World {
         this.bubbles.forEach(bubble => {
             if (this.endboss && this.endboss.isColliding(bubble)) {
                 this.endboss.hit(3);
+                this.endboss.changeVulnerability();
                 this.sounds.endboss_hurt_sound.play();
                 this.endboss_mark.setPercentageLife(this.endboss.energy);
 
@@ -234,6 +279,11 @@ class World {
             this.sounds.shark_hurt_sound.play();
             this.shark.changeVulnerability();
             this.life_mark.setPercentageLife(this.shark.energy);
+        }else if(this,this.shark.slap && this.endboss.isColliding(this.shark)){
+            this.endboss.hit(2);
+            this.endboss.changeVulnerability();
+            this.sounds.shark_slap_sound.play();
+            this.endboss_mark.setPercentageLife(this.endboss.energy);
         }
     }
 
@@ -259,9 +309,14 @@ class World {
     }
 
 
+    /**
+     * Pause the Game: pause animation and sounds.
+     * If already paused, resume the game.
+     * */
     pauseGame(){
         if (this.animationId) {
             cancelAnimationFrame(this.animationId);
+            this.sounds.stopAllSounds();
             this.animationId = null;
         }else if(this.animationId == null){
             this.start();

@@ -78,6 +78,10 @@ class Endboss extends MovableObject{
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_ATTACK);
         this.speed = 3;
+        this.lastHurt = Date.now();
+        this.isVulnerable = true;
+        this.isVulnerableDelay = 2000;
+        this.alreadyVulnerable();
     }
 
 
@@ -182,6 +186,30 @@ class Endboss extends MovableObject{
         } else if (this.y < shark.y &&this.y + this.height < this.world.canvas.height - 60) {
             this.y += this.speed / 2;
         }
+    }
+
+    /**
+     * Starts an interval that checks if the shark should be vulnarable based on the time since its last hurt.
+     * If the time elapsed exceeds the vulnarable delay, sets the `isVulnerable` property to true.
+     *
+     * @returns {void}
+     */
+    alreadyVulnerable(){
+        setInterval(() => {
+            if (Date.now() - this.lastHurt > this.isVulnerableDelay) {
+                this.isVulnerable = true;
+            }
+        }, 1000 / 30);
+    }
+
+
+    /**
+     * Sets the shark's vulnerability status to false and updates the last hurt timestamp.
+     * Typically called when the shark becomes invulnerable after taking damage.
+     */
+    changeVulnerability(){
+        this.lastHurt = Date.now();
+        this.isVulnerable = false;
     }
 
 
