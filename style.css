@@ -385,7 +385,8 @@ canvas {
 
 .game-over img{
   width: 70px;
-  height: 70px;margin: 30px;
+  height: 70px;
+  margin: 30px;
 } 
 
 .restart-game-btn{
@@ -393,6 +394,25 @@ canvas {
   border: none;
   cursor: pointer;
 }
+
+.restart-game-win{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family:"Luckiest Guy", Verdana, Geneva, Tahoma, sans-serif;
+  color: aqua;
+  background: linear-gradient(90deg, #e73b06, #15b86c);
+  font-weight: bold;
+  font-size: 24px;
+  border: none;
+  cursor: pointer;
+  width: 110px;
+  height: 50px;
+  border-radius: 10px;
+  scale: 1.5;
+}
+
 
 .restart-game-btn img{
   width: 150px;

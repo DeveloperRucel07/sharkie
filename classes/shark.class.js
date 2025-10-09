@@ -69,6 +69,7 @@ class Shark extends MovableObject {
     poisonBubblesThrown = 0;
     normalBubblesThrown = 0;
     slapReady = true;
+    deadSoundAlreadyPlayed = false;
 
 
 
@@ -85,7 +86,7 @@ class Shark extends MovableObject {
         this.loadImages(this.ATTACK_POISONED_BUBBLE);
         this.loadImages(this.ATTACK_BUBBLE);
         this.loadImages(this.ATTACK_SLAP);
-        this.speed = 10;
+        this.speed = 15;
         this.isSleeping = false;
         this.sleepDelay = 5000;
         this.lastHurt = Date.now();
@@ -113,12 +114,17 @@ class Shark extends MovableObject {
     /**
      * handle Shark Movement base on Key value and if he is Sleeping, Hurt or Dead
      */
-    animate() { 
+    animate() {
         if(this.isDead()){
-            this.playAnimation(this.IMAGE_DEAD_POISONED); 
+            this.playAnimation(this.IMAGE_DEAD_POISONED);
             this.animateDeathToTop();
             this.sharkDead();
-            this.world.sounds.shark_dead_sound.play();
+            this.world.sounds.stopBackgroundSounds();
+            if(!this.deadSoundAlreadyPlayed){
+                this.world.sounds.shark_dead_sound.play();
+                this.world.sounds.game_over_sound.play();
+                this.deadSoundAlreadyPlayed = true;
+            }
             document.getElementById("gameOver").classList.remove("d-none");
             document.getElementById("gameOver").classList.add("d-flex");
         }else if(this.isHurt()){
@@ -155,8 +161,7 @@ class Shark extends MovableObject {
             this.playAnimation(this.IMAGES_STAY);
             this.world.sounds.swim_sound.play();
         }
-        
-        this.world.sounds.swim_sound.play();
+
         this.sharkSlap()
 
     }
@@ -169,8 +174,7 @@ class Shark extends MovableObject {
     sharkDead(){
         setTimeout(()=>{
             this.world.stop();
-            this.world.sounds.stopAllSounds();
-        }, 4500);
+        }, 3500);
     }
 
 

@@ -7,7 +7,7 @@
     <title>Sharkie Game</title>
     <link rel="stylesheet" href="./style.css">
 </head>
-<body onclick="closeMenu(event)">
+<body onclick="closeMenu(event);">
     <div id="orientation">
         <img src="./images/5.Buttons/Key/rotate_device.png" alt="rotate device">
         <p>Please rotate your device to play in landscape mode.</p>
@@ -55,7 +55,10 @@
     </div>
 
     <div class="game-zone d-none" id="gameZone">
-        <div class="you-win d-none" id="youWin"> <img src="./images/5.Buttons/Decisions/Wins/youWin.png" alt="Stop Game"></div>
+        <div class="you-win d-none" id="youWin"> 
+            <img src="./images/5.Buttons/Decisions/Wins/youWin.png" alt="Stop Game">
+            <button id="tryAgain" class="restart-game-win"> Replay </button>
+        </div>
         <div class="game-over d-none" id="gameOver"> 
             <button id="tryAgain" class="restart-game-btn"> <img src="./images/5.Buttons/TryAgain/tryAgainYelow.png" alt="Stop Game"></button>
         </div>

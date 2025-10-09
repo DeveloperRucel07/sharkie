@@ -25,7 +25,7 @@ class World {
         this.endboss =  new Endboss();
         this.endboss_life = new EndBossLife()
         this.setWorldToObject();
-        this.checkColisions();  
+ 
     }
 
 
@@ -305,6 +305,8 @@ class World {
         setInterval(()=>{
             this.animatedObjects();
         }, 1000/15);
+        this.sounds.resetAllSounds();
+        this.checkColisions(); 
         this.gameLoop();
     }
 
@@ -313,11 +315,9 @@ class World {
      * Pause the Game: pause animation and sounds.
      * If already paused, resume the game.
      * */
-    pauseGame(){
+    pauseWorld(){
         if (this.animationId) {
-            cancelAnimationFrame(this.animationId);
-            this.sounds.stopAllSounds();
-            this.animationId = null;
+            this.stop();
         }else if(this.animationId == null){
             this.start();
         }
@@ -328,6 +328,7 @@ class World {
      * Stop the Game: stop animation, stop sounds, clear the interval for animated Objects.
      */
     stop() {
+        this.sounds.stopAllSounds();
         if (this.animationId) {
             cancelAnimationFrame(this.animationId);
             clearInterval(this.intervalCheckCollision);

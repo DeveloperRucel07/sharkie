@@ -62,15 +62,8 @@ function startGame(){
     } else {
       mobileButton.classList.add('d-none');
       mobileButton.classList.remove('d-flex');
-    }
-
-    setTimeout(() => {
-      settingBtn.setAttribute('onclick', 'openMenu(event)');
-      // world.pauseGame();
-    }, 2000);
-    
+    } 
     initLevel();
-    
 }
 
 
@@ -78,16 +71,7 @@ function startGame(){
  * replay the Game
  */
 tryAgain.addEventListener('click', ()=>{
-  gameOver.classList.add('d-none');
-  tryAgain.classList.add('d-none');
-  startGame();
-  init();
-  setTimeout(()=>{
-    if(sounds){
-        sounds.background_music.play();
-      }
-  }, 200);
-  
+  location.reload();
 })
 
 

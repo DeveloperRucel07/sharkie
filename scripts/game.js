@@ -15,7 +15,6 @@ function init() {
     ctx = canvas.getContext('2d');
     world = new World(canvas, ctx, keyboard, sounds);
     setTimeout(()=>{
-        sounds.background_music.play();
         world.start();
     },100)
 }
@@ -25,9 +24,9 @@ function init() {
  * Stop the Game 
  * stop all sounds and movable objects in the World.
  */
-function stopGame(){
-    world.sounds.stopAllSounds();
-    world.stop();
+function pauseGame(){
+    // world.sounds.stopAllSounds();
+    world.pauseWorld();
 }
 
 

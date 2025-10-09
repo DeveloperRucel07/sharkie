@@ -69,6 +69,7 @@ class Endboss extends MovableObject{
     isComing = false;
     hasArrived = false;
     comeAnimationFrame = 0;
+    deadSoundPlayed = false;
 
     constructor() {
         super().loadImage(this.imagePath);
@@ -93,11 +94,14 @@ class Endboss extends MovableObject{
             this.playAnimation(this.IMAGES_DEAD);
             this.animateDeathToTop();
             this.endbossDead();
-            this.world.sounds.endboss_dead_sound.play();
+            this.world.sounds.stopBackgroundSounds();
+            if(!this.deadSoundPlayed){
+                this.world.sounds.endboss_dead_sound.play();
+                this.world.sounds.win_sound.play();
+                this.deadSoundPlayed = true;
+            }
             document.getElementById("youWin").classList.remove("d-none");
             document.getElementById("youWin").classList.add("d-flex");
-            this.world.sounds.win_sound.play();
-
         }else if(this.isHurt()){
             this.playAnimation(this.IMAGES_HURT);
         }else{
@@ -114,8 +118,7 @@ class Endboss extends MovableObject{
     endbossDead(){
         setTimeout(()=>{
             this.world.stop();
-            this.world.sounds.stopAllSounds();
-        }, 4000)
+        }, 3500)
     }
 
 
@@ -188,6 +191,7 @@ class Endboss extends MovableObject{
         }
     }
 
+    
     /**
      * Starts an interval that checks if the shark should be vulnarable based on the time since its last hurt.
      * If the time elapsed exceeds the vulnarable delay, sets the `isVulnerable` property to true.

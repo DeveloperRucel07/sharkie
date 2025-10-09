@@ -2,8 +2,6 @@ class SoundManager {
     constructor() {
         this.background_music = new Audio('audio/background_music.mp3');
         this.background_music.loop = true;
-        this.background_music.volume = 0.2;
-
         this.collect_coin_sound = new Audio('audio/coin.mp3');
         this.win_sound = new Audio('audio/win.mp3');
         this.game_over_sound = new Audio('audio/game_over.mp3');
@@ -23,56 +21,104 @@ class SoundManager {
         this.endboss_dead_sound = new Audio('audio/boss_dead.mp3');
         this.endboss_background_sound = new Audio('audio/background_endboss.mp3');
 
+        this.backgroundSounds = [this.background_music, this.endboss_background_sound]; //
+        this.effectSounds = [
+            this.collect_coin_sound,
+            this.win_sound,
+            this.game_over_sound,
+            this.swim_sound,
+            this.electric_sound,
+            this.shark_slap_sound,
+            this.shark_hurt_sound,
+            this.shark_dead_sound,
+            this.shark_bubble_sound,
+            this.shark_poison_sound,
+            this.shark_sleeping_sound,
+            this.collect_poison_sound,
+            this.collect_life_sound,
+            this.entry_endboss_sound,
+            this.endboss_attack_sound,
+            this.endboss_hurt_sound,
+            this.endboss_dead_sound,
+        ];
     }
 
 
     /**
-     * check every instance of Audio and play them.
+     * Play all background sounds.
      */
     playAllSounds() {
-        for (const key in this) {
-            if (this[key] instanceof Audio) {
-                this[key].play();
-                this[key].currentTime = 0;
-            }
-        }
+        this.backgroundSounds.forEach(sound => {
+            sound.play();
+            sound.currentTime = 0;
+        });
     }
 
 
     /**
-     * check every instance of Audio and pause them.
+     * Stop all sounds (background and effects).
      */
     stopAllSounds() {
-        for (const key in this) {
-            if (this[key] instanceof Audio) {
-                this[key].pause();
-                this[key].currentTime = 0;
-            }
-        }
+        [...this.backgroundSounds, ...this.effectSounds].forEach(sound => {
+            sound.currentTime = 0;
+            sound.pause();
+        });
     }
 
 
     /**
-     * check every instance of Audio and muted them.
+     * Stop only background sounds.
+     */
+    stopBackgroundSounds() {
+        this.backgroundSounds.forEach(sound => {
+            sound.currentTime = 0;
+            sound.pause();
+        });
+    }
+
+
+    /**
+     * Restart background sounds from the beginning.
+     */
+    restartBackgroundSounds() {
+        this.backgroundSounds.forEach(sound => {
+            sound.currentTime = 0;
+            sound.play();
+        });
+    }
+
+    /**
+     * Reset all sounds (background and effects) and restart background sounds.
+     */
+    resetAllSounds() {
+        [...this.backgroundSounds, ...this.effectSounds].forEach(sound => {
+            sound.currentTime = 0;
+            sound.pause();
+        });
+        this.backgroundSounds.forEach(sound => {
+            sound.currentTime = 0;
+            sound.play();
+        });
+    }
+
+
+    /**
+     * Mute all sounds (background and effects).
      */
     muteAllSounds() {
-        for (const key in this) {
-            if (this[key] instanceof Audio) {
-                this[key].muted = true;
-            }
-        }
+        [...this.backgroundSounds, ...this.effectSounds].forEach(sound => {
+            sound.muted = true;
+        });
     }
 
 
     /**
-     * check every instance of Audio and unmuted them.
+     * Unmute all sounds (background and effects).
      */
     unmuteAllSounds() {
-        for (const key in this) {
-            if (this[key] instanceof Audio) {
-                this[key].muted = false;
-            }
-        }
+        [...this.backgroundSounds, ...this.effectSounds].forEach(sound => {
+            sound.muted = false;
+        });
     }
 
 }
