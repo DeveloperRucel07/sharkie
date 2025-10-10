@@ -94,14 +94,11 @@ class Endboss extends MovableObject{
             this.playAnimation(this.IMAGES_DEAD);
             this.animateDeathToTop();
             this.endbossDead();
-            this.world.sounds.stopBackgroundSounds();
             if(!this.deadSoundPlayed){
                 this.world.sounds.endboss_dead_sound.play();
                 this.world.sounds.win_sound.play();
                 this.deadSoundPlayed = true;
             }
-            document.getElementById("youWin").classList.remove("d-none");
-            document.getElementById("youWin").classList.add("d-flex");
         }else if(this.isHurt()){
             this.playAnimation(this.IMAGES_HURT);
         }else{
@@ -117,6 +114,8 @@ class Endboss extends MovableObject{
      */
     endbossDead(){
         setTimeout(()=>{
+            document.getElementById("youWin").classList.remove("d-none");
+            document.getElementById("youWin").classList.add("d-flex");
             this.world.stop();
         }, 3500)
     }

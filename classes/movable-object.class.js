@@ -119,7 +119,7 @@ class MovableObject extends DrawableObject{
      * this for Jelly Fishes when they colliding with Shark
      */
     electro(){
-        this.energy -= 6;
+        this.energy -= 10;
         if(this.energy < 0){
             this.energy = 0;
         }else{

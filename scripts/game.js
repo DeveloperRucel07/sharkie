@@ -39,25 +39,35 @@ function isMobileDevice() {
 }
 
 
+function stopFullscreen(){
+    if(isMobileDevice()){
+        document.querySelector('#fullscreen').classList.remove('d-flex');
+        document.querySelector('#fullscreen').classList.add('d-none');
+    }else{
+        document.querySelector('#fullscreen').classList.remove('d-none');
+        document.querySelector('#fullscreen').classList.add('d-flex');
+    }
+}
+
 /**
  * Set a fullscreen for better experince
  * but the fullscreen is in mobile device desable.
  */
 function fullscreen() {
+    if(isMobileDevice()) return;
     if (!isMobileDevice()) {
         const widthObj = window.innerWidth;
         const heightObj = window.innerHeight;
         const ratio = canvas.width / canvas.height;
         maintainObjWidthHeight(widthObj, heightObj, ratio);
-    }
-    if (canvas.requestFullscreen) {
-    canvas.requestFullscreen();
-    } else if (canvas.webkitRequestFullscreen) { 
-    canvas.webkitRequestFullscreen();
-    } else if (canvas.msRequestFullscreen) {
-    canvas.msRequestFullscreen();
-    }
-  
+        if (canvas.requestFullscreen) {
+        canvas.requestFullscreen();
+        } else if (canvas.webkitRequestFullscreen) { 
+        canvas.webkitRequestFullscreen();
+        } else if (canvas.msRequestFullscreen) {
+        canvas.msRequestFullscreen();
+        }
+    } 
 }
 
 

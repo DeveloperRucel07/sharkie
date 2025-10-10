@@ -1,6 +1,7 @@
 const tryAgain = document.getElementById("tryAgain");
 const startGameDiv = document.querySelector(".start-game");
 const gameZone = document.querySelector(".game-zone");
+const footer = document.querySelector(".footer");
 const menuInfos = document.getElementById('menuInfos');
 const mobileButton = document.getElementById('mobileButtons');
 const settingBtn = document.getElementById('setting');
@@ -11,7 +12,6 @@ const volumeStatus = document.querySelector('.img-volume');
 const historyContain = document.querySelector('#historyContain');
 const fullscreenContainer = document.querySelector('#fullscreen');
 let instructions = document.getElementById("instructions");
-let volume = true;
 
 /**
  * open the menu infos
@@ -26,17 +26,35 @@ function openMenu(event){
   }
 }
 
+function muteAndunmuteSound(){
+  if (localStorage.getItem('volume') === null) {
+    localStorage.setItem('volume', 'true'); 
+  }
+  
+  let volume = localStorage.getItem('volume') === 'true';
+  if(volume){
+    sounds.unmuteAllSounds();
+    volumeStatus.src = './images/5.Buttons/Key/volume.png';
+  }else{
+    sounds.muteAllSounds();
+    volumeStatus.src = './images/5.Buttons/Key/volume_off.png';
+
+  }
+}
 
 /**
  * change the Sound status for Muted or Unmuted.
- */
+*/
 volumeIcon?.addEventListener('click', function(event){
   event.stopPropagation();
-  volume = !volume;
-  if(!volume){
+
+  let volume = localStorage.getItem('volume') === 'true';
+  if(volume){
+    localStorage.setItem('volume', 'false');
     sounds.muteAllSounds();
     volumeStatus.src = './images/5.Buttons/Key/volume_off.png';
   }else{
+    localStorage.setItem('volume', 'true');
     sounds.unmuteAllSounds();
     volumeStatus.src = './images/5.Buttons/Key/volume.png';
   }
@@ -52,10 +70,9 @@ volumeIcon?.addEventListener('click', function(event){
  */
 function startGame(){
     startGameDiv.classList.add('d-none');
+    footer.classList.add('d-none');
     gameZone.classList.remove('d-none');
     gameZone.classList.add('d-flex');
-    fullscreenContainer.classList.remove('d-none');
-    fullscreenContainer.classList.add('d-flex');
     if (isTouchDevice()) {
       mobileButton.classList.remove('d-none');
       mobileButton.classList.add('d-flex');
@@ -70,9 +87,13 @@ function startGame(){
 /**
  * replay the Game
  */
-tryAgain.addEventListener('click', ()=>{
-  location.reload();
-})
+function replayGame(){
+  gameOver.classList.add('d-none');
+  tryAgain.classList.remove('d-flex');;
+  tryAgain.classList.add('d-none');
+  startGame();
+  init();
+}
 
 
 /**
@@ -145,9 +166,9 @@ function checkOrientation() {
 }
 
 
-window.addEventListener("load", checkOrientation);
-window.addEventListener("resize", checkOrientation);
-window.addEventListener("orientationchange", checkOrientation);
+window.addEventListener("load", checkOrientation, stopFullscreen);
+window.addEventListener("resize", checkOrientation, stopFullscreen);
+window.addEventListener("orientationchange", checkOrientation, stopFullscreen);
 
 
 

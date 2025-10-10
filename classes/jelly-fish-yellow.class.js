@@ -32,6 +32,7 @@ class JellyFishYellow extends MovableObject{
         this.speed = 8 + Math.random() * 0.3;
         this.jumHeight = 600;
         this.animate();
+        this.die = false;
     }
 
 
@@ -43,7 +44,7 @@ class JellyFishYellow extends MovableObject{
     *
     */
     animate(){
-        if(this.isDead()){
+        if(this.die){
             this.playAnimation(this.IMAGES_DIE);
             this.animateDeathToTop();
         }else{

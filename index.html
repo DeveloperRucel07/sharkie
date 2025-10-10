@@ -7,7 +7,7 @@
     <title>Sharkie Game</title>
     <link rel="stylesheet" href="./style.css">
 </head>
-<body onclick="closeMenu(event);">
+<body onclick="closeMenu(event);" onload="muteAndunmuteSound(); isMobileDevice(); stopFullscreen();">
     <div id="orientation">
         <img src="./images/5.Buttons/Key/rotate_device.png" alt="rotate device">
         <p>Please rotate your device to play in landscape mode.</p>
@@ -57,10 +57,10 @@
     <div class="game-zone d-none" id="gameZone">
         <div class="you-win d-none" id="youWin"> 
             <img src="./images/5.Buttons/Decisions/Wins/youWin.png" alt="Stop Game">
-            <button id="tryAgain" class="restart-game-win"> Replay </button>
+            <button id="tryAgainReplay" class="restart-game-win" onclick="replayGame()"> Replay </button>
         </div>
         <div class="game-over d-none" id="gameOver"> 
-            <button id="tryAgain" class="restart-game-btn"> <img src="./images/5.Buttons/TryAgain/tryAgainYelow.png" alt="Stop Game"></button>
+            <button id="tryAgain" class="restart-game-btn" onclick="replayGame()"> <img src="./images/5.Buttons/TryAgain/tryAgainYelow.png" alt="Stop Game"></button>
         </div>
         <canvas id="gameCanvas">
 
@@ -79,6 +79,9 @@
             <button ontouchstart="slap(event, true)" ontouchend="slap(event, false)" onmousedown="slap(event, true)" onmouseup="slap(event, false)"><img src="./images/5.Buttons/Key/slap-shark.png" alt="slap"></button>
         </div>
     </div>
+    <footer class="footer" id="footer">
+        <button  onclick="openMenu(event);impressum(event)"><img class="img-setting" id="impressum" src="./images/5.Buttons/Key/impress.png" alt="setting image" > Impressum</button>
+    </footer>
     
     <script src="./scripts/template.js"></script>
     <script src="./classes/audio.class.js"></script>

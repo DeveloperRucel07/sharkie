@@ -14,6 +14,7 @@ class World {
     collectedPoisons = 0;
     worldWidth;
     intervalCheckCollision;
+    intervalAnimatedObject;
 
     constructor(canvas, ctx, keyboard, sounds) {
         this.canvas = canvas;
@@ -94,13 +95,15 @@ class World {
     checkColisions(){
         this.intervalCheckCollision = setInterval(()=>{
             this.sharkCollisionWithPufferFishes();
-            this.sharkCollisionWithJellyFishes(); 
+            this.sharkCollisionWithJellyFishes();
+            this.bubbleCollisionWithPufferFishes();
+            this.bubbleCollisionWithJellyFishes();
             this.sharkCollisionWithCoins();
             this.sharkCollisionWithPoisons();
             this.sharkCollisionWithLifes();
             this.checkBubbleEndbossCollision();
             this.sharkCollisionWithEndboss();
-        }, 200) 
+        }, 200)
     }
 
 
@@ -117,10 +120,10 @@ class World {
                 this.sounds.shark_slap_sound.play();
                 setTimeout(()=>{
                     this.level.pufferEnemies.splice(index, 1);
-                }, 4000);
+                }, 3000);
             }else
                 if(this.shark.isVulnerable && this.shark.isColliding(pufferEnemy)){
-                this.shark.hit(4);
+                this.shark.hit(10);
                 this.sounds.shark_hurt_sound.play();
                 this.shark.changeVulnerability();
                 this.life_mark.setPercentageLife(this.shark.energy);
@@ -142,7 +145,7 @@ class World {
                     this.sounds.electric_sound.play();
                     setTimeout(()=>{
                         this.level.pufferEnemies.splice(index, 1);
-                    }, 4000);
+                    }, 3000);
                     this.bubbles.splice(bubbleIndex, 1);
                 }
             })
@@ -164,11 +167,11 @@ class World {
                 this.shark.changeVulnerability();
                 this.life_mark.setPercentageLife(this.shark.energy);
             } else if(this.shark.slap && this.shark.isColliding(jellyEnemy)){
-                jellyEnemy.isDead();
+                jellyEnemy.die = true;
                 this.sounds.shark_slap_sound.play();
                 setTimeout(()=>{
                     this.level.jellyEnemies.splice(index, 1);
-                }, 4000);
+                }, 3000);
             }
         })
     }
@@ -182,11 +185,11 @@ class World {
         this.level.jellyEnemies.forEach((jellyEnemy, index)=>{
             this.bubbles.forEach((bubble, bubbleIndex)=>{
                 if(bubble.isColliding(jellyEnemy)){
-                    jellyEnemy.isDead();
+                    jellyEnemy.die = true;
                     this.sounds.electric_sound.play();
                     setTimeout(()=>{
                         this.level.jellyEnemies.splice(index, 1);
-                    }, 4000);
+                    }, 3000);
                     this.bubbles.splice(bubbleIndex, 1);
                 }
             })
@@ -302,7 +305,7 @@ class World {
      * start the Game and animate element.
      */
     start() {
-        setInterval(()=>{
+        this.intervalAnimatedObject = setInterval(()=>{
             this.animatedObjects();
         }, 1000/15);
         this.sounds.resetAllSounds();
@@ -331,6 +334,7 @@ class World {
         this.sounds.stopAllSounds();
         if (this.animationId) {
             cancelAnimationFrame(this.animationId);
+            clearInterval(this.intervalAnimatedObject);
             clearInterval(this.intervalCheckCollision);
             this.animationId = null;
         }
