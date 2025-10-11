@@ -43,9 +43,6 @@ function stopFullscreen(){
     if(isMobileDevice()){
         document.querySelector('#fullscreen').classList.remove('d-flex');
         document.querySelector('#fullscreen').classList.add('d-none');
-    }else{
-        document.querySelector('#fullscreen').classList.remove('d-none');
-        document.querySelector('#fullscreen').classList.add('d-flex');
     }
 }
 

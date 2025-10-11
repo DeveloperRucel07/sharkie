@@ -59,7 +59,6 @@ class SoundManager {
      * Stop all sounds (background and effects).
      */
     stopAllSounds() {
-        console.warn('stopAllSounds()');
         [...this.backgroundSounds, ...this.effectSounds].forEach(sound => {
             sound.currentTime = 0;
             sound.pause();
@@ -71,7 +70,6 @@ class SoundManager {
      * Stop only background sounds.
      */
     stopBackgroundSounds() {
-        console.warn('stopBackgroundSounds()');
         this.backgroundSounds.forEach(sound => {
             sound.currentTime = 0;
             sound.pause();
@@ -93,7 +91,6 @@ class SoundManager {
      * Reset all sounds (background and effects) and restart background sounds.
      */
     resetAllSounds() {
-        console.warn('resetAllSounds the Sounds again!!!');
         [...this.backgroundSounds, ...this.effectSounds].forEach(sound => {
             sound.currentTime = 0;
             sound.pause();

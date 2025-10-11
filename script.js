@@ -1,4 +1,4 @@
-const tryAgain = document.getElementById("tryAgain");
+
 const startGameDiv = document.querySelector(".start-game");
 const gameZone = document.querySelector(".game-zone");
 const footer = document.querySelector(".footer");
@@ -6,6 +6,7 @@ const menuInfos = document.getElementById('menuInfos');
 const mobileButton = document.getElementById('mobileButtons');
 const settingBtn = document.getElementById('setting');
 const gameOver = document.getElementById('gameOver');
+const youWin = document.getElementById('youWin');
 let startBtn = document.getElementById("startBtnGame");
 let volumeIcon = document.getElementById("volume");
 const volumeStatus = document.querySelector('.img-volume');
@@ -69,6 +70,7 @@ volumeIcon?.addEventListener('click', function(event){
  * initiate the Level.
  */
 function startGame(){
+    document.querySelector('.p-controls').classList.add('d-none');
     startGameDiv.classList.add('d-none');
     footer.classList.add('d-none');
     gameZone.classList.remove('d-none');
@@ -79,7 +81,8 @@ function startGame(){
     } else {
       mobileButton.classList.add('d-none');
       mobileButton.classList.remove('d-flex');
-    } 
+    }
+    stopFullscreen();
     initLevel();
 }
 
@@ -88,11 +91,16 @@ function startGame(){
  * replay the Game
  */
 function replayGame(){
-  gameOver.classList.add('d-none');
-  tryAgain.classList.remove('d-flex');;
-  tryAgain.classList.add('d-none');
+  closeButtonsWinLose();
   startGame();
   init();
+}
+
+/** close the YouWin and GameOver windows
+ */
+function closeButtonsWinLose(){
+  youWin.classList.add('d-none');
+  gameOver.classList.add('d-none');
 }
 
 

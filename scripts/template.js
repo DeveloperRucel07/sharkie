@@ -52,6 +52,11 @@ function templateHowToPlay(){
                     </ul>
                 </li>
             </ol>
+
+            <ul>
+                <li>Mute and Unmute Sound: <img src="./images/5.Buttons/Key/volume.png" alt="mute/unmute image"></li>
+                <li> FullScreen: <img src="./images/5.Buttons/Key/fullscreen.png" alt="fullscreen image"></li>
+            </ul>
             
 
     `

@@ -419,6 +419,34 @@ canvas {
   scale: 1.5;
 }
 
+.p-controls{
+  position: absolute;
+  top: 30px;
+  right: 100px;
+  font-family:"Luckiest Guy", Verdana, Geneva, Tahoma, sans-serif;
+  color: aqua;
+  font-weight: bold;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  width: auto;
+  height: auto;
+  border-radius: 10px;
+  scale: 1.2;
+}
+
+.click-settings{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.click-settings img{
+  width: 30px;
+  height: 30px;
+}
+
 
 .restart-game-btn img{
   width: 150px;

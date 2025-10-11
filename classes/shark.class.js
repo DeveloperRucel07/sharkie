@@ -171,11 +171,9 @@ class Shark extends MovableObject {
     stopAfterDeath(){
         setTimeout(()=>{
             this.world.stop();
-            if(gameOver.classList.contains("d-none")){
-                gameOver.classList.remove("d-none");
-                gameOver.classList.add("d-flex");
-                clearInterval(this.animated);
-            }
+            closeButtonsWinLose();
+            document.getElementById('gameOver').classList.remove('d-none');
+            document.getElementById('gameOver').classList.add('d-flex');
         }, 3500)
     }
 

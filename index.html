@@ -7,7 +7,7 @@
     <title>Sharkie Game</title>
     <link rel="stylesheet" href="./style.css">
 </head>
-<body onclick="closeMenu(event);" onload="muteAndunmuteSound(); isMobileDevice(); stopFullscreen();">
+<body onclick="closeMenu(event);" onload="muteAndunmuteSound(); isMobileDevice();">
     <div id="orientation">
         <img src="./images/5.Buttons/Key/rotate_device.png" alt="rotate device">
         <p>Please rotate your device to play in landscape mode.</p>
@@ -19,6 +19,7 @@
         <button type="button" id="startBtnGame" class="start-game-btn" onclick="startGame(); init();"><img src="./images/5.Buttons/Start/3.png" alt="" srcset=""></button>
     </div>
     <div class="settings">
+        <p class="p-controls">Controls</p>
         <img class="fullscreen d-none" id="fullscreen" src="./images/5.Buttons/Key/fullscreen.png" alt="fullscreen image" onclick="fullscreen()">
         <img class="img-volume  volume_true" id="volume" src="./images/5.Buttons/Key/volume.png" alt="sound image">
         <img class="img-setting" id="setting" src="./images/5.Buttons/Key/settings_full.png" alt="menu image" onclick="openMenu(event)">
@@ -45,6 +46,10 @@
                     </ul>
                 </li>
             </ol>
+            <ul class="click-settings">
+                <li>Mute and Unmute Sound: <img src="./images/5.Buttons/Key/volume.png" alt="mute/unmute image"></li>
+                <li> FullScreen: <img src="./images/5.Buttons/Key/fullscreen.png" alt="fullscreen image"></li>
+            </ul>
         </div>
         <div class="icon-menu">
             <button onclick="startIntructions(event)"><img class="img-setting" id="setting" src="./images/5.Buttons/Key/settings.png" alt="setting image"> Controls</button>

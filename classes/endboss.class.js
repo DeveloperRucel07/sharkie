@@ -114,9 +114,10 @@ class Endboss extends MovableObject{
      */
     endbossDead(){
         setTimeout(()=>{
+            this.world.stop();
+            closeButtonsWinLose();
             document.getElementById("youWin").classList.remove("d-none");
             document.getElementById("youWin").classList.add("d-flex");
-            this.world.stop();
         }, 3500)
     }
 
