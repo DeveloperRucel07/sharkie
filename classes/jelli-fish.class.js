@@ -1,4 +1,4 @@
-class JellyFishLila extends MovableObject{
+class JellyFish extends MovableObject{
     width = 80;
     height = 80;
     offset = {
@@ -8,28 +8,18 @@ class JellyFishLila extends MovableObject{
         right:8
     }
    
-    IMAGES_SWIM = [
-        'images/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png',
-        'images/2.Enemy/2 Jelly fish/Regular damage/Lila 2.png',
-        'images/2.Enemy/2 Jelly fish/Regular damage/Lila 3.png',
-        'images/2.Enemy/2 Jelly fish/Regular damage/Lila 4.png', 
-    ];
+    IMAGES_SWIM;
+    IMAGES_DIE;
 
-    IMAGES_DIE = [
-        'images/2.Enemy/2 Jelly fish/Dead/Lila/L1.png',
-        'images/2.Enemy/2 Jelly fish/Dead/Lila/L2.png',
-        'images/2.Enemy/2 Jelly fish/Dead/Lila/L3.png',
-        'images/2.Enemy/2 Jelly fish/Dead/Lila/L4.png'
-    ];
-
-    imagePath = 'images/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png';
-    constructor(x){
-        super().loadImage(this.imagePath);
-        this.loadImages(this.IMAGES_SWIM);
-        this.loadImages(this.IMAGES_DIE);
+    constructor(x, IMAGES_SWIM, IMAGES_DIE){
+        super();
         this.y = this.y = 600 - this.height;
         this.x = x;
-        this.speed = 5 + Math.random() * 0.3;
+        this.IMAGES_SWIM = IMAGES_SWIM;
+        this.IMAGES_DIE = IMAGES_DIE;
+        this.loadImages(this.IMAGES_SWIM);
+        this.loadImages(this.IMAGES_DIE);
+        this.speed = 8 + Math.random() * 2;
         this.jumHeight = 600;
         this.animate();
         this.die = false;

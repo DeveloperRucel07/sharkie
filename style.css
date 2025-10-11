@@ -278,17 +278,19 @@ button{
 }
 
 .infos {
-  display: block;
+  position: absolute;
+  top: 10px;
+  z-index: 2;
 }
 
 .infos h1 {
-  font-size: 32px;
-  font-weight: bold;
-  background: linear-gradient(90deg, #15b86c, #e73b06);
+  font-size:32px;
+  font-weight: 100;
+  background: linear-gradient(90deg, #e73b06, #15b86c);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  scale: 2;
+  scale: 1.2;
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
 }
 
@@ -429,11 +431,11 @@ canvas {
 }
 
 .d-flex {
-  display: flex;
+  display: flex !important;
 }
 
 .d-none {
-  display: none;
+  display: none !important;
 }
 
 footer{

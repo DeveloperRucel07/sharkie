@@ -1,5 +1,91 @@
 let level1;
 
+IMAGES_SWIM_PUFFERFISH_ORANGE = [
+    'images/2.Enemy/1.Puffer fish (3 color options)/1.Swim/2.swim1.png',
+    'images/2.Enemy/1.Puffer fish (3 color options)/1.Swim/2.swim5.png',
+    'images/2.Enemy/1.Puffer fish (3 color options)/1.Swim/2.swim3.png',
+    'images/2.Enemy/1.Puffer fish (3 color options)/1.Swim/2.swim4.png',
+    'images/2.Enemy/1.Puffer fish (3 color options)/1.Swim/2.swim5.png',
+];
+IMAGES_DIE_PUFFERFISH_ORANGE = [
+    'images/2.Enemy/1.Puffer fish (3 color options)/4.DIE/2.2.png',
+    'images/2.Enemy/1.Puffer fish (3 color options)/4.DIE/2.3.png',
+    'images/2.Enemy/1.Puffer fish (3 color options)/4.DIE/2.png'
+];
+IMAGES_SWIM_PUFFERFISH_GREEN = [
+    'images/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png',
+    'images/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim5.png',
+    'images/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim3.png',
+    'images/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim4.png',
+    'images/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim5.png',
+];
+IMAGES_DIE_PUFFERFISH_GREEN = [
+    'images/2.Enemy/1.Puffer fish (3 color options)/4.DIE/1.Dead 1 (can animate by going up).png',
+    'images/2.Enemy/1.Puffer fish (3 color options)/4.DIE/1.Dead 2 (can animate by going down to the floor after the Fin Slap attack).png',
+    'images/2.Enemy/1.Puffer fish (3 color options)/4.DIE/1.Dead 3 (can animate by going down to the floor after the Fin Slap attack).png'
+];
+IMAGES_SWIM_PUFFERFISH_PINK = [
+    'images/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim1.png',
+    'images/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim5.png',
+    'images/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim3.png',
+    'images/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim4.png',
+    'images/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim5.png',
+];
+IMAGES_DIE_PUFFERFISH_PINK = [
+    'images/2.Enemy/1.Puffer fish (3 color options)/4.DIE/3.2.png',
+    'images/2.Enemy/1.Puffer fish (3 color options)/4.DIE/3.3.png',
+    'images/2.Enemy/1.Puffer fish (3 color options)/4.DIE/3.png',
+];
+
+IMAGES_SWIM_JELLYFISH_YELLOW = [
+    'images/2.Enemy/2 Jelly fish/Regular damage/Yellow 1.png',
+    'images/2.Enemy/2 Jelly fish/Regular damage/Yellow 2.png',
+    'images/2.Enemy/2 Jelly fish/Regular damage/Yellow 3.png',
+    'images/2.Enemy/2 Jelly fish/Regular damage/Yellow 4.png',
+];
+IMAGES_DIE_JELLYFISH_YELLOW = [
+    'images/2.Enemy/2 Jelly fish/Dead/Yellow/y1.png',
+    'images/2.Enemy/2 Jelly fish/Dead/Yellow/y2.png',
+    'images/2.Enemy/2 Jelly fish/Dead/Yellow/y3.png',
+    'images/2.Enemy/2 Jelly fish/Dead/Yellow/y4.png'
+];
+
+IMAGES_SWIM_JELLYFISH_LILA = [
+    'images/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png',
+    'images/2.Enemy/2 Jelly fish/Regular damage/Lila 2.png',
+    'images/2.Enemy/2 Jelly fish/Regular damage/Lila 3.png',
+    'images/2.Enemy/2 Jelly fish/Regular damage/Lila 4.png',
+];
+IMAGES_DIE_JELLYFISH_LILA = [
+    'images/2.Enemy/2 Jelly fish/Dead/Lila/L1.png',
+    'images/2.Enemy/2 Jelly fish/Dead/Lila/L2.png',
+    'images/2.Enemy/2 Jelly fish/Dead/Lila/L3.png',
+    'images/2.Enemy/2 Jelly fish/Dead/Lila/L4.png'
+];
+IMAGES_SWIM_JELLYFISH_PINK = [
+     'images/2.Enemy/2 Jelly fish/Súper dangerous/Pink 1.png',
+    'images/2.Enemy/2 Jelly fish/Súper dangerous/Pink 2.png',
+    'images/2.Enemy/2 Jelly fish/Súper dangerous/Pink 3.png',
+    'images/2.Enemy/2 Jelly fish/Súper dangerous/Pink 4.png',
+];
+IMAGES_DIE_JELLYFISH_PINK = [
+    'images/2.Enemy/2 Jelly fish/Dead/Pink/P1.png',
+    'images/2.Enemy/2 Jelly fish/Dead/Pink/P2.png',
+    'images/2.Enemy/2 Jelly fish/Dead/Pink/P3.png',
+    'images/2.Enemy/2 Jelly fish/Dead/Pink/P4.png',
+];
+IMAGES_SWIM_JELLYFISH_GREEN = [
+    'images/2.Enemy/2 Jelly fish/Súper dangerous/Green 1.png',
+    'images/2.Enemy/2 Jelly fish/Súper dangerous/Green 2.png',
+    'images/2.Enemy/2 Jelly fish/Súper dangerous/Green 3.png',
+    'images/2.Enemy/2 Jelly fish/Súper dangerous/Green 4.png',
+];
+IMAGES_DIE_JELLYFISH_GREEN = [
+    'images/2.Enemy/2 Jelly fish/Dead/green/g1.png',
+    'images/2.Enemy/2 Jelly fish/Dead/green/g2.png',
+    'images/2.Enemy/2 Jelly fish/Dead/green/g3.png',
+    'images/2.Enemy/2 Jelly fish/Dead/green/g4.png'
+];
 
 /**
  * inititate Level Game
@@ -7,30 +93,30 @@ let level1;
 function initLevel(){
     level1  = new Level(
         [
-            new PufferFishOrange(400, 10),
-            new PufferFishGreen(600, 100),
-            new PufferFishOrange(500, 400),
-            new PufferFishPink(800, 200),
-            new PufferFishPink(1200, 10),
-            new PufferFishOrange(1900, 300),
-            new PufferFishPink(2700, 400),
-            new PufferFishGreen(3000, 500),
-            new PufferFishOrange(3200, 400),
-            new PufferFishPink(3100, 100),
-            new PufferFishGreen(3300, 10),
+            new PufferFish(400, 10, IMAGES_SWIM_PUFFERFISH_ORANGE, IMAGES_DIE_PUFFERFISH_ORANGE),
+            new PufferFish(600, 100, IMAGES_SWIM_PUFFERFISH_GREEN, IMAGES_DIE_PUFFERFISH_GREEN),
+            new PufferFish(500, 400, IMAGES_SWIM_PUFFERFISH_ORANGE, IMAGES_DIE_PUFFERFISH_ORANGE),
+            new PufferFish(800, 200, IMAGES_SWIM_PUFFERFISH_PINK, IMAGES_DIE_PUFFERFISH_PINK),
+            new PufferFish(1200, 10, IMAGES_SWIM_PUFFERFISH_PINK, IMAGES_DIE_PUFFERFISH_PINK),
+            new PufferFish(1900, 300, IMAGES_SWIM_PUFFERFISH_ORANGE, IMAGES_DIE_PUFFERFISH_ORANGE),
+            new PufferFish(2700, 400, IMAGES_SWIM_PUFFERFISH_PINK, IMAGES_DIE_PUFFERFISH_PINK),
+            new PufferFish(3000, 500, IMAGES_SWIM_PUFFERFISH_GREEN, IMAGES_DIE_PUFFERFISH_GREEN),
+            new PufferFish(3200, 400, IMAGES_SWIM_PUFFERFISH_ORANGE, IMAGES_DIE_PUFFERFISH_ORANGE),
+            new PufferFish(3100, 100, IMAGES_SWIM_PUFFERFISH_PINK, IMAGES_DIE_PUFFERFISH_PINK),
+            new PufferFish(3300, 10, IMAGES_SWIM_PUFFERFISH_GREEN, IMAGES_DIE_PUFFERFISH_GREEN),
         ],
 
         [
-            new JellyFishLila(350),
-            new JellyFishYellow(650),
-            new JellyFishPink(950),
-            new JellyFishGreen(1250),
-            new JellyFishGreen(1600),
-            new JellyFishYellow(2000),
-            new JellyFishLila(2200),
-            new JellyFishPink(3000),
-            new JellyFishLila(3200),
-            new JellyFishGreen(2800),
+            new JellyFish(350, IMAGES_SWIM_JELLYFISH_LILA, IMAGES_DIE_JELLYFISH_LILA),
+            new JellyFish(650, IMAGES_SWIM_JELLYFISH_YELLOW, IMAGES_DIE_JELLYFISH_YELLOW),
+            new JellyFish(950, IMAGES_SWIM_JELLYFISH_PINK, IMAGES_DIE_JELLYFISH_PINK),
+            new JellyFish(1250, IMAGES_SWIM_JELLYFISH_GREEN, IMAGES_DIE_JELLYFISH_GREEN),
+            new JellyFish(1600, IMAGES_SWIM_JELLYFISH_GREEN, IMAGES_DIE_JELLYFISH_GREEN),
+            new JellyFish(2000, IMAGES_SWIM_JELLYFISH_YELLOW, IMAGES_DIE_JELLYFISH_YELLOW),
+            new JellyFish(2200, IMAGES_SWIM_JELLYFISH_LILA, IMAGES_DIE_JELLYFISH_LILA),
+            new JellyFish(3000, IMAGES_SWIM_JELLYFISH_PINK, IMAGES_DIE_JELLYFISH_PINK),
+            new JellyFish(3200, IMAGES_SWIM_JELLYFISH_LILA, IMAGES_DIE_JELLYFISH_LILA),
+            new JellyFish(2800, IMAGES_SWIM_JELLYFISH_GREEN, IMAGES_DIE_JELLYFISH_GREEN),
         ],
 
         [
