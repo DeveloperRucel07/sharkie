@@ -1,21 +1,15 @@
 class LifeMark extends DrawableObject{
-    LIFE_MARK_IMAGES = [
-        'images/4.Marks/Purple/0_ .png',
-        'images/4.Marks/Purple/20_ .png',
-        'images/4.Marks/Purple/40_ .png',
-        'images/4.Marks/Purple/60_ .png',
-        'images/4.Marks/Purple/80_ .png',
-        'images/4.Marks/Purple/100_ .png',
-    ];
+    LIFE_MARK_IMAGES;
     width = 180;
     height = 40;
-    x = 10;
+    x;
     y = 0;
-
     percentage = 100;
-
-    constructor(){
+    
+    constructor(x, LIFE_MARK_IMAGES){
         super();
+        this.x = x;
+        this.LIFE_MARK_IMAGES = LIFE_MARK_IMAGES;
         this.loadImages(this.LIFE_MARK_IMAGES);
         this.setPercentageLife(this.percentage);
         

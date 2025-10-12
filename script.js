@@ -96,6 +96,14 @@ function replayGame(){
   init();
 }
 
+
+/** 
+ * restart the Game by reloading the page
+ */
+function restartGame(){
+  location.reload();
+}
+
 /** close the YouWin and GameOver windows
  */
 function closeButtonsWinLose(){

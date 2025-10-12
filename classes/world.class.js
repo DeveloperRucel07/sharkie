@@ -1,12 +1,50 @@
+COLLECTABLE_IMAGES_COINS = [
+    'images/4.Marks/orange/0_coin.png',
+    'images/4.Marks/orange/20_coin.png',
+    'images/4.Marks/orange/40_coin.png',
+    'images/4.Marks/orange/60_coin.png',
+    'images/4.Marks/orange/80_coin.png',
+    'images/4.Marks/orange/100_coin.png'
+];
+
+COLLECTABLE_IMAGES_POISONS = [
+    'images/4.Marks/green/poisoned bubbles/0_ copia 2.png',
+    'images/4.Marks/green/poisoned bubbles/20_ copia 3.png',
+    'images/4.Marks/green/poisoned bubbles/40_ copia 2.png',
+    'images/4.Marks/green/poisoned bubbles/60_ copia 2.png',
+    'images/4.Marks/green/poisoned bubbles/80_ copia 2.png',
+    'images/4.Marks/green/poisoned bubbles/100_ copia 3.png',
+];
+
+LIFE_MARK_IMAGES_SHARK = [
+    'images/4.Marks/Purple/0_ .png',
+    'images/4.Marks/Purple/20_ .png',
+    'images/4.Marks/Purple/40_ .png',
+    'images/4.Marks/Purple/60_ .png',
+    'images/4.Marks/Purple/80_ .png',
+    'images/4.Marks/Purple/100_ .png',
+];
+
+LIFE_MARK_IMAGES_ENDBOSS = [
+    'images/4.Marks/red_endboss/0_endboss.png',
+    'images/4.Marks/red_endboss/20_endboss.png',
+    'images/4.Marks/red_endboss/40_endboss.png',
+    'images/4.Marks/red_endboss/60_endboss.png',
+    'images/4.Marks/red_endboss/80_endboss.png',
+    'images/4.Marks/red_endboss/100_endboss.png'
+
+];
+
+
 class World {
     shark;
     level = level1;
     canvas;
     keyboard;
-    life_mark = new LifeMark();
-    coin_mark = new CoinMark();
-    poison_mark = new PoisonMark();
-    endboss_mark = new EndBossLife();
+    life_mark = new LifeMark(10, LIFE_MARK_IMAGES_SHARK);
+    coin_mark = new Collectable(220, COLLECTABLE_IMAGES_COINS);
+    poison_mark = new Collectable(420, COLLECTABLE_IMAGES_POISONS);
+    endboss_mark = new LifeMark(700, LIFE_MARK_IMAGES_ENDBOSS);
     bubbles = [];
     ctx;
     camera_x = 0;
@@ -24,7 +62,6 @@ class World {
         this.worldWidth = this.level.level_end_x;
         this.shark = new Shark('images/1.Sharkie/Stay/1.png');
         this.endboss =  new Endboss();
-        this.endboss_life = new EndBossLife()
         this.setWorldToObject();
  
     }
@@ -208,7 +245,7 @@ class World {
                 this.collectedCoins++;
                 this.sounds.collect_coin_sound.play();
                 this.level.coins.splice(index, 1);
-                this.coin_mark.setPercentageCoin(this.collectedCoins);
+                this.coin_mark.setPercentage(this.collectedCoins);
             }
         })
     }
@@ -225,7 +262,7 @@ class World {
                 this.collectedPoisons++;
                 this.sounds.collect_poison_sound.play();
                 this.level.poisons.splice(index, 1);
-                this.poison_mark.setPercentagePoison(this.collectedPoisons);
+                this.poison_mark.setPercentage(this.collectedPoisons);
             }
         })
     }

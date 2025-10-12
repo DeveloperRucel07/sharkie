@@ -163,6 +163,7 @@ button{
   width: 50px;
   height: 50px;
   cursor: pointer;
+  z-index: 2;
 }
 
 .container-intructions{
@@ -401,11 +402,16 @@ canvas {
   cursor: pointer;
 }
 
-.restart-game-win{
+.win-game{
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  gap: 120px;
+  margin-top: -50px;
+}
+
+.restart-game-win, .restart-game{
   font-family:"Luckiest Guy", Verdana, Geneva, Tahoma, sans-serif;
   color: aqua;
   background: linear-gradient(90deg, #e73b06, #15b86c);
@@ -417,7 +423,9 @@ canvas {
   height: 50px;
   border-radius: 10px;
   scale: 1.5;
+  margin: 50px;
 }
+
 
 .p-controls{
   position: absolute;

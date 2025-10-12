@@ -407,7 +407,7 @@ class Shark extends MovableObject {
             this.world.bubbles.push(bubble);
             this.poisonBubblesThrown++;
             this.world.collectedPoisons = Math.max(0, this.world.collectedPoisons - 1);
-            this.world.poison_mark.setPercentagePoison(this.world.collectedPoisons);
+            this.world.poison_mark.setPercentage(this.world.collectedPoisons);
         }
     }
 
