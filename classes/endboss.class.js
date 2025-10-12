@@ -60,10 +60,10 @@ class Endboss extends MovableObject{
     x = 3800;
     y = -200;
     offset = {
-        top:140,
-        bottom:40,
-        left:15,
-        right:15
+        top:145,
+        bottom:50,
+        left:25,
+        right:25
     }
     world;
     isComing = false;

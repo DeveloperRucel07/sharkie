@@ -12,6 +12,10 @@ function init() {
     canvas = document.getElementById('gameCanvas');
     canvas.width = 900;
     canvas.height = 600;
+    if (isMobileDevice()) {
+        canvas.style.width = '100%';
+        canvas.style.height = window.innerHeight + 'px';
+    }
     ctx = canvas.getContext('2d');
     world = new World(canvas, ctx, keyboard, sounds);
     setTimeout(()=>{

@@ -59,20 +59,13 @@ class Shark extends MovableObject {
     height = 250;
     energy = 100;
     slap = false;
-    offset = {
-        top:120,
-        bottom:50,
-        left:50,
-        right:50
-    }
+    offset = {top:120, bottom:50, left:50, right:50}
     lastMoveTime = 0;
     poisonBubblesThrown = 0;
     normalBubblesThrown = 0;
     slapReady = true;
     deadSoundAlreadyPlayed = false;
-
     animated;
-
 
     constructor(imagePath) {
         super().loadImage(imagePath);
@@ -102,7 +95,6 @@ class Shark extends MovableObject {
         this.startSharkanimation();
         this.checkIfSleeping();
         this.alreadyVulnerable(); 
-
         // Add keyup event listeners to reset bubble throw flags
         window.addEventListener("keyup", (e) => {
             if (e.code === "KeyD") {
@@ -125,7 +117,6 @@ class Shark extends MovableObject {
         }, 200);
     }
 
-    
     /**
      * handle Shark Movement base on Key value and if he is Sleeping, Hurt or Dead
      */
@@ -140,26 +131,32 @@ class Shark extends MovableObject {
             this.playAnimation(this.IMAGES_HURT_ELECTRIC_SHOCK);
             this.changeSleepTime();
         }else{
-            let isMoving = false;
-            if(this.multipleMove(isMoving)){
-                this.playAnimation(this.IMAGES_SWIM);
-            }else if(this.isSleeping){
-                this.playAnimation(this.IMAGES_LONGSTAY);
-                this.world.sounds.shark_sleeping_sound.play();
-            }else if(this.world.keyboard.D){
-                this.throwBubbleNormal();
-            }else if(this.world.keyboard.F){
-                this.throwBubblePoison();
-            }else if(this.slap){
-                this.playAnimation(this.ATTACK_SLAP);
-            }else{
-                this.playAnimation(this.IMAGES_STAY);
-                this.world.sounds.swim_sound.play();
-            }
+            this.sharkMovement();
         }
         this.sharkSlap();
     }
 
+    /**
+     * Handles actions when the shark is alive and not hurt or dead.
+     */
+    sharkMovement() {
+        let isMoving = false;
+        if(this.multipleMove(isMoving)){
+            this.playAnimation(this.IMAGES_SWIM);
+        }else if(this.isSleeping){
+            this.playAnimation(this.IMAGES_LONGSTAY);
+            this.world.sounds.shark_sleeping_sound.play();
+        }else if(this.world.keyboard.D){
+            this.throwBubbleNormal();
+        }else if(this.world.keyboard.F){
+            this.throwBubblePoison();
+        }else if(this.slap){
+            this.playAnimation(this.ATTACK_SLAP);
+        }else{
+            this.playAnimation(this.IMAGES_STAY);
+            this.world.sounds.swim_sound.play();
+        }
+    }
 
     /** check if the shark is moving in any direction
      * if he is moving in any direction set isMoving to true
@@ -173,7 +170,6 @@ class Shark extends MovableObject {
         return isMoving;
     }
 
-
     /**     * Handles the shark's death sequence by stopping the game after a delay.
      * Initiates a 3.5-second timeout before calling the stopGame function.
      */
@@ -185,7 +181,6 @@ class Shark extends MovableObject {
             document.getElementById('gameOver').classList.add('d-flex');
         }, 3500)
     }
-
 
     /**
      * Handles the shark's death sequence by stopping the game after a delay.
@@ -202,7 +197,6 @@ class Shark extends MovableObject {
         
     }
 
-
     /**
      * Starts an interval that checks if the shark should be vulnarable based on the time since its last hurt.
      * If the time elapsed exceeds the vulnarable delay, sets the `isVulnerable` property to true.
@@ -216,7 +210,6 @@ class Shark extends MovableObject {
             }
         }, 1000 / 30);
     }
-
 
     /**
         * Updates the horizontal camera position so that it follows the player
@@ -233,7 +226,6 @@ class Shark extends MovableObject {
         this.world.camera_x = cam;
     }
 
-
     /**
      * Sets the shark's isSleeping status to false and updates the last Move timestamp.
      * Typically called when the shark is sleeping.
@@ -243,7 +235,6 @@ class Shark extends MovableObject {
         this.isSleeping = false;
     }
 
-
     /**
      * Sets the shark's vulnerability status to false and updates the last hurt timestamp.
      * Typically called when the shark becomes invulnerable after taking damage.
@@ -252,7 +243,6 @@ class Shark extends MovableObject {
         this.lastHurt = Date.now();
         this.isVulnerable = false;
     }
-
 
     /**
      * Starts an interval that checks if the shark should be sleeping based on the time since its last movement.
@@ -268,7 +258,6 @@ class Shark extends MovableObject {
         }, 1000 / 30);
     }
 
-
     /**
      * Checks if the shark is moving left based on keyboard input.
      * If moving left, updates the shark's position and sleep time.
@@ -281,7 +270,6 @@ class Shark extends MovableObject {
             return true;
         }
     }
-
 
     /**
      * Checks if the shark is moving right based on keyboard input.
@@ -296,7 +284,6 @@ class Shark extends MovableObject {
         }
     }
 
-
     /**
      * Checks if the shark is moving down based on keyboard input and canvas boundaries.
      * If moving down, updates the shark's position and sleep time.
@@ -310,7 +297,6 @@ class Shark extends MovableObject {
         }
     }
 
-
     /**
      * Checks if the shark is moving Up based on keyboard input and canvas boundaries.
      * If moving Up, updates the shark's position and sleep time.
@@ -323,7 +309,6 @@ class Shark extends MovableObject {
             return true;
         }
     }
-
 
     /**
      * set Slap at true for 1500 after that it become false.
@@ -340,9 +325,8 @@ class Shark extends MovableObject {
         }
     }
 
-
     /**
-     * throw a bubble
+     * throw a bubble by type (normal or poison)
      * @param {string} type type of the bubble (normal or poison)
      * @returns null
      */
@@ -357,7 +341,6 @@ class Shark extends MovableObject {
            this.setNormalBubble(bubbleX, bubbleY, type)
         }
     }  
-
 
     /**
      * create poison bubble
@@ -376,7 +359,6 @@ class Shark extends MovableObject {
         }
     }
 
-
     /**
      * create normal bubble
      * @param {number} bubbleX the x value of the bubble
@@ -392,7 +374,6 @@ class Shark extends MovableObject {
         }
     }
 
-
     /** * Throws a poison bubble if conditions are met (cooldown and availability).
      * Plays the corresponding sound and updates the sleep timer.
      */
@@ -406,7 +387,6 @@ class Shark extends MovableObject {
             this.changeSleepTime();
         }
     }
-
 
     /** * Throws a normal bubble if conditions are met (cooldown and availability).
      * Plays the corresponding sound and updates the sleep timer.
