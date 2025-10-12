@@ -39,6 +39,8 @@ function isMobileDevice() {
 }
 
 
+/** if the device is a mobile device stop the fullscreen button
+ */
 function stopFullscreen(){
     if(isMobileDevice()){
         document.querySelector('#fullscreen').classList.remove('d-flex');
@@ -176,7 +178,10 @@ function poisonBubble(event, value){
     keyboard.F = value;
 }
 
-
+/**
+ * if a key is pressed set the value in the keyboard to true
+ * @param {Event} event envent listener for keydown
+ */
 window.addEventListener("keydown", (e) => {
     if (e.code === "ArrowLeft") keyboard.LEFT = true;
     if (e.code === "ArrowRight") keyboard.RIGHT = true;
@@ -189,6 +194,9 @@ window.addEventListener("keydown", (e) => {
 });
 
 
+/** if a key is released set the value in the keyboard to false
+ * @param {Event} event envent listener for keyup
+ */
 window.addEventListener("keyup", (e) => {
     if (e.code === "ArrowLeft") keyboard.LEFT = false;
     if (e.code === "ArrowRight") keyboard.RIGHT = false;

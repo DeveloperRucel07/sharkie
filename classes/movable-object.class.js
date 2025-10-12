@@ -82,6 +82,36 @@ class MovableObject extends DrawableObject{
     }
 
 
+
+    
+    /**
+     * Moves the shark character to the right by increasing its x-coordinate.
+     * Sets the direction to 'right' and updates the camera position.
+     * Movement is restricted to within the lright boundary (this.x + this.width < this.world.worldWidth).
+     */
+    sharkMoveRight() {
+        this.otherDirection = false;
+        if (this.x + this.width < this.world.worldWidth) {
+            this.x += this.speed;
+            this.updateCamera();
+        }
+    }
+
+
+    /**
+     * Moves the shark character to the left by decreasing its x-coordinate.
+     * Sets the direction to 'left' and updates the camera position.
+     * Movement is restricted to within the left boundary (x > 0).
+     */
+    sharkMoveLeft() {
+        this.otherDirection = true;
+        if (this.x > 0) {
+            this.x -= this.speed;
+            this.updateCamera();
+        }
+    }
+
+
     /**
      * Checks if the current movable object is colliding with another movable object (moObject) using axis-aligned bounding box (AABB) collision detection. 
      * This method accounts for offset values to provide more precise collision boundaries, allowing for hitboxes that are smaller than the object's full dimensions.

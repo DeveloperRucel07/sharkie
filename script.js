@@ -75,6 +75,14 @@ function startGame(){
     footer.classList.add('d-none');
     gameZone.classList.remove('d-none');
     gameZone.classList.add('d-flex');
+    touchDeviceStartGame();
+    stopFullscreen();
+    initLevel();
+}
+
+/** show the mobile buttons if the device is a touch device
+ */
+function touchDeviceStartGame(){
     if (isTouchDevice()) {
       mobileButton.classList.remove('d-none');
       mobileButton.classList.add('d-flex');
@@ -82,8 +90,6 @@ function startGame(){
       mobileButton.classList.add('d-none');
       mobileButton.classList.remove('d-flex');
     }
-    stopFullscreen();
-    initLevel();
 }
 
 
@@ -181,10 +187,11 @@ function checkOrientation() {
   }
 }
 
-
-window.addEventListener("load", checkOrientation, stopFullscreen);
-window.addEventListener("resize", checkOrientation, stopFullscreen);
-window.addEventListener("orientationchange", checkOrientation, stopFullscreen);
+/** add event listeners to check orientation on load, resize, and orientation change
+ */
+window.addEventListener("load", ()=>{checkOrientation(); stopFullscreen();});
+window.addEventListener("resize", ()=>{checkOrientation(); stopFullscreen();});
+window.addEventListener("orientationchange", ()=>{checkOrientation(); stopFullscreen();});
 
 
 

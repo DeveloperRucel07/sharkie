@@ -139,29 +139,38 @@ class Shark extends MovableObject {
         }else if(this.isHurtElectric()){
             this.playAnimation(this.IMAGES_HURT_ELECTRIC_SHOCK);
             this.changeSleepTime();
-        }else if(this.isMovingRight()){
-            this.playAnimation(this.IMAGES_SWIM); 
-        }else if(this.isMovingLeft()){
-            this.playAnimation(this.IMAGES_SWIM); 
-        }else if(this.isMovingUp()){
-            this.playAnimation(this.IMAGES_SWIM); 
-        }else if(this.isMovingDown()){
-            this.playAnimation(this.IMAGES_SWIM); 
-        }else if(this.isSleeping){
-            this.playAnimation(this.IMAGES_LONGSTAY); 
-            this.world.sounds.shark_sleeping_sound.play();
-        }else if(this.world.keyboard.D){
-            this.throwBubbleNormal();
-        }else if(this.world.keyboard.F){
-            this.throwBubblePoison();
-        }else if(this.slap){
-            this.playAnimation(this.ATTACK_SLAP);
-        }
-        else{
-            this.playAnimation(this.IMAGES_STAY);
-            this.world.sounds.swim_sound.play();
+        }else{
+            let isMoving = false;
+            if(this.multipleMove(isMoving)){
+                this.playAnimation(this.IMAGES_SWIM);
+            }else if(this.isSleeping){
+                this.playAnimation(this.IMAGES_LONGSTAY);
+                this.world.sounds.shark_sleeping_sound.play();
+            }else if(this.world.keyboard.D){
+                this.throwBubbleNormal();
+            }else if(this.world.keyboard.F){
+                this.throwBubblePoison();
+            }else if(this.slap){
+                this.playAnimation(this.ATTACK_SLAP);
+            }else{
+                this.playAnimation(this.IMAGES_STAY);
+                this.world.sounds.swim_sound.play();
+            }
         }
         this.sharkSlap();
+    }
+
+
+    /** check if the shark is moving in any direction
+     * if he is moving in any direction set isMoving to true
+     * @returns {boolean} true or false
+     */
+    multipleMove(isMoving){
+        if(this.isMovingRight()) isMoving = true;
+        if(this.isMovingLeft()) isMoving = true;
+        if(this.isMovingUp()) isMoving = true;
+        if(this.isMovingDown()) isMoving = true;
+        return isMoving;
     }
 
 
@@ -206,50 +215,6 @@ class Shark extends MovableObject {
                 this.isVulnerable = true;
             }
         }, 1000 / 30);
-    }
-
-
-    /**
-     * Moves the shark character to the right by increasing its x-coordinate.
-     * Sets the direction to 'right' and updates the camera position.
-     * Movement is restricted to within the lright boundary (this.x + this.width < this.world.worldWidth).
-     */
-    moveRight() {
-        this.otherDirection = false;
-        if (this.x + this.width < this.world.worldWidth) {
-            this.x += this.speed;
-            if (this.x > this.world.canvas.width / 2) {
-                this.world.camera_x = -(this.x - this.world.canvas.width / 2);
-            }
-        }
-    }
-
-
-    /**
-     * Moves the shark character to the right by increasing its x-coordinate.
-     * Sets the direction to 'right' and updates the camera position.
-     * Movement is restricted to within the lright boundary (this.x + this.width < this.world.worldWidth).
-     */
-    moveRight() {
-        this.otherDirection = false;
-        if (this.x + this.width < this.world.worldWidth) {
-            this.x += this.speed;
-            this.updateCamera();
-        }
-    }
-
-
-    /**
-     * Moves the shark character to the left by decreasing its x-coordinate.
-     * Sets the direction to 'left' and updates the camera position.
-     * Movement is restricted to within the left boundary (x > 0).
-     */
-    moveLeft() {
-        this.otherDirection = true;
-        if (this.x > 0) {
-            this.x -= this.speed;
-            this.updateCamera();
-        }
     }
 
 
@@ -311,7 +276,7 @@ class Shark extends MovableObject {
      */
     isMovingLeft(){
         if (this.world.keyboard.LEFT) {
-            this.moveLeft();
+            this.sharkMoveLeft();
             this.changeSleepTime();
             return true;
         }
@@ -325,7 +290,7 @@ class Shark extends MovableObject {
      */
     isMovingRight(){
         if (this.world.keyboard.RIGHT) {
-            this.moveRight();
+            this.sharkMoveRight();
             this.changeSleepTime();
             return true;
         }
@@ -456,12 +421,4 @@ class Shark extends MovableObject {
             this.changeSleepTime();
         }
     }
-
-
-    
-
 }
-
-
-
-
