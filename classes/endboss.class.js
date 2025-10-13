@@ -70,6 +70,8 @@ class Endboss extends MovableObject{
     hasArrived = false;
     comeAnimationFrame = 0;
     deadSoundPlayed = false;
+    isVulnerable = true;
+    isVulnerableDelay = 2000;
 
     constructor() {
         super().loadImage(this.imagePath);
@@ -78,10 +80,8 @@ class Endboss extends MovableObject{
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_ATTACK);
-        this.speed = 3;
+        this.speed = 12;
         this.lastHurt = Date.now();
-        this.isVulnerable = true;
-        this.isVulnerableDelay = 2000;
         this.alreadyVulnerable();
     }
 

@@ -126,6 +126,40 @@ button{
   cursor: pointer;
 }
 
+.volume-slider {
+  position: absolute;
+  top: 100px;
+  right: 90px;
+  width: 100px;
+  height: 20px;
+  z-index: 2;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  background: linear-gradient(90deg, #e73b06, #15b86c);
+  border-radius: 10px;
+  outline: none;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: aqua;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.volume-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: aqua;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+}
+
 .start-game-btn{
   display: flex;
   justify-content: center;
@@ -590,6 +624,14 @@ footer{
     font-size: 12px;
     scale: 1;
   }
+  
+  .volume-slider {
+    top: 80px;
+    right: 70px;
+    width: 90px;
+    height: 12px;
+  }
+
 
   .settings .img-setting{
     top: 10px;

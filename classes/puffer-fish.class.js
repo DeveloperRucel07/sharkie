@@ -40,7 +40,6 @@ class PufferFish extends MovableObject {
             this.playAnimation(this.IMAGES_DIE);
             this.animateDeathToTop();
         }else{
-
             this.playAnimation(this.IMAGES_SWIM);
         }
         this.moveLeft();

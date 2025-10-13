@@ -66,6 +66,15 @@ class Shark extends MovableObject {
     slapReady = true;
     deadSoundAlreadyPlayed = false;
     animated;
+    isVulnerable = true;
+    isVulnerableDelay = 2000;
+    canThrowNormalBubble = true;
+    canThrowPoisonBubble = true;
+    lastBubbleThrowTime = 0;
+    bubbleThrowCooldown = 2000;
+    speed = 15;
+    isSleeping = false;
+    sleepDelay = 5000;
 
     constructor(imagePath) {
         super().loadImage(imagePath);
@@ -80,18 +89,9 @@ class Shark extends MovableObject {
         this.loadImages(this.ATTACK_POISONED_BUBBLE);
         this.loadImages(this.ATTACK_BUBBLE);
         this.loadImages(this.ATTACK_SLAP);
-        this.speed = 15;
-        this.isSleeping = false;
-        this.sleepDelay = 5000;
         this.lastHurt = Date.now();
         this.lastMoveTime = Date.now();
-        this.isVulnerable = true;
-        this.isVulnerableDelay = 2000;
         this.worldWidth = this.worldWidth;
-        this.canThrowNormalBubble = true;
-        this.canThrowPoisonBubble = true;
-        this.lastBubbleThrowTime = 0;
-        this.bubbleThrowCooldown = 2000;
         this.startSharkanimation();
         this.checkIfSleeping();
         this.alreadyVulnerable(); 

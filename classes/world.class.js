@@ -63,7 +63,6 @@ class World {
         this.shark = new Shark('images/1.Sharkie/Stay/1.png');
         this.endboss =  new Endboss();
         this.setWorldToObject();
- 
     }
 
 

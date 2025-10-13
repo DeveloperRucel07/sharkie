@@ -1,4 +1,5 @@
 class SoundManager {
+    volume = 0.5;
     constructor() {
         this.background_music = new Audio('audio/background_music.mp3');
         this.background_music.loop = true;
@@ -41,6 +42,7 @@ class SoundManager {
             this.endboss_hurt_sound,
             this.endboss_dead_sound,
         ];
+        this.setVolume(this.volume);
     }
 
 
@@ -119,6 +121,25 @@ class SoundManager {
         [...this.backgroundSounds, ...this.effectSounds].forEach(sound => {
             sound.muted = false;
         });
+    }
+
+    /**
+     * Set volume for all sounds (background and effects).
+     * @param {number} volume - Volume level between 0 and 1.
+     */
+    setVolume(volume) {
+        this.volume = volume;
+        [...this.backgroundSounds, ...this.effectSounds].forEach(sound => {
+            sound.volume = volume;
+        });
+    }
+
+    /**
+     * Get current volume level.
+     * @returns {number} Current volume level.
+     */
+    getVolume() {
+        return this.volume;
     }
 
 }
