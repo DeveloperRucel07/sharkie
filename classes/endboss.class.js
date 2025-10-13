@@ -165,7 +165,7 @@ class Endboss extends MovableObject{
         const distanceX = Math.abs(this.x - shark.x);
         const distanceY = Math.abs(this.y - shark.y);
         const nearThreshold = 150;
-        this.otherDirection = !shark.otherDirection;
+        this.otherDirection = this.x < shark.x; // Face towards shark: true if endboss is to the right of shark
         if (distanceX < nearThreshold && distanceY < nearThreshold) {
             this.playAnimation(this.IMAGES_ATTACK);
             this.world.sounds.endboss_attack_sound.play();
