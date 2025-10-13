@@ -6,7 +6,7 @@ class Shark extends MovableObject {
     );
 
     IMAGES_LONGSTAY = 
-        Array.from({ length: 14 }, (_, i) =>
+        Array.from({ length: 10 }, (_, i) =>
             `images/1.Sharkie/LongStay/I${i+1}.png`,
     );
 
