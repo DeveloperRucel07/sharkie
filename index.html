@@ -18,6 +18,11 @@
     <div class="start-game d-flex">
         <button type="button" id="startBtnGame" class="start-game-btn" onclick="startGame(); init();"><img src="./images/5.Buttons/Start/3.png" alt="" srcset=""></button>
     </div>
+    <div id="gameStartPopup" class="popup d-none">
+        <div class="popup-content">
+            <p>You decide to help Shark, you have only 20 normal bubble and 10 collected poison bubble</p>
+        </div>
+    </div>
     <div class="settings">
         <p class="p-controls">Controls</p>
         <img class="fullscreen d-none" id="fullscreen" src="./images/5.Buttons/Key/fullscreen.png" alt="fullscreen image" onclick="fullscreen()">
@@ -71,6 +76,7 @@
         </div>
         <div class="game-over d-none" id="gameOver"> 
             <button id="tryAgain" class="restart-game-btn" onclick="replayGame()"> <img src="./images/5.Buttons/TryAgain/tryAgainYelow.png" alt="Stop Game"></button>
+            <button id="tryAgainReplay" class="restart-game" onclick="restartGame()"> HOME </button>
         </div>
         <canvas id="gameCanvas">
 
@@ -78,15 +84,15 @@
     </div>
     <div class="mobile-buttons d-none" id="mobileButtons">
         <div class="left-side">
-            <button ontouchstart="moveUpMobile(event, true)" ontouchend="moveUpMobile(event, false)" onmousedown="moveUpMobile(event, true)" onmouseup="moveUpMobile(event, false)"><img src="./images/5.Buttons/Key/arow-up.png" alt="up"></button>
-            <button ontouchstart="moveLeftMobile(event, true)" ontouchend="moveLeftMobile(event, false)" onmousedown="moveLeftMobile(event, true)" onmouseup="moveLeftMobile(event, false)"><img src="./images/5.Buttons/Key/arow-left.png" alt="left"></button>
-            <button ontouchstart="moveRightMobile(event, true)" ontouchend="moveRightMobile(event, false)" onmousedown="moveRightMobile(event, true)" onmouseup="moveRightMobile(event, false)"><img src="./images/5.Buttons/Key/arow-right.png" alt="right"></button>
-            <button ontouchstart="moveDownMobile(event, true)" ontouchend="moveDownMobile(event, false)" onmousedown ="moveDownMobile(event, true)" onmouseup ="moveDownMobile(event, false)"><img src="./images/5.Buttons/Key/arow-down.png" alt="down"></button>
+            <button ontouchstart="moveUpMobile(event, true)" ontouchend="moveUpMobile(event, false)" onmousedown="moveUpMobile(event, true)" onmouseup="moveUpMobile(event, false)" id="moveUpBtn"><img src="./images/5.Buttons/Key/arow-up.png" alt="up"></button>
+            <button ontouchstart="moveLeftMobile(event, true)" ontouchend="moveLeftMobile(event, false)" onmousedown="moveLeftMobile(event, true)" onmouseup="moveLeftMobile(event, false)" id="moveLeftBtn"><img src="./images/5.Buttons/Key/arow-left.png" alt="left"></button>
+            <button ontouchstart="moveRightMobile(event, true)" ontouchend="moveRightMobile(event, false)" onmousedown="moveRightMobile(event, true)" onmouseup="moveRightMobile(event, false)" id="moveRightBtn"><img src="./images/5.Buttons/Key/arow-right.png" alt="right"></button>
+            <button ontouchstart="moveDownMobile(event, true)" ontouchend="moveDownMobile(event, false)" onmousedown ="moveDownMobile(event, true)" onmouseup ="moveDownMobile(event, false)" id="moveDownBtn"><img src="./images/5.Buttons/Key/arow-down.png" alt="down"></button>
         </div>
         <div class="right-side">
-            <button ontouchstart="poisonBubble(event, true)" ontouchend="poisonBubble(event, false)" onmousedown="poisonBubble(event, true)" onmouseup="poisonBubble(event, false)"><img src="./images/5.Buttons/Key/poison-bubble.png" alt="poison"></button>
-            <button ontouchstart="normalBubble(event, true)" ontouchend="normalBubble(event, false)" onmousedown="normalBubble(event, true)" onmouseup="normalBubble(event, false)"><img src="./images/5.Buttons/Key/normal-bubble.png" alt="normal"></button>
-            <button ontouchstart="slap(event, true)" ontouchend="slap(event, false)" onmousedown="slap(event, true)" onmouseup="slap(event, false)"><img src="./images/5.Buttons/Key/slap-shark.png" alt="slap"></button>
+            <button ontouchstart="poisonBubble(event, true)" ontouchend="poisonBubble(event, false)" onmousedown="poisonBubble(event, true)" onmouseup="poisonBubble(event, false)" id="poisonBubbleBtn"><img src="./images/5.Buttons/Key/poison-bubble.png" alt="poison"></button>
+            <button ontouchstart="normalBubble(event, true)" ontouchend="normalBubble(event, false)" onmousedown="normalBubble(event, true)" onmouseup="normalBubble(event, false)" id="normalBubbleBtn"><img src="./images/5.Buttons/Key/normal-bubble.png" alt="normal"></button>
+            <button ontouchstart="slap(event, true)" ontouchend="slap(event, false)" onmousedown="slap(event, true)" onmouseup="slap(event, false)" id="slapBtn"><img src="./images/5.Buttons/Key/slap-shark.png" alt="slap"></button>
         </div>
     </div>
     <footer class="footer" id="footer">

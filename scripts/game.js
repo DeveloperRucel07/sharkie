@@ -166,6 +166,7 @@ function normalBubble(event, value){
     if (event.cancelable) {
         event.preventDefault();
     }
+    if(value === false) world.shark.canThrowNormalBubble = true;
     keyboard.D = value;
 }
 
@@ -179,6 +180,7 @@ function poisonBubble(event, value){
     if (event.cancelable) {
         event.preventDefault();
     }
+    if(value === false) world.shark.canThrowPoisonBubble = true;
     keyboard.F = value;
 }
 

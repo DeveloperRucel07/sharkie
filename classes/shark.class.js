@@ -349,13 +349,15 @@ class Shark extends MovableObject {
      * @param {*string} type type of the bubble (normal or poison)
      */
     setPoisonBubble(bubbleX, bubbleY, type){
-         if(this.poisonBubblesThrown < 10){
+         if(this.poisonBubblesThrown <= 10){
             let bubble = new ThrowableObject(bubbleX, bubbleY, type);
             bubble.otherDirection = this.otherDirection;
             this.world.bubbles.push(bubble);
             this.poisonBubblesThrown++;
             this.world.collectedPoisons = Math.max(0, this.world.collectedPoisons - 1);
             this.world.poison_mark.setPercentage(this.world.collectedPoisons);
+        }else{
+            showBubbles();
         }
     }
 
@@ -366,7 +368,7 @@ class Shark extends MovableObject {
      * @param {*string} type type of the bubble (normal or poison)
      */
     setNormalBubble(bubbleX, bubbleY, type){
-        if(this.normalBubblesThrown < (20 - this.world.collectedPoisons) && this.normalBubblesThrown < 10){
+        if(this.normalBubblesThrown < (30 - this.poisonBubblesThrown) && this.normalBubblesThrown <= 20){
             let bubble = new ThrowableObject(bubbleX, bubbleY, type);
             bubble.otherDirection = this.otherDirection;
             this.world.bubbles.push(bubble);

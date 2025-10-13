@@ -44,12 +44,15 @@ function muteAndunmuteSound() {
   let volume = localStorage.getItem("volume") === "true";
   let volumeLevel = parseFloat(localStorage.getItem("volumeLevel"));
 
-  if (volume) {
+  if (sounds && volume) {
     sounds.setVolume(volumeLevel);
     volumeStatus.src = "./images/5.Buttons/Key/volume.png";
-  } else {
+  } else if (sounds) {
     sounds.setVolume(0);
     volumeStatus.src = "./images/5.Buttons/Key/volume_off.png";
+  }else{
+    volumeStatus.src = "./images/5.Buttons/Key/volume_off.png";
+    return;
   }
   volumeSlider.value = volumeLevel;
 }
@@ -60,15 +63,18 @@ function muteAndunmuteSound() {
 volumeIcon?.addEventListener("click", function (event) {
   event.stopPropagation();
   let volume = localStorage.getItem("volume") === "true";
-  if (volume) {
+  if (volume && sounds) {
     localStorage.setItem("volume", "false");
     sounds.setVolume(0);
     volumeStatus.src = "./images/5.Buttons/Key/volume_off.png";
-  } else {
+  } else if (sounds) {
     localStorage.setItem("volume", "true");
     let volumeLevel = parseFloat(localStorage.getItem("volumeLevel"));
     sounds.setVolume(volumeLevel);
     volumeStatus.src = "./images/5.Buttons/Key/volume.png";
+  }else{
+    volumeStatus.src = "./images/5.Buttons/Key/volume_off.png";
+    return;
   }
 });
 
@@ -77,10 +83,14 @@ volumeIcon?.addEventListener("click", function (event) {
  */
 volumeSlider?.addEventListener("input", function (event) {
   let volumeLevel = parseFloat(event.target.value);
-  localStorage.setItem("volumeLevel", volumeLevel.toString());
-  sounds.setVolume(volumeLevel);
-  localStorage.setItem("volume", "true"); // Ensure volume is enabled when adjusting slider
-  volumeStatus.src = "./images/5.Buttons/Key/volume.png";
+  if (sounds){
+    localStorage.setItem("volumeLevel", volumeLevel.toString());
+    sounds.setVolume(volumeLevel);
+    localStorage.setItem("volume", "true"); // Ensure volume is enabled when adjusting slider
+    volumeStatus.src = "./images/5.Buttons/Key/volume.png";
+  }else{
+    return;
+  }
 });
 
 /**
@@ -200,17 +210,41 @@ function checkOrientation() {
   }
 }
 
-/** add event listeners to check orientation on load, resize, and orientation change
+/** add event listeners to check orientation on load,
+ * this check the orintation when the page is loaded
+ * and when the user change the size of the window or change the orintation
  */
 window.addEventListener("load", () => {
   checkOrientation();
   stopFullscreen();
 });
+
+/** add event listeners to check orientation on resize,
+ * this check the orintation when the page is resized
+ * and when the user change the size of the window or change the orintation
+ */
 window.addEventListener("resize", () => {
   checkOrientation();
   stopFullscreen();
 });
+
+/** add event listeners to check orientation on orientationchange,
+ * this check the orintation when the page is changed
+ * and when the user change the size of the window or change the orintation
+ */
 window.addEventListener("orientationchange", () => {
   checkOrientation();
   stopFullscreen();
 });
+
+/** show the bubbles popup when user user all poisoned bubbles
+ */
+function showBubbles(){
+  const popup = document.getElementById("gameStartPopup");
+  popup.classList.remove("d-none");
+  popup.classList.add("d-flex");
+  setTimeout(() => {
+    popup.classList.add("d-none");
+    popup.classList.remove("d-flex");
+  }, 3000);
+}

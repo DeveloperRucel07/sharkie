@@ -179,15 +179,20 @@ class Endboss extends MovableObject{
      * @param {Shark} shark - The shark object.
      */
     endbossFollowShark(shark){
-        if (this.x > shark.x) {
-            this.x -= this.speed;
-        } else if (this.x < shark.x) {
-            this.x += this.speed;
+        const moveThreshold = 50; // Only move if distance exceeds this threshold to prevent oscillation
+        if (Math.abs(this.x - shark.x) > moveThreshold) {
+            if (this.x > shark.x) {
+                this.x -= this.speed;
+            } else if (this.x < shark.x) {
+                this.x += this.speed;
+            }
         }
-        if (this.y > shark.y) {
-            this.y -= this.speed / 2;
-        } else if (this.y < shark.y &&this.y + this.height < this.world.canvas.height - 60) {
-            this.y += this.speed / 2;
+        if (Math.abs(this.y - shark.y) > moveThreshold) {
+            if (this.y > shark.y) {
+                this.y -= this.speed / 2;
+            } else if (this.y < shark.y && this.y + this.height < this.world.canvas.height) {
+                this.y += this.speed / 2;
+            }
         }
     }
 
