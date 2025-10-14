@@ -118,7 +118,12 @@ class Endboss extends MovableObject{
         closeButtonsWinLose();
         setTimeout(()=>{
             this.world.stop();
-            this.showWinButton();
+            if(this.world.shark.isDead()){
+                this.showReplayButton();
+                return;
+            }else{
+                this.showWinButton();
+            }
         }, 3500)
     }
 

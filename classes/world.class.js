@@ -311,7 +311,7 @@ class World {
     checkBubbleEndbossCollision() {
         this.bubbles.forEach(bubble => {
             if (this.endboss && this.endboss.isColliding(bubble)) {
-                this.endboss.hit(3);
+                this.endboss.hit(7);
                 this.endboss.changeVulnerability();
                 this.sounds.endboss_hurt_sound.play();
                 this.endboss_mark.setPercentageLife(this.endboss.energy);
@@ -334,7 +334,7 @@ class World {
             this.shark.changeVulnerability();
             this.life_mark.setPercentageLife(this.shark.energy);
         }else if(this,this.shark.slap && this.endboss.isColliding(this.shark)){
-            this.endboss.hit(2);
+            this.endboss.hit(5);
             this.endboss.changeVulnerability();
             this.sounds.shark_slap_sound.play();
             this.endboss_mark.setPercentageLife(this.endboss.energy);

@@ -207,10 +207,14 @@ class MovableObject extends DrawableObject{
      * Removes 'd-none' class and adds 'd-flex' class to the game over element.
      */
     showReplayButton(){
+        document.getElementById("youWin").classList.add("d-none");
+        document.getElementById("youWin").classList.remove("d-flex")
         setTimeout(()=>{
-        document.getElementById('gameOver').classList.remove('d-none');
-        document.getElementById('gameOver').classList.add('d-flex');
-        }, 4000)
+            document.getElementById("youWin").classList.add("d-none");
+            document.getElementById("youWin").classList.remove("d-flex")
+            document.getElementById('gameOver').classList.remove('d-none');
+            document.getElementById('gameOver').classList.add('d-flex');
+        }, 4500)
     }
 
 

@@ -184,10 +184,14 @@ class Shark extends MovableObject {
      * Initiates a 3.5-second timeout before calling the stopGame function.
      */
     stopAfterDeath(){
-        closeButtonsWinLose();
+        closeButtonsWinLose(); 
         setTimeout(()=>{
             this.world.stop();
-            this.showReplayButton();
+            if(this.world.endboss.isDead()){
+                this.showReplayButton();
+            }else{
+                this.showReplayButton();
+            }
         }, 3000)
     }
 
