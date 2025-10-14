@@ -12,6 +12,14 @@ class PufferFish extends MovableObject {
         right:10
     }
 
+
+    /**
+     * Creates a PufferFish object at specified coordinates with swim and die animations.
+     * @param {number} x - The x-coordinate of the PufferFish.
+     * @param {number} y - The y-coordinate of the PufferFish.
+     * @param {Array} IMAGES_SWIM - Array of image paths for swimming animation.
+     * @param {Array} IMAGES_DIE - Array of image paths for dying animation.
+     */
     constructor(x, y, IMAGES_SWIM, IMAGES_DIE) {
         super();
         this.x = x;

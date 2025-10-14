@@ -195,12 +195,22 @@ class MovableObject extends DrawableObject{
             if (this.y < 0){
                 if(this instanceof Shark || this instanceof Endboss){
                     this.y = -100;
-                    this.loadImage(this.imagePath);
                 }else{
                     this.y = 0;
                 }
             };
         }
+    }
+
+
+    /** Displays the game over screen by manipulating DOM elements.
+     * Removes 'd-none' class and adds 'd-flex' class to the game over element.
+     */
+    showReplayButton(){
+        setTimeout(()=>{
+        document.getElementById('gameOver').classList.remove('d-none');
+        document.getElementById('gameOver').classList.add('d-flex');
+        }, 4000)
     }
 
 

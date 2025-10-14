@@ -12,6 +12,11 @@ class Poison extends MovableObject{
     imagePath = 'images/4.Marks/Posión/Animada/1.png';
     width = 50;
     height = 50;
+
+    /**
+     * Creates a Poison object at specified x-coordinate.
+     * @param {number} x - The x-coordinate of the Poison.
+     */
     constructor(x){
         super().loadImage(this.imagePath);
         this.imageCache = {};

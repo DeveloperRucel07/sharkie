@@ -73,6 +73,9 @@ class Endboss extends MovableObject{
     isVulnerable = true;
     isVulnerableDelay = 2000;
 
+    /**
+     * Initializes the Endboss by loading images, setting speed, and starting vulnerability checks.
+     */
     constructor() {
         super().loadImage(this.imagePath);
         this.imageCache = {};
@@ -80,7 +83,7 @@ class Endboss extends MovableObject{
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_ATTACK);
-        this.speed = 12;
+        this.speed = 5 + Math.random() * 0.5;
         this.lastHurt = Date.now();
         this.alreadyVulnerable();
     }
@@ -105,7 +108,6 @@ class Endboss extends MovableObject{
             this.playAnimation(this.IMAGES_SWIM);
             this.world.sounds.endboss_background_sound.play();
         }
-
     }
 
 
@@ -113,12 +115,22 @@ class Endboss extends MovableObject{
      * Handles the death sequence of the Endboss.
      */
     endbossDead(){
+        closeButtonsWinLose();
         setTimeout(()=>{
             this.world.stop();
-            closeButtonsWinLose();
+            this.showWinButton();
+        }, 3500)
+    }
+
+
+    /** Displays the game win screen by manipulating DOM elements.
+     * Removes 'd-none' class and adds 'd-flex' class to the game over element.
+     */
+    showWinButton(){
+        setTimeout(()=>{
             document.getElementById("youWin").classList.remove("d-none");
             document.getElementById("youWin").classList.add("d-flex");
-        }, 3500)
+        }, 4000)
     }
 
 

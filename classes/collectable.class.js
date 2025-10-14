@@ -5,6 +5,12 @@ class Collectable extends DrawableObject{
     x;
     y = 0;
     percentage = 0;
+
+    /**
+     * Creates a Collectable object at specified x-coordinate with given images.
+     * @param {number} x - The x-coordinate of the Collectable.
+     * @param {Array} COLLECTABLE_IMAGES - Array of image paths for different collectable states.
+     */
     constructor(x, COLLECTABLE_IMAGES){
         super();
         this.x = x;

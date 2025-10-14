@@ -95,13 +95,23 @@ class Shark extends MovableObject {
         this.startSharkanimation();
         this.checkIfSleeping();
         this.alreadyVulnerable(); 
-        // Add keyup event listeners to reset bubble throw flags
+        this.eventlistenerForBubbles();
+    }
+
+    /**
+     * Adds event listeners for bubble throwing actions.
+     * Listens for 'D' key to throw normal bubbles and 'F' key to throw poison bubbles.
+     * Sets corresponding flags and updates sleep timer when keys are released.
+     */
+    eventlistenerForBubbles(){
         window.addEventListener("keyup", (e) => {
             if (e.code === "KeyD") {
                 this.canThrowNormalBubble = true;
+                this.changeSleepTime();
             }
             if (e.code === "KeyF") {
                 this.canThrowPoisonBubble = true;
+                this.changeSleepTime();
             }
         });
     }
@@ -174,13 +184,13 @@ class Shark extends MovableObject {
      * Initiates a 3.5-second timeout before calling the stopGame function.
      */
     stopAfterDeath(){
+        closeButtonsWinLose();
         setTimeout(()=>{
             this.world.stop();
-            closeButtonsWinLose();
-            document.getElementById('gameOver').classList.remove('d-none');
-            document.getElementById('gameOver').classList.add('d-flex');
-        }, 3500)
+            this.showReplayButton();
+        }, 3000)
     }
+
 
     /**
      * Handles the shark's death sequence by stopping the game after a delay.
@@ -380,7 +390,7 @@ class Shark extends MovableObject {
      * Plays the corresponding sound and updates the sleep timer.
      */
     throwBubblePoison(){
-        if(this.canThrowPoisonBubble && (Date.now() - this.lastBubbleThrowTime > this.bubbleThrowCooldown)){
+        if(this.world.collectedPoisons > 0 && this.canThrowPoisonBubble && (Date.now() - this.lastBubbleThrowTime > this.bubbleThrowCooldown)){
             this.playAnimation(this.ATTACK_POISONED_BUBBLE);
             this.throwBubble('poison');
             this.canThrowPoisonBubble = false;

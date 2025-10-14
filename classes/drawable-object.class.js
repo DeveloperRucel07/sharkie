@@ -33,17 +33,20 @@ class DrawableObject {
 
     /**
      * Draws the object's image on the canvas context. Flips horizontally if otherDirection is true.
+     * Only draws if the image is loaded and not broken.
      * @param {CanvasRenderingContext2D} ctx - The canvas rendering context.
      */
     draw(ctx) {
-        if(!this.otherDirection){ 
-            ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-        } else {
-            ctx.save();
-            ctx.scale(-1, 1);
-            ctx.drawImage(this.img, -this.x - this.width, this.y, this.width, this.height);
-            ctx.restore();
-        } 
+        if (this.img && this.img.complete && this.img.naturalWidth !== 0) {
+            if(!this.otherDirection){
+                ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+            } else {
+                ctx.save();
+                ctx.scale(-1, 1);
+                ctx.drawImage(this.img, -this.x - this.width, this.y, this.width, this.height);
+                ctx.restore();
+            }
+        }
     }
 
     /**

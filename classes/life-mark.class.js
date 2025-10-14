@@ -6,6 +6,11 @@ class LifeMark extends DrawableObject{
     y = 0;
     percentage = 100;
     
+    /**
+     * Creates a Collectable object at specified x-coordinate with given images.
+     * @param {number} x - The x-coordinate of the Collectable.
+     * @param {Array} LIFE_MARK_IMAGES - Array of image paths for different life mark states.
+     */
     constructor(x, LIFE_MARK_IMAGES){
         super();
         this.x = x;
@@ -23,7 +28,6 @@ class LifeMark extends DrawableObject{
      */
     setPercentageLife(percentage){
         this.percentage = percentage;
-
         if(this.percentage == 0){
             this.loadImage(this.LIFE_MARK_IMAGES[0]);
         }else if(this.percentage <= 20){
@@ -37,9 +41,6 @@ class LifeMark extends DrawableObject{
         }else{
             this.loadImage(this.LIFE_MARK_IMAGES[5]);
         }
-
     }
-
-
 
 }

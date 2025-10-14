@@ -6,6 +6,13 @@ class ThrowableObject extends MovableObject {
     vx = 1; // horizontal velocity
     vy = 1; // vertical velocity
     gravity = 4; // gravity acceleration
+
+    /**
+     * Creates a ThrowableObject (e.g., bubble or poison) at specified coordinates and type.
+     * @param {number} x - The x-coordinate of the projectile.
+     * @param {number} y - The y-coordinate of the projectile.
+     * @param {string} type - The type of projectile ("bubble" or "poison").
+     */
     constructor(x, y, type){
         super();
         this.type = type;

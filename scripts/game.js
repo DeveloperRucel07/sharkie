@@ -20,7 +20,7 @@ function init() {
     world = new World(canvas, ctx, keyboard, sounds);
     setTimeout(()=>{
         world.start();
-    },100)
+    },100);
 }
 
 
@@ -168,6 +168,7 @@ function normalBubble(event, value){
     }
     if(value === false) world.shark.canThrowNormalBubble = true;
     keyboard.D = value;
+    world.shark.changeSleepTime();
 }
 
 
@@ -182,6 +183,7 @@ function poisonBubble(event, value){
     }
     if(value === false) world.shark.canThrowPoisonBubble = true;
     keyboard.F = value;
+    world.shark.changeSleepTime();
 }
 
 /**

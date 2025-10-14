@@ -11,6 +11,12 @@ class JellyFish extends MovableObject{
     IMAGES_SWIM;
     IMAGES_DIE;
 
+    /**
+     * Creates a JellyFish object at specified x-coordinate with swim and die animations.
+     * @param {number} x - The x-coordinate of the JellyFish.
+     * @param {Array} IMAGES_SWIM - Array of image paths for swimming animation.
+     * @param {Array} IMAGES_DIE - Array of image paths for dying animation.
+     */
     constructor(x, IMAGES_SWIM, IMAGES_DIE){
         super();
         this.y = this.y = 600 - this.height;

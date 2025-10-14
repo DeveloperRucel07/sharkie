@@ -17,12 +17,12 @@ COLLECTABLE_IMAGES_POISONS = [
 ];
 
 LIFE_MARK_IMAGES_SHARK = [
-    'images/4.Marks/Purple/0_ .png',
-    'images/4.Marks/Purple/20_ .png',
-    'images/4.Marks/Purple/40_ .png',
-    'images/4.Marks/Purple/60_ .png',
-    'images/4.Marks/Purple/80_ .png',
-    'images/4.Marks/Purple/100_ .png',
+    'images/4.Marks/Purple/0.png',
+    'images/4.Marks/Purple/20.png',
+    'images/4.Marks/Purple/40.png',
+    'images/4.Marks/Purple/60.png',
+    'images/4.Marks/Purple/80.png',
+    'images/4.Marks/Purple/100.png',
 ];
 
 LIFE_MARK_IMAGES_ENDBOSS = [
@@ -54,6 +54,14 @@ class World {
     intervalCheckCollision;
     intervalAnimatedObject;
 
+    /**
+     * Creates the game world with canvas, context, keyboard controls, and sounds.
+     * Initializes shark, endboss, and sets up the world.
+     * @param {HTMLCanvasElement} canvas - The canvas element for rendering.
+     * @param {CanvasRenderingContext2D} ctx - The 2D rendering context.
+     * @param {Keyboard} keyboard - The keyboard input handler.
+     * @param {Object} sounds - An object containing sound effects.
+     */
     constructor(canvas, ctx, keyboard, sounds) {
         this.canvas = canvas;
         this.ctx = ctx;
@@ -152,11 +160,7 @@ class World {
     sharkCollisionWithPufferFishes(){
         this.level.pufferEnemies.forEach((pufferEnemy, index)=>{
             if(this.shark.slap && this.shark.isColliding(pufferEnemy)){
-                pufferEnemy.die = true;
-                this.sounds.shark_slap_sound.play();
-                setTimeout(()=>{
-                    this.level.pufferEnemies.splice(index, 1);
-                }, 3000);
+                this.sharkHitFish(this.level.pufferEnemies, pufferEnemy, index)
             }else
                 if(this.shark.isVulnerable && this.shark.isColliding(pufferEnemy)){
                 this.shark.hit(10);
@@ -203,13 +207,24 @@ class World {
                 this.shark.changeVulnerability();
                 this.life_mark.setPercentageLife(this.shark.energy);
             } else if(this.shark.slap && this.shark.isColliding(jellyEnemy)){
-                jellyEnemy.die = true;
-                this.sounds.shark_slap_sound.play();
-                setTimeout(()=>{
-                    this.level.jellyEnemies.splice(index, 1);
-                }, 3000);
+                this.sharkHitFish(this.level.jellyEnemies, jellyEnemy, index)
             }
         })
+    }
+
+    /**
+     * Handles collisions between Shark and fishes.
+     * If shark is slapping -> kill fish, play slap sound, remove enemy.
+     * @param {Array} ArrayEnemies - Array of enemy fish objects (puffer or jelly).
+     * @param {Object} fishEnemy - The specific fish enemy object being checked.
+     * @param {number} index - The index of the fish enemy in the array.
+     */
+    sharkHitFish(ArrayEnemies, fishEnemy, index){
+        fishEnemy.die = true;
+        this.sounds.shark_slap_sound.play();
+        setTimeout(()=>{
+            ArrayEnemies.splice(index, 1);
+        }, 3000);
     }
 
     /**
@@ -344,8 +359,9 @@ class World {
         this.intervalAnimatedObject = setInterval(()=>{
             this.animatedObjects();
         }, 1000/15);
+        this.sounds.stopAllSounds();
         this.sounds.resetAllSounds();
-        this.checkColisions(); 
+        this.checkColisions();
         this.gameLoop();
     }
 
@@ -367,6 +383,7 @@ class World {
      * Stop the Game: stop animation, stop sounds, clear the interval for animated Objects.
      */
     stop() {
+        this.sounds.resetAllSounds();
         this.sounds.stopAllSounds();
         if (this.animationId) {
             cancelAnimationFrame(this.animationId);

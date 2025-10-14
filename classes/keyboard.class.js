@@ -1,4 +1,9 @@
 class Keyboard {
+
+    /**
+     * Object to track the state of specific keys for game controls.
+     * Properties:LEFT, RIGHT, UP, DOWN, SPACE, ENTER, D, F - Boolean values indicating if the key is pressed.
+     */
     constructor() {
         this.LEFT = false;
         this.RIGHT = false;

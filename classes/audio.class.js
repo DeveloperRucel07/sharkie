@@ -1,5 +1,10 @@
 class SoundManager {
     volume = 0.5;
+    currentPlayPromise = null;
+
+    /**
+     * Initializes the SoundManager with various sound effects and background music.
+     */
     constructor() {
         this.background_music = new Audio('audio/background_music.mp3');
         this.background_music.loop = true;
@@ -22,7 +27,8 @@ class SoundManager {
         this.endboss_dead_sound = new Audio('audio/boss_dead.mp3');
         this.endboss_background_sound = new Audio('audio/background_endboss.mp3');
 
-        this.backgroundSounds = [this.background_music, this.endboss_background_sound]; //
+        this.backgroundSounds = [this.background_music];
+        this.backgroundSoundEndBoss = [this.endboss_background_sound];
         this.effectSounds = [
             this.collect_coin_sound,
             this.win_sound,
@@ -45,14 +51,26 @@ class SoundManager {
         this.setVolume(this.volume);
     }
 
+    async playAndMaybePause(sound) {
+        try {
+            await sound.play();
+        } catch (error) {
+            if (error.name === 'AbortError') {
+                return; 
+            } else {
+                console.error('Error during audio playback:', error);
+            }
+        }
+    }
+
 
     /**
      * Play all background sounds.
      */
     playAllSounds() {
         this.backgroundSounds.forEach(sound => {
-            sound.play();
             sound.currentTime = 0;
+            this.playAndMaybePause(sound);
         });
     }
 
@@ -61,9 +79,9 @@ class SoundManager {
      * Stop all sounds (background and effects).
      */
     stopAllSounds() {
-        [...this.backgroundSounds, ...this.effectSounds].forEach(sound => {
-            sound.currentTime = 0;
+        [...this.backgroundSounds, ...this.effectSounds, ...this.backgroundSoundEndBoss].forEach(sound => {
             sound.pause();
+            sound.currentTime = 0;
         });
     }
 
@@ -72,9 +90,9 @@ class SoundManager {
      * Stop only background sounds.
      */
     stopBackgroundSounds() {
-        this.backgroundSounds.forEach(sound => {
-            sound.currentTime = 0;
+        [...this.backgroundSounds, ...this.backgroundSoundEndBoss].forEach(sound => {
             sound.pause();
+            sound.currentTime = 0;
         });
     }
 
@@ -85,7 +103,7 @@ class SoundManager {
     restartBackgroundSounds() {
         this.backgroundSounds.forEach(sound => {
             sound.currentTime = 0;
-            sound.play();
+            this.playAndMaybePause(sound);
         });
     }
 
@@ -93,13 +111,13 @@ class SoundManager {
      * Reset all sounds (background and effects) and restart background sounds.
      */
     resetAllSounds() {
-        [...this.backgroundSounds, ...this.effectSounds].forEach(sound => {
-            sound.currentTime = 0;
+        [...this.backgroundSounds, ...this.effectSounds, ...this.backgroundSoundEndBoss].forEach(sound => {
             sound.pause();
+            sound.currentTime = 0;
         });
         this.backgroundSounds.forEach(sound => {
             sound.currentTime = 0;
-            sound.play();
+            this.playAndMaybePause(sound);
         });
     }
 
@@ -108,7 +126,7 @@ class SoundManager {
      * Mute all sounds (background and effects).
      */
     muteAllSounds() {
-        [...this.backgroundSounds, ...this.effectSounds].forEach(sound => {
+        [...this.backgroundSounds, ...this.effectSounds, ...this.backgroundSoundEndBoss].forEach(sound => {
             sound.muted = true;
         });
     }
@@ -118,7 +136,7 @@ class SoundManager {
      * Unmute all sounds (background and effects).
      */
     unmuteAllSounds() {
-        [...this.backgroundSounds, ...this.effectSounds].forEach(sound => {
+        [...this.backgroundSounds, ...this.effectSounds, ...this.backgroundSoundEndBoss].forEach(sound => {
             sound.muted = false;
         });
     }
@@ -129,7 +147,7 @@ class SoundManager {
      */
     setVolume(volume) {
         this.volume = volume;
-        [...this.backgroundSounds, ...this.effectSounds].forEach(sound => {
+        [...this.backgroundSounds, ...this.effectSounds, ...this.backgroundSoundEndBoss].forEach(sound => {
             sound.volume = volume;
         });
     }
