@@ -51,14 +51,14 @@ class SoundManager {
         this.setVolume(this.volume);
     }
 
-    async playAndMaybePause(sound) {
+    async playSoundSafely(sound) {
         try {
-            await sound.play();
+            if(sound.readyState == 4){
+                sound.play();
+            }
         } catch (error) {
             if (error.name === 'AbortError') {
                 return; 
-            } else {
-                console.error('Error during audio playback:', error);
             }
         }
     }
@@ -70,7 +70,7 @@ class SoundManager {
     playAllSounds() {
         this.backgroundSounds.forEach(sound => {
             sound.currentTime = 0;
-            this.playAndMaybePause(sound);
+            this.playSoundSafely(sound);
         });
     }
 
@@ -103,7 +103,7 @@ class SoundManager {
     restartBackgroundSounds() {
         this.backgroundSounds.forEach(sound => {
             sound.currentTime = 0;
-            this.playAndMaybePause(sound);
+            this.playSoundSafely(sound);
         });
     }
 
@@ -117,7 +117,7 @@ class SoundManager {
         });
         this.backgroundSounds.forEach(sound => {
             sound.currentTime = 0;
-            this.playAndMaybePause(sound);
+            this.playSoundSafely(sound);
         });
     }
 

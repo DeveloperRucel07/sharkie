@@ -209,12 +209,8 @@ class MovableObject extends DrawableObject{
     showReplayButton(){
         document.getElementById("youWin").classList.add("d-none");
         document.getElementById("youWin").classList.remove("d-flex")
-        setTimeout(()=>{
-            document.getElementById("youWin").classList.add("d-none");
-            document.getElementById("youWin").classList.remove("d-flex")
-            document.getElementById('gameOver').classList.remove('d-none');
-            document.getElementById('gameOver').classList.add('d-flex');
-        }, 4500)
+        document.getElementById('gameOver').classList.remove('d-none');
+        document.getElementById('gameOver').classList.add('d-flex');
     }
 
 

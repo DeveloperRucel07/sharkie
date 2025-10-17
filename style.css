@@ -584,7 +584,6 @@ footer{
   
   .mobile-buttons button{
     z-index: 1000;
-    border: 2px solid red;
   }
 
   .mobile-buttons button img {

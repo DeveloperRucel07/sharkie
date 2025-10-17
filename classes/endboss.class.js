@@ -132,10 +132,8 @@ class Endboss extends MovableObject{
      * Removes 'd-none' class and adds 'd-flex' class to the game over element.
      */
     showWinButton(){
-        setTimeout(()=>{
-            document.getElementById("youWin").classList.remove("d-none");
-            document.getElementById("youWin").classList.add("d-flex");
-        }, 4000)
+        document.getElementById("youWin").classList.remove("d-none");
+        document.getElementById("youWin").classList.add("d-flex");
     }
 
 
