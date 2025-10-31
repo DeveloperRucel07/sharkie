@@ -69,7 +69,7 @@ Touch the on-screen buttons for movement and attacks.
 2. Open `index.html` in your web browser
 3. Click "Start" to begin playing
 4. For best experience, play in fullscreen mode
-or Use this Link to play directly [Sharkie Game Live Test](https://rucel-tsafack.developerakademie.net/sharkie/index.html)
+or Use this Link to play directly [Sharkie Game Live Test]((https://sharkie.rucel-tsafack.com/index.html))
 
 ## License
 
